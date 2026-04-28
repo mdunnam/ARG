@@ -89,80 +89,57 @@ export class SomnatekPhoneStack extends cdk.Stack {
     // Contact flow — greeting menu → DTMF input → extension message → disconnect
     //
     // Flow:
-    //   SetVoice (Joanna, neural)
-    //   → InvokeLambda phase=greeting  (returns level + greeting ssml)
-    //   → StoreGreeting (save ssml to contact attribute)
-    //   → GetUserInput  (play greeting ssml, collect 1 DTMF digit, 8s timeout)
-    //     → on digit 1-4: InvokeLambda phase=extension, extension=digit
-    //       → StoreExtension → PlayExtension → Disconnect
-    //     → on digit 9:  loop back to GetUserInput (repeat menu)
-    //     → timeout / nomatch: PlayFallback → Disconnect
+    //   SetVoice (Joanna)
+    //   → GetUserInput  (play greeting, collect 1 DTMF digit, 8s timeout)
+    //     → 1: Records message → Disconnect
+    //     → 2: Research message → Disconnect
+    //     → 3: Dr. Ellison message → Disconnect
+    //     → 4: Other extensions message → Disconnect
+    //     → 9: loop back to GetUserInput
+    //     → timeout / no match: Fallback → Disconnect
     //
-    // Lambda errors at any point fall through to PlayFallback.
+    // Lambda (phone-responder) is deployed and ready for future level-based
+    // routing. It is wired in via a stack update once the basic flow is verified.
     // ----------------------------------------------------------------
-    const contactFlowContent = cdk.Stack.of(this).toJsonString({
+    const contactFlowContent = JSON.stringify({
       Version: '2019-10-30',
       StartAction: 'set-voice',
       Actions: [
         {
           Identifier: 'set-voice',
           Type: 'UpdateContactTextToSpeechVoice',
-          Parameters: { GlobalVoiceId: 'Joanna' },
-          Transitions: { NextAction: 'invoke-greeting' },
-        },
-
-        // ---- Phase 1: get greeting SSML from Lambda ----
-        {
-          Identifier: 'invoke-greeting',
-          Type: 'InvokeLambdaFunction',
-          Parameters: {
-            LambdaFunctionARN: phoneResponder.functionArn,
-            InvocationTimeLimitSeconds: '8',
-            LambdaInvocationAttributes: { phase: 'greeting' },
-            ResponseValidation: { ResponseType: 'STRING_MAP' },
-          },
+          Parameters: { VoiceId: 'Joanna' },
           Transitions: {
-            NextAction: 'store-greeting',
-            Errors: [
-              { NextAction: 'play-fallback', ErrorType: 'NoMatchingError' },
-              { NextAction: 'play-fallback', ErrorType: 'TimedOut' },
-            ],
+            NextAction: 'play-greeting',
+            Errors: [],
+            Conditions: [],
           },
         },
-
-        // Store greeting SSML as contact attribute
         {
-          Identifier: 'store-greeting',
-          Type: 'UpdateContactAttributes',
-          Parameters: {
-            TargetContact: 'Current',
-            Attributes: { menuSsml: '$.External.ssml' },
-          },
-          Transitions: {
-            NextAction: 'collect-digit',
-            Errors: [{ NextAction: 'play-fallback', ErrorType: 'NoMatchingError' }],
-          },
-        },
-
-        // ---- Phase 2: play greeting + collect DTMF ----
-        {
-          Identifier: 'collect-digit',
+          Identifier: 'play-greeting',
           Type: 'GetUserInput',
           Parameters: {
-            Text: '$.Attributes.menuSsml',
-            TextToSpeechType: 'ssml',
-            Timeout: '8',
+            Text: [
+              'You have reached Somnatek Sleep Health Center.',
+              'Our offices are no longer in operation.',
+              'For records and billing inquiries, press 1.',
+              'For the research department, press 2.',
+              "For Dr. Ellison's office, press 3.",
+              'For all other extensions, press 4.',
+              'To repeat these options, press 9.',
+            ].join(' '),
+            TextToSpeechType: 'text',
+            InputTimeLimitSeconds: '8',
             MaxDigits: '1',
-            TerminatingKeypress: '#',
           },
           Transitions: {
             NextAction: 'play-fallback',
             Conditions: [
-              { NextAction: 'invoke-ext-1', Condition: { Operator: 'Equals', Operand: '1' } },
-              { NextAction: 'invoke-ext-2', Condition: { Operator: 'Equals', Operand: '2' } },
-              { NextAction: 'invoke-ext-3', Condition: { Operator: 'Equals', Operand: '3' } },
-              { NextAction: 'invoke-ext-4', Condition: { Operator: 'Equals', Operand: '4' } },
-              { NextAction: 'collect-digit', Condition: { Operator: 'Equals', Operand: '9' } },
+              { NextAction: 'play-ext-1', Condition: { Operator: 'Equals', Operand: '1' } },
+              { NextAction: 'play-ext-2', Condition: { Operator: 'Equals', Operand: '2' } },
+              { NextAction: 'play-ext-3', Condition: { Operator: 'Equals', Operand: '3' } },
+              { NextAction: 'play-ext-4', Condition: { Operator: 'Equals', Operand: '4' } },
+              { NextAction: 'play-greeting', Condition: { Operator: 'Equals', Operand: '9' } },
             ],
             Errors: [
               { NextAction: 'play-fallback', ErrorType: 'InputTimedOut' },
@@ -170,78 +147,98 @@ export class SomnatekPhoneStack extends cdk.Stack {
             ],
           },
         },
-
-        // ---- Phase 3: Lambda invocations per extension ----
-        ...(['1', '2', '3', '4'] as const).map((digit) => ({
-          Identifier: `invoke-ext-${digit}`,
-          Type: 'InvokeLambdaFunction',
-          Parameters: {
-            LambdaFunctionARN: phoneResponder.functionArn,
-            InvocationTimeLimitSeconds: '8',
-            LambdaInvocationAttributes: { phase: 'extension', extension: digit },
-            ResponseValidation: { ResponseType: 'STRING_MAP' },
-          },
-          Transitions: {
-            NextAction: `store-ext-${digit}`,
-            Errors: [
-              { NextAction: 'play-fallback', ErrorType: 'NoMatchingError' },
-              { NextAction: 'play-fallback', ErrorType: 'TimedOut' },
-            ],
-          },
-        })),
-
-        // Store extension SSML per digit
-        ...(['1', '2', '3', '4'] as const).map((digit) => ({
-          Identifier: `store-ext-${digit}`,
-          Type: 'UpdateContactAttributes',
-          Parameters: {
-            TargetContact: 'Current',
-            Attributes: { extSsml: '$.External.ssml' },
-          },
-          Transitions: {
-            NextAction: `play-ext-${digit}`,
-            Errors: [{ NextAction: 'play-fallback', ErrorType: 'NoMatchingError' }],
-          },
-        })),
-
-        // Play extension SSML per digit then disconnect
-        ...(['1', '2', '3', '4'] as const).map((digit) => ({
-          Identifier: `play-ext-${digit}`,
+        {
+          Identifier: 'play-ext-1',
           Type: 'MessageParticipant',
           Parameters: {
-            Text: '$.Attributes.extSsml',
-            TextToSpeechType: 'ssml',
+            Text: [
+              'Records and Administration.',
+              'Patient records from Somnatek Sleep Health Center have been transferred to Dorsal Health Holdings LLC.',
+              'To submit a records request, please write to Dorsal Health Holdings, P.O. Box 1140, Harrow County.',
+              'Standard processing time is fifteen to twenty business days.',
+              'This line is not monitored. Please do not leave a message.',
+            ].join(' '),
+            TextToSpeechType: 'text',
           },
           Transitions: {
             NextAction: 'disconnect',
             Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
+            Conditions: [],
           },
-        })),
-
-        // ---- Fallback: hardcoded level-1 closure message ----
+        },
+        {
+          Identifier: 'play-ext-2',
+          Type: 'MessageParticipant',
+          Parameters: {
+            Text: [
+              'You have reached the research department.',
+              'The Wexler University longitudinal sleep recall study concluded in September 2013.',
+              'Study enrollment is closed and no new participants are being accepted.',
+              'For research records inquiries, please contact Dorsal Health Holdings LLC.',
+            ].join(' '),
+            TextToSpeechType: 'text',
+          },
+          Transitions: {
+            NextAction: 'disconnect',
+            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
+            Conditions: [],
+          },
+        },
+        {
+          Identifier: 'play-ext-3',
+          Type: 'MessageParticipant',
+          Parameters: {
+            Text: [
+              "You have reached the office of Dr. Mara Ellison.",
+              'Dr. Ellison is currently on administrative leave.',
+              'This voicemail is no longer accepting messages.',
+              'For clinical inquiries, please contact your primary care provider.',
+              'For records inquiries, please contact Dorsal Health Holdings LLC.',
+            ].join(' '),
+            TextToSpeechType: 'text',
+          },
+          Transitions: {
+            NextAction: 'disconnect',
+            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
+            Conditions: [],
+          },
+        },
+        {
+          Identifier: 'play-ext-4',
+          Type: 'MessageParticipant',
+          Parameters: {
+            Text: [
+              'The extension you have dialed is no longer in service.',
+              'Somnatek Sleep Health Center ceased operations on September 18, 2014.',
+              'For records inquiries, please contact Dorsal Health Holdings LLC.',
+            ].join(' '),
+            TextToSpeechType: 'text',
+          },
+          Transitions: {
+            NextAction: 'disconnect',
+            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
+            Conditions: [],
+          },
+        },
         {
           Identifier: 'play-fallback',
           Type: 'MessageParticipant',
           Parameters: {
             Text: [
-              '<speak>',
-              '  <prosody rate="95%">',
-              '    You have reached Somnatek Sleep Health Center.',
-              '    Our offices are no longer in operation.',
-              '    For records inquiries, please contact Dorsal Health Holdings LLC',
-              '    at the address listed on our website.',
-              '    Thank you.',
-              '  </prosody>',
-              '</speak>',
+              'You have reached Somnatek Sleep Health Center.',
+              'Our offices are no longer in operation.',
+              'For records inquiries, please contact Dorsal Health Holdings LLC',
+              'at the address listed on our website.',
+              'Thank you.',
             ].join(' '),
-            TextToSpeechType: 'ssml',
+            TextToSpeechType: 'text',
           },
           Transitions: {
             NextAction: 'disconnect',
             Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
+            Conditions: [],
           },
         },
-
         {
           Identifier: 'disconnect',
           Type: 'DisconnectParticipant',
