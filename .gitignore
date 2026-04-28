@@ -1,0 +1,109 @@
+# ============================================================
+# Somnatek ARG — .gitignore
+# ============================================================
+
+# ------------------------------------------------------------
+# Environment / Secrets
+# ------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.pfx
+cdk.context.json
+
+# ------------------------------------------------------------
+# Node / Lambda
+# ------------------------------------------------------------
+node_modules/
+lambda/node_modules/
+lambda/**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnp
+.pnp.js
+
+# ------------------------------------------------------------
+# Build Outputs
+# ------------------------------------------------------------
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+*.tsbuildinfo
+
+# ------------------------------------------------------------
+# AWS CDK
+# ------------------------------------------------------------
+infra/cdk.out/
+infra/.cdk.staging/
+
+# ------------------------------------------------------------
+# AWS SAM (if used)
+# ------------------------------------------------------------
+.aws-sam/
+samconfig.toml
+
+# ------------------------------------------------------------
+# OS / Editor
+# ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.vscode/settings.json
+.vscode/*.log
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ------------------------------------------------------------
+# VS Code Local History — may contain snapshots of .env
+# ------------------------------------------------------------
+.history/
+
+# ------------------------------------------------------------
+# Canon Bible / Spoiler Documents (keep out of public repo)
+# ------------------------------------------------------------
+# Uncomment the lines below if this is a public repository
+# and you want to hide the puzzle answer ledger and canon notes.
+# docs/canon-bible.md
+# docs/puzzle-answers.md
+# docs/sleep-clinic-arg-story-breakdown.md
+
+# ------------------------------------------------------------
+# Staged / Unreleased Content
+# ------------------------------------------------------------
+# Unreleased drops stored locally before scheduled push to S3
+staged/
+unreleased/
+
+# ------------------------------------------------------------
+# Generated / Processed Assets
+# ------------------------------------------------------------
+assets/processed/
+assets/compressed/
+assets/watermarked/
+
+# ------------------------------------------------------------
+# Log Files
+# ------------------------------------------------------------
+*.log
+logs/
+
+# ------------------------------------------------------------
+# Test / Coverage
+# ------------------------------------------------------------
+coverage/
+.nyc_output/
