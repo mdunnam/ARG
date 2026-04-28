@@ -361,3 +361,31 @@ a.pdf-link {
 .grey { color: #888888; }
 .red { color: #aa3333; }
 hr { border: none; border-top: 1px solid #d0dce4; margin: 14px 0; }
+
+/* ---- Image placeholders ---- */
+/* Grey box renders if the image file is missing.
+   Remove background-color once real images are in place. */
+.img-float-right {
+    float: right;
+    margin: 0 0 10px 16px;
+    border: 1px solid #b0bec6;
+    background-color: #ccd4d8;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.img-float-left {
+    float: left;
+    margin: 0 16px 10px 0;
+    border: 1px solid #b0bec6;
+    background-color: #ccd4d8;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.img-float-right img,
+.img-float-left img {
+    display: block;
+    /* image renders over grey background once file exists */
+}
+
