@@ -88,35 +88,49 @@ export class SomnatekPhoneStack extends cdk.Stack {
     // ----------------------------------------------------------------
     // Contact flow — greeting menu → DTMF input → extension message → disconnect
     //
-    // Flow:
-    //   SetVoice (Joanna)
-    //   → GetUserInput  (play greeting, collect 1 DTMF digit, 8s timeout)
-    //     → 1: Records message → Disconnect
-    //     → 2: Research message → Disconnect
-    //     → 3: Dr. Ellison message → Disconnect
-    //     → 4: Other extensions message → Disconnect
-    //     → 9: loop back to GetUserInput
-    //     → timeout / no match: Fallback → Disconnect
+    // Action identifiers MUST be valid UUIDs — Connect rejects any other format.
+    // IDs are static/hardcoded so the flow is idempotent across deploys.
     //
-    // Lambda (phone-responder) is deployed and ready for future level-based
-    // routing. It is wired in via a stack update once the basic flow is verified.
+    // ID map:
+    //   00000001  set-voice
+    //   00000002  play-greeting (GetUserInput)
+    //   00000011  play-ext-1  records
+    //   00000012  play-ext-2  research
+    //   00000013  play-ext-3  dr ellison
+    //   00000014  play-ext-4  other extensions
+    //   00000020  play-fallback
+    //   00000099  disconnect
+    //
+    // Lambda (phone-responder) is deployed and wired in via a future stack
+    // update once this base flow is verified working.
     // ----------------------------------------------------------------
+
+    // UUID helper — pads a short string into 00000000-0000-0000-0000-xxxxxxxxxxxx
+    const uid = (n: string) => `00000000-0000-0000-0000-${n.padStart(12, '0')}`;
+
+    const ID = {
+      voice:     uid('000001'),
+      greeting:  uid('000002'),
+      ext1:      uid('000011'),
+      ext2:      uid('000012'),
+      ext3:      uid('000013'),
+      ext4:      uid('000014'),
+      fallback:  uid('000020'),
+      disconnect: uid('000099'),
+    } as const;
+
     const contactFlowContent = JSON.stringify({
       Version: '2019-10-30',
-      StartAction: 'set-voice',
+      StartAction: ID.voice,
       Actions: [
         {
-          Identifier: 'set-voice',
+          Identifier: ID.voice,
           Type: 'UpdateContactTextToSpeechVoice',
-          Parameters: { VoiceId: 'Joanna' },
-          Transitions: {
-            NextAction: 'play-greeting',
-            Errors: [],
-            Conditions: [],
-          },
+          Parameters: { GlobalVoiceId: 'Joanna' },
+          Transitions: { NextAction: ID.greeting },
         },
         {
-          Identifier: 'play-greeting',
+          Identifier: ID.greeting,
           Type: 'GetUserInput',
           Parameters: {
             Text: [
@@ -133,22 +147,22 @@ export class SomnatekPhoneStack extends cdk.Stack {
             MaxDigits: '1',
           },
           Transitions: {
-            NextAction: 'play-fallback',
+            NextAction: ID.fallback,
             Conditions: [
-              { NextAction: 'play-ext-1', Condition: { Operator: 'Equals', Operand: '1' } },
-              { NextAction: 'play-ext-2', Condition: { Operator: 'Equals', Operand: '2' } },
-              { NextAction: 'play-ext-3', Condition: { Operator: 'Equals', Operand: '3' } },
-              { NextAction: 'play-ext-4', Condition: { Operator: 'Equals', Operand: '4' } },
-              { NextAction: 'play-greeting', Condition: { Operator: 'Equals', Operand: '9' } },
+              { NextAction: ID.ext1, Condition: { Operator: 'Equals', Operand: '1' } },
+              { NextAction: ID.ext2, Condition: { Operator: 'Equals', Operand: '2' } },
+              { NextAction: ID.ext3, Condition: { Operator: 'Equals', Operand: '3' } },
+              { NextAction: ID.ext4, Condition: { Operator: 'Equals', Operand: '4' } },
+              { NextAction: ID.greeting, Condition: { Operator: 'Equals', Operand: '9' } },
             ],
             Errors: [
-              { NextAction: 'play-fallback', ErrorType: 'InputTimedOut' },
-              { NextAction: 'play-fallback', ErrorType: 'NoMatchingCondition' },
+              { NextAction: ID.fallback, ErrorType: 'InputTimedOut' },
+              { NextAction: ID.fallback, ErrorType: 'NoMatchingCondition' },
             ],
           },
         },
         {
-          Identifier: 'play-ext-1',
+          Identifier: ID.ext1,
           Type: 'MessageParticipant',
           Parameters: {
             Text: [
@@ -160,14 +174,10 @@ export class SomnatekPhoneStack extends cdk.Stack {
             ].join(' '),
             TextToSpeechType: 'text',
           },
-          Transitions: {
-            NextAction: 'disconnect',
-            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
-            Conditions: [],
-          },
+          Transitions: { NextAction: ID.disconnect },
         },
         {
-          Identifier: 'play-ext-2',
+          Identifier: ID.ext2,
           Type: 'MessageParticipant',
           Parameters: {
             Text: [
@@ -178,18 +188,14 @@ export class SomnatekPhoneStack extends cdk.Stack {
             ].join(' '),
             TextToSpeechType: 'text',
           },
-          Transitions: {
-            NextAction: 'disconnect',
-            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
-            Conditions: [],
-          },
+          Transitions: { NextAction: ID.disconnect },
         },
         {
-          Identifier: 'play-ext-3',
+          Identifier: ID.ext3,
           Type: 'MessageParticipant',
           Parameters: {
             Text: [
-              "You have reached the office of Dr. Mara Ellison.",
+              'You have reached the office of Dr. Mara Ellison.',
               'Dr. Ellison is currently on administrative leave.',
               'This voicemail is no longer accepting messages.',
               'For clinical inquiries, please contact your primary care provider.',
@@ -197,14 +203,10 @@ export class SomnatekPhoneStack extends cdk.Stack {
             ].join(' '),
             TextToSpeechType: 'text',
           },
-          Transitions: {
-            NextAction: 'disconnect',
-            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
-            Conditions: [],
-          },
+          Transitions: { NextAction: ID.disconnect },
         },
         {
-          Identifier: 'play-ext-4',
+          Identifier: ID.ext4,
           Type: 'MessageParticipant',
           Parameters: {
             Text: [
@@ -214,14 +216,10 @@ export class SomnatekPhoneStack extends cdk.Stack {
             ].join(' '),
             TextToSpeechType: 'text',
           },
-          Transitions: {
-            NextAction: 'disconnect',
-            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
-            Conditions: [],
-          },
+          Transitions: { NextAction: ID.disconnect },
         },
         {
-          Identifier: 'play-fallback',
+          Identifier: ID.fallback,
           Type: 'MessageParticipant',
           Parameters: {
             Text: [
@@ -233,14 +231,10 @@ export class SomnatekPhoneStack extends cdk.Stack {
             ].join(' '),
             TextToSpeechType: 'text',
           },
-          Transitions: {
-            NextAction: 'disconnect',
-            Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
-            Conditions: [],
-          },
+          Transitions: { NextAction: ID.disconnect },
         },
         {
-          Identifier: 'disconnect',
+          Identifier: ID.disconnect,
           Type: 'DisconnectParticipant',
           Parameters: {},
           Transitions: {},
