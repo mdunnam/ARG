@@ -1,0 +1,9 @@
+{
+  "name": "email-responder",
+  "version": "1.0.0",
+  "description": "Somnatek ARG - automated records email responder",
+  "main": "index.js",
+  "dependencies": {
+    "mailparser": "^3.7.1"
+  }
+}
