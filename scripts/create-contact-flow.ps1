@@ -53,15 +53,17 @@ $flowObj = [ordered]@{
     Version     = "2019-10-30"
     StartAction = $ID.voice
     Actions     = @(
+        # SetVoice — TextToSpeechVoice is the correct parameter name
         [ordered]@{
             Identifier  = $ID.voice
             Type        = "UpdateContactTextToSpeechVoice"
-            Parameters  = [ordered]@{ VoiceId = "Joanna" }
+            Parameters  = [ordered]@{ TextToSpeechVoice = "Joanna" }
             Transitions = [ordered]@{ NextAction = $ID.greeting }
         },
+        # DTMF menu — correct type is GetParticipantInput; conditions use Operands (array)
         [ordered]@{
             Identifier  = $ID.greeting
-            Type        = "GetUserInput"
+            Type        = "GetParticipantInput"
             Parameters  = [ordered]@{
                 Text = ("You have reached Somnatek Sleep Health Center. " +
                         "Our offices are no longer in operation. " +
@@ -70,25 +72,26 @@ $flowObj = [ordered]@{
                         "For Dr. Ellison's office, press 3. " +
                         "For all other extensions, press 4. " +
                         "To repeat these options, press 9.")
-                TextToSpeechType    = "text"
                 InputTimeLimitSeconds = "8"
-                MaxDigits           = "1"
+                StoreInput            = "False"
             }
             Transitions = [ordered]@{
                 NextAction = $ID.fallback
                 Conditions = @(
-                    [ordered]@{ NextAction = $ID.ext1; Condition = [ordered]@{ Operator = "Equals"; Operand = "1" } },
-                    [ordered]@{ NextAction = $ID.ext2; Condition = [ordered]@{ Operator = "Equals"; Operand = "2" } },
-                    [ordered]@{ NextAction = $ID.ext3; Condition = [ordered]@{ Operator = "Equals"; Operand = "3" } },
-                    [ordered]@{ NextAction = $ID.ext4; Condition = [ordered]@{ Operator = "Equals"; Operand = "4" } },
-                    [ordered]@{ NextAction = $ID.greeting; Condition = [ordered]@{ Operator = "Equals"; Operand = "9" } }
+                    [ordered]@{ NextAction = $ID.ext1; Condition = [ordered]@{ Operator = "Equals"; Operands = @("1") } },
+                    [ordered]@{ NextAction = $ID.ext2; Condition = [ordered]@{ Operator = "Equals"; Operands = @("2") } },
+                    [ordered]@{ NextAction = $ID.ext3; Condition = [ordered]@{ Operator = "Equals"; Operands = @("3") } },
+                    [ordered]@{ NextAction = $ID.ext4; Condition = [ordered]@{ Operator = "Equals"; Operands = @("4") } },
+                    [ordered]@{ NextAction = $ID.greeting; Condition = [ordered]@{ Operator = "Equals"; Operands = @("9") } }
                 )
                 Errors = @(
-                    [ordered]@{ NextAction = $ID.fallback; ErrorType = "InputTimedOut" },
-                    [ordered]@{ NextAction = $ID.fallback; ErrorType = "NoMatchingCondition" }
+                    [ordered]@{ NextAction = $ID.fallback; ErrorType = "InputTimeLimitExceeded" },
+                    [ordered]@{ NextAction = $ID.fallback; ErrorType = "NoMatchingCondition" },
+                    [ordered]@{ NextAction = $ID.fallback; ErrorType = "NoMatchingError" }
                 )
             }
         },
+        # MessageParticipant — Text only, no TextToSpeechType
         [ordered]@{
             Identifier  = $ID.ext1
             Type        = "MessageParticipant"
@@ -98,7 +101,6 @@ $flowObj = [ordered]@{
                         "To submit a records request, please write to Dorsal Health Holdings, P.O. Box 1140, Harrow County. " +
                         "Standard processing time is fifteen to twenty business days. " +
                         "This line is not monitored. Please do not leave a message.")
-                TextToSpeechType = "text"
             }
             Transitions = [ordered]@{ NextAction = $ID.disconnect }
         },
@@ -110,7 +112,6 @@ $flowObj = [ordered]@{
                         "The Wexler University longitudinal sleep recall study concluded in September 2013. " +
                         "Study enrollment is closed and no new participants are being accepted. " +
                         "For research records inquiries, please contact Dorsal Health Holdings LLC.")
-                TextToSpeechType = "text"
             }
             Transitions = [ordered]@{ NextAction = $ID.disconnect }
         },
@@ -123,7 +124,6 @@ $flowObj = [ordered]@{
                         "This voicemail is no longer accepting messages. " +
                         "For clinical inquiries, please contact your primary care provider. " +
                         "For records inquiries, please contact Dorsal Health Holdings LLC.")
-                TextToSpeechType = "text"
             }
             Transitions = [ordered]@{ NextAction = $ID.disconnect }
         },
@@ -134,7 +134,6 @@ $flowObj = [ordered]@{
                 Text = ("The extension you have dialed is no longer in service. " +
                         "Somnatek Sleep Health Center ceased operations on September 18, 2014. " +
                         "For records inquiries, please contact Dorsal Health Holdings LLC.")
-                TextToSpeechType = "text"
             }
             Transitions = [ordered]@{ NextAction = $ID.disconnect }
         },
@@ -146,7 +145,6 @@ $flowObj = [ordered]@{
                         "Our offices are no longer in operation. " +
                         "For records inquiries, please contact Dorsal Health Holdings LLC " +
                         "at the address listed on our website. Thank you.")
-                TextToSpeechType = "text"
             }
             Transitions = [ordered]@{ NextAction = $ID.disconnect }
         },
@@ -170,6 +168,7 @@ $result = aws connect create-contact-flow `
     --type "CONTACT_FLOW" `
     --description "Somnatek ARG - main clinic line inbound handler" `
     --content $flowJson `
+    --cli-error-format json `
     --profile $Profile 2>&1
 
 if ($LASTEXITCODE -ne 0) {
