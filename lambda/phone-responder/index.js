@@ -40,7 +40,7 @@ function getGreetingSsml(level) {
       '    Please wait to be recalled.',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   return [
@@ -61,7 +61,7 @@ function getGreetingSsml(level) {
     '    To repeat these options, press 9.',
     '  </prosody>',
     '</speak>',
-  ].join('\n');
+  ].join(' ');
 }
 
 /**
@@ -92,7 +92,7 @@ function getExtension1Ssml(level) {
       '    No further action is required on your part at this time.',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   return [
@@ -111,7 +111,7 @@ function getExtension1Ssml(level) {
     '    This line is not monitored. Please do not leave a message.',
     '  </prosody>',
     '</speak>',
-  ].join('\n');
+  ].join(' ');
 }
 
 /**
@@ -141,7 +141,7 @@ function getExtension2Ssml(level) {
       '    <break time="3000ms"/>',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   if (level >= 2) {
@@ -162,7 +162,7 @@ function getExtension2Ssml(level) {
       '    This line is monitored periodically.',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   return [
@@ -178,7 +178,7 @@ function getExtension2Ssml(level) {
     '    For research records inquiries, please contact Dorsal Health Holdings LLC.',
     '  </prosody>',
     '</speak>',
-  ].join('\n');
+  ].join(' ');
 }
 
 /**
@@ -209,7 +209,7 @@ function getExtension3Ssml(level) {
       '    </prosody>',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   if (level >= 2) {
@@ -233,7 +233,7 @@ function getExtension3Ssml(level) {
       '    Please do not leave a message here.',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   return [
@@ -249,7 +249,7 @@ function getExtension3Ssml(level) {
     '    For records inquiries, please contact Dorsal Health Holdings LLC.',
     '  </prosody>',
     '</speak>',
-  ].join('\n');
+  ].join(' ');
 }
 
 /**
@@ -275,7 +275,7 @@ function getExtension4Ssml(level) {
       '    <break time="3000ms"/>',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   return [
@@ -288,7 +288,7 @@ function getExtension4Ssml(level) {
     '    For records inquiries, please contact Dorsal Health Holdings LLC.',
     '  </prosody>',
     '</speak>',
-  ].join('\n');
+  ].join(' ');
 }
 
 /**
@@ -309,7 +309,7 @@ function getFallbackSsml() {
     '    Thank you.',
     '  </prosody>',
     '</speak>',
-  ].join('\n');
+  ].join(' ');
 }
 
 // ---------------------------------------------------------------------------
@@ -523,7 +523,7 @@ function getSsml(level) {
       '    <break time="4s"/>',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   if (level === 2) {
@@ -545,7 +545,7 @@ function getSsml(level) {
       '    Thank you for contacting Somnatek Sleep Health Center.',
       '  </prosody>',
       '</speak>',
-    ].join('\n');
+    ].join(' ');
   }
 
   // Level 1 — standard closure message
@@ -564,7 +564,7 @@ function getSsml(level) {
     '    Thank you for contacting Somnatek Sleep Health Center.',
     '  </prosody>',
     '</speak>',
-  ].join('\n');
+  ].join(' ');
 }
 
 /**

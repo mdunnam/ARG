@@ -100,14 +100,14 @@ export class SomnatekPhoneStack extends cdk.Stack {
     //
     // Lambda errors at any point fall through to PlayFallback.
     // ----------------------------------------------------------------
-    const contactFlowContent = JSON.stringify({
+    const contactFlowContent = cdk.Stack.of(this).toJsonString({
       Version: '2019-10-30',
       StartAction: 'set-voice',
       Actions: [
         {
           Identifier: 'set-voice',
           Type: 'UpdateContactTextToSpeechVoice',
-          Parameters: { VoiceId: 'Joanna' },
+          Parameters: { GlobalVoiceId: 'Joanna' },
           Transitions: { NextAction: 'invoke-greeting' },
         },
 
@@ -158,15 +158,15 @@ export class SomnatekPhoneStack extends cdk.Stack {
           Transitions: {
             NextAction: 'play-fallback',
             Conditions: [
-              { NextAction: 'invoke-ext-1', Operator: 'Equals', Operand: '1' },
-              { NextAction: 'invoke-ext-2', Operator: 'Equals', Operand: '2' },
-              { NextAction: 'invoke-ext-3', Operator: 'Equals', Operand: '3' },
-              { NextAction: 'invoke-ext-4', Operator: 'Equals', Operand: '4' },
-              { NextAction: 'collect-digit', Operator: 'Equals', Operand: '9' },
+              { NextAction: 'invoke-ext-1', Condition: { Operator: 'Equals', Operand: '1' } },
+              { NextAction: 'invoke-ext-2', Condition: { Operator: 'Equals', Operand: '2' } },
+              { NextAction: 'invoke-ext-3', Condition: { Operator: 'Equals', Operand: '3' } },
+              { NextAction: 'invoke-ext-4', Condition: { Operator: 'Equals', Operand: '4' } },
+              { NextAction: 'collect-digit', Condition: { Operator: 'Equals', Operand: '9' } },
             ],
             Errors: [
-              { NextAction: 'play-fallback', ErrorType: 'NoMatchingError' },
-              { NextAction: 'play-fallback', ErrorType: 'TimedOut' },
+              { NextAction: 'play-fallback', ErrorType: 'InputTimedOut' },
+              { NextAction: 'play-fallback', ErrorType: 'NoMatchingCondition' },
             ],
           },
         },
@@ -265,11 +265,13 @@ export class SomnatekPhoneStack extends cdk.Stack {
     // In that case: deploy without PhoneNumber, then claim a number manually
     // in the Connect console and associate it with SomnatekMainLine.
     // ----------------------------------------------------------------
+    // prefix removed — no 740 numbers were available in the pool.
+    // AWS will assign the next available US DID.
+    // To request a 740 number later: Connect console → Phone numbers → Claim a number.
     const phoneNumber = new connect.CfnPhoneNumber(this, 'PhoneNumber', {
       targetArn: connectInstance.attrArn,
       type: 'DID',
       countryCode: 'US',
-      prefix: '+1740',
       description: 'Somnatek ARG - main clinic line',
     });
 
