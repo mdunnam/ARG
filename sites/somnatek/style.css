@@ -167,6 +167,7 @@ a:visited { color: #5a4a7a; }
     float: left;
     width: 576px;
     padding: 18px 20px;
+    box-sizing: border-box;
 }
 
 #main h1 {
