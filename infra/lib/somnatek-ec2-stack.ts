@@ -28,7 +28,7 @@ export class SomnatekEc2Stack extends cdk.Stack {
     // ----------------------------------------------------------------
     const sg = new ec2.SecurityGroup(this, 'WebServerSg', {
       vpc,
-      description: 'Somnatek ARG web server — HTTP/HTTPS inbound',
+      description: 'Somnatek ARG web server - HTTP/HTTPS inbound',
       allowAllOutbound: true,
     });
 
@@ -87,7 +87,7 @@ export class SomnatekEc2Stack extends cdk.Stack {
       'cat > /etc/nginx/conf.d/somnatek.conf << \'NGINXEOF\'',
       'server {',
       '    listen 80 default_server;',
-      '    server_name _;',
+      '    server_name somnatek.org www.somnatek.org;',
       '    root /var/www/somnatek;',
       '    index index.html;',
       '    location / { try_files $uri $uri/ /index.html; }',
