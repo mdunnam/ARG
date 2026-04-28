@@ -1,0 +1,7 @@
+{
+  "name": "phone-responder",
+  "version": "1.0.0",
+  "description": "Somnatek ARG - Amazon Connect phone responder",
+  "main": "index.js",
+  "dependencies": {}
+}

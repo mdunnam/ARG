@@ -3,6 +3,7 @@ import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { SomnatekEc2Stack } from '../lib/somnatek-ec2-stack';
 import { SomnatekEmailStack } from '../lib/somnatek-email-stack';
+import { SomnatekPhoneStack } from '../lib/somnatek-phone-stack';
 
 const app = new cdk.App();
 
@@ -19,4 +20,9 @@ new SomnatekEc2Stack(app, 'SomnatekEc2Stack', {
 new SomnatekEmailStack(app, 'SomnatekEmailStack', {
   env,
   description: 'Somnatek ARG - inbound email pipeline (SES + Lambda + Bedrock)',
+});
+
+new SomnatekPhoneStack(app, 'SomnatekPhoneStack', {
+  env,
+  description: 'Somnatek ARG - Amazon Connect phone line (740 number + Polly IVR)',
 });
