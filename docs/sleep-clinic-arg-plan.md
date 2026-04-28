@@ -744,3 +744,229 @@ The final note should be restrained:
 > Arrival window: 02:10-02:17
 >
 > If recalled early, remain seated.
+
+---
+
+## How The Full System Works
+
+This section documents how all live components connect, how players move through them, and how the ARG operator controls escalation.
+
+---
+
+### Player Journey Overview
+
+```
+                        finds site
+                            │
+                            ▼
+                 [somnatek.org — public pages]
+                 Reads clinic history, staff,
+                 research summary, closure notice.
+                 Nothing obviously wrong yet.
+                            │
+                   finds portal / PDF IDs
+                            ▼
+                  [Patient Portal puzzle]
+                  Enters PTX-018 or similar.
+                  Receives archived recall summaries.
+                  Begins pattern-matching.
+                            │
+                 emails records@somnatek.org
+                            ▼
+              [SES → Lambda → Bedrock → SES]
+              Automated response from DHHRMS v2.3.
+              Level 1: standard closure acknowledgment.
+              Level 2: "active archive classification",
+                       "processing timelines are not fixed."
+              Level 3: system has an open file on the sender.
+                            │
+                calls the clinic phone number
+                            ▼
+       [Amazon Connect → Lambda → Polly → caller]
+       Hears IVR menu. Presses extensions 1-4.
+       Level 1: closed clinic recordings.
+       Level 2: research line "monitored periodically."
+       Level 3: "your recall window is open."
+                            │
+               finds RestWell forum (week 2+)
+                            ▼
+          [restwell.org — patient support forum]
+          Discovers independent patient reports.
+          Cross-references usernames with PTX IDs.
+          Finds partially-deleted thread by MarauderBlue.
+                            │
+            finds Wexler university archive (week 3+)
+                            ▼
+      [wexler.org — university research archive]
+      Conference abstracts, protocol filings,
+      redacted IRB correspondence.
+      Vale's name in edit history of PDFs
+      post-dates his removal from the study.
+                            │
+           finds county business records (week 4+)
+                            ▼
+     [harrow-county.org — county records portal]
+     Dorsal Health Holdings LLC registered
+     two months after the patient file transfer.
+     Registered agent: Edwin Vale.
+     One document on file.
+```
+
+---
+
+### The Three Communication Systems
+
+#### 1. Email — `records@somnatek.org`
+
+**How it works:**
+
+1. Player emails `records@somnatek.org`
+2. SES receipt rule stores the raw MIME message in S3 (`somnatek-email-inbound` bucket, `inbound/` prefix)
+3. S3 event notification triggers `lambda/email-responder`
+4. Lambda parses the email, hashes the sender address (SHA-256), and retrieves the sender's state from DynamoDB
+5. Lambda classifies the email body against keyword patterns to determine response level
+6. Lambda calls Amazon Bedrock (Claude 3 Haiku) with a persona-locked system prompt
+7. Bedrock generates a 150–250 word response as DHHRMS v2.3, the automated Dorsal Health Holdings records system
+8. Lambda sends the response via SES and updates the sender's state in DynamoDB
+
+**Sender state persists.** Level never decreases. The third email from a level-2 sender is more strange than the first.
+
+**Rate limiting:** 1 response/hour, 3/day. Silent drops beyond that.
+
+**Level triggers:**
+
+| Level | Keywords |
+|---|---|
+| 1 | Any email |
+| 2 | study, research, protocol, Wexler, recall, Dr. Vale, Dr. Ellison, participant, longitudinal, transfer agreement |
+| 3 | PTX-### IDs, room 413, night floor, PLEASE WAIT TO BE RECALLED, Lena Ortiz, dorsal site, indexed space, blue door, hallway bends |
+
+**Level 3 response character:**
+- The system appears to already have an open file on the sender before they have identified themselves
+- References "your file" as current and active
+- Includes "PLEASE WAIT TO BE RECALLED" as standard administrative language
+- Reference numbers end in `-413`
+
+---
+
+#### 2. Phone — the clinic line
+
+**How it works:**
+
+1. Player calls the 740 number
+2. Amazon Connect receives the call and invokes `lambda/phone-responder` with `phase=greeting`
+3. Lambda hashes the caller's phone number and retrieves their level from DynamoDB
+4. Lambda returns level-appropriate greeting SSML
+5. Connect plays the greeting via Polly (voice: Joanna) and waits for DTMF input (8-second timeout)
+6. Player presses a digit; Connect invokes Lambda again with `phase=extension, extension=digit`
+7. Lambda returns extension-specific SSML based on digit + level
+8. Connect plays the response and disconnects
+
+**Extensions:**
+
+| Digit | Extension | Level 1 | Level 2 | Level 3 |
+|---|---|---|---|---|
+| 1 | Records & Administration | Standard Dorsal Holdings transfer notice | Same + "if you have been contacted by this office, your file is current" | Same |
+| 2 | Research Department (Dr. Vale's line) | Study concluded 2013, no enrollment | "Follow-up participants" language, "this line is monitored periodically" | "Participant file verified. Your recall window is currently open." |
+| 3 | Dr. Ellison's office | Voicemail full, not accepting messages | Tired voicemail recording, "if calling regarding the study, do not leave a message here" | "Room 413 is not on any floor plan. Do not go back." |
+| 4 | All other extensions (Lena Ortiz) | Extension not in service | Extension not in service | "The extension you have dialed is no longer in service. If someone gave you this number, they should not have been able to." |
+
+**No input / timeout / press 9:** Replays the main greeting menu.
+
+**Caller promotion:** Callers default to level 1. Promote by writing a DynamoDB record with `pk: PHONE#<sha256>` and `level: 2` or `level: 3`. See [deploy.md](deploy.md) for the PowerShell command.
+
+---
+
+#### 3. Portal — `somnatek.org/portal.html`
+
+**How it works:**
+
+1. Player enters a PTX-### participant ID
+2. Form POSTs to API Gateway → `lambda/portal-login` (to be built)
+3. Lambda hashes the ID, checks DynamoDB solve state table
+4. Returns the appropriate archived recall summary page
+5. Records the player's VIS-##### visitor ID in DynamoDB on first access
+
+**Visitor IDs** are assigned on first portal access and used to personalize email content in later stages. Format: `VIS-XXXXX` (five-digit zero-padded).
+
+---
+
+### DynamoDB Tables
+
+All state lives in three tables:
+
+| Table | Env var | Purpose |
+|---|---|---|
+| `somnatek-visitors` | `DYNAMODB_TABLE_VISITORS` | Email sender state (`EMAIL#hash`), phone caller state (`PHONE#hash`), portal visitor records (`VIS#id`) |
+| `somnatek-solve-state` | `DYNAMODB_TABLE_SOLVE_STATE` | Which puzzles a given visitor ID has solved and what they have unlocked |
+| `somnatek-content-ledger` | `DYNAMODB_TABLE_CONTENT_LEDGER` | Content drop tracking: `drafted → scheduled → released → discovered → superseded → removed` |
+
+---
+
+### How the Operator Controls Escalation
+
+Players are never escalated automatically based purely on calling or emailing. Escalation is a deliberate operator action.
+
+**Email level** is driven by keyword classification — players self-escalate by using deeper lore language. The operator does not need to do anything.
+
+**Phone level** is a manual operator action. The operator decides when a specific player has earned a level 2 or level 3 phone experience and writes the DynamoDB record.
+
+**Portal access** is puzzle-gated. Operators control which PTX IDs return content and what that content says by managing the solve state table.
+
+**Content drops** are controlled via the content ledger table. The release script in `scripts/` sets a record to `released` and copies the staged artifact to the public S3 path.
+
+---
+
+### The Escalation Arc
+
+| Stage | What players do | What they experience |
+|---|---|---|
+| 1 — Forgotten Clinic | Browse the public site | Static institutional site. Small anomalies. |
+| 2 — Shared Dream Evidence | Find and solve the portal puzzle | Archived recall summaries. Patterns emerge. |
+| 3 — The Archive Responds | Email the clinic, dig deeper | Automated responses that know too much. Pages change after puzzles are solved. |
+| 4 — Visitor Classification | Opt into email updates | Assigned a VIS-##### ID. Receive in-world appointment notices. |
+| 5 — The Protocol | Find Protocol 7A | Study was not a dream study. Environmental recall was real. |
+| 6 — The Forum | Reach RestWell | Independent patient reports corroborate the archive. MarauderBlue's posts. |
+| 7 — Records Contradict | Reach Wexler and Harrow County | Dorsal Health Holdings was created after the transfer. Vale's name should not be there. |
+| 8 — Room 413 | Final puzzle solve | Appointment confirmed. Room 413. Arrival window. |
+
+---
+
+### Content Drop Workflow
+
+1. Create artifact in `staged/` (never committed to public repo)
+2. Add record to content ledger table with status `drafted`
+3. When ready, update record to `scheduled` with target release timestamp
+4. Run `scripts/release.js` — copies artifact to public S3 path, updates ledger to `released`
+5. When players find it, ledger status updates to `discovered` (either manually or via Lambda)
+6. Superseded artifacts are marked `superseded` — still accessible, but no longer the current version
+
+**Daily micro-drops** are the smallest unit: a single HTML comment added to a page, a PDF metadata change, a forum reply, a broken link becoming active. These require a site file update and redeploy.
+
+**Redeploy shortcut:**
+```powershell
+$env:AWS_PROFILE = "somnatek-arg"
+aws s3 sync G:\APPS\ARG\sites\somnatek\ s3://somnatek-site/ --delete
+aws ssm send-command --instance-ids "i-081a7e7e3c65b1f5d" `
+  --document-name "AWS-RunShellScript" `
+  --parameters 'commands=["aws s3 sync s3://somnatek-site/ /var/www/somnatek/ --delete","chown -R nginx:nginx /var/www/somnatek","systemctl reload nginx"]'
+```
+
+---
+
+### Infrastructure Summary
+
+| Component | Service | Stack | Status |
+|---|---|---|---|
+| Somnatek site hosting | EC2 + nginx | SomnatekEc2Stack | Deployed |
+| Site files | S3 `somnatek-site` | Manual | Deployed |
+| Email inbound | SES receipt rule + S3 | SomnatekEmailStack | Ready to deploy |
+| Email response | Lambda + Bedrock | SomnatekEmailStack | Ready to deploy |
+| Phone line | Amazon Connect | SomnatekPhoneStack | Ready to deploy |
+| Phone routing | Lambda + Polly | SomnatekPhoneStack | Ready to deploy |
+| Visitor state | DynamoDB | SomnatekEmailStack | Ready to deploy |
+| Portal login | Lambda + API Gateway | Not yet built | Planned |
+| RestWell forum | EC2 or S3 + nginx | Not yet built | Week 2 |
+| Wexler archive | EC2 or S3 + nginx | Not yet built | Week 3 |
+| Harrow County records | EC2 or S3 + nginx | Not yet built | Week 4 |
+

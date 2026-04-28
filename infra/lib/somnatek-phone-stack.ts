@@ -86,18 +86,21 @@ export class SomnatekPhoneStack extends cdk.Stack {
     });
 
     // ----------------------------------------------------------------
-    // Contact flow — play message and disconnect
+    // Contact flow — greeting menu → DTMF input → extension message → disconnect
     //
     // Flow:
     //   SetVoice (Joanna, neural)
-    //   → InvokeLambda (returns level + ssml)
-    //   → UpdateContactAttributes (store ssml from $.External.ssml)
-    //   → MessageParticipant (play $.Attributes.message)
-    //   → DisconnectParticipant
+    //   → InvokeLambda phase=greeting  (returns level + greeting ssml)
+    //   → StoreGreeting (save ssml to contact attribute)
+    //   → GetUserInput  (play greeting ssml, collect 1 DTMF digit, 8s timeout)
+    //     → on digit 1-4: InvokeLambda phase=extension, extension=digit
+    //       → StoreExtension → PlayExtension → Disconnect
+    //     → on digit 9:  loop back to GetUserInput (repeat menu)
+    //     → timeout / nomatch: PlayFallback → Disconnect
     //
-    // Lambda errors fall back to the hardcoded level-1 closure message.
+    // Lambda errors at any point fall through to PlayFallback.
     // ----------------------------------------------------------------
-    const contactFlowContent = cdk.Stack.of(this).toJsonString({
+    const contactFlowContent = JSON.stringify({
       Version: '2019-10-30',
       StartAction: 'set-voice',
       Actions: [
@@ -105,53 +108,118 @@ export class SomnatekPhoneStack extends cdk.Stack {
           Identifier: 'set-voice',
           Type: 'UpdateContactTextToSpeechVoice',
           Parameters: { VoiceId: 'Joanna' },
-          Transitions: { NextAction: 'invoke-lambda' },
+          Transitions: { NextAction: 'invoke-greeting' },
         },
+
+        // ---- Phase 1: get greeting SSML from Lambda ----
         {
-          Identifier: 'invoke-lambda',
+          Identifier: 'invoke-greeting',
           Type: 'InvokeLambdaFunction',
           Parameters: {
             LambdaFunctionARN: phoneResponder.functionArn,
             InvocationTimeLimitSeconds: '8',
-            LambdaInvocationAttributes: {
-              callerNumber: '$.CustomerEndpoint.Address',
-            },
+            LambdaInvocationAttributes: { phase: 'greeting' },
             ResponseValidation: { ResponseType: 'STRING_MAP' },
           },
           Transitions: {
-            NextAction: 'store-message',
+            NextAction: 'store-greeting',
             Errors: [
               { NextAction: 'play-fallback', ErrorType: 'NoMatchingError' },
               { NextAction: 'play-fallback', ErrorType: 'TimedOut' },
             ],
           },
         },
+
+        // Store greeting SSML as contact attribute
         {
-          Identifier: 'store-message',
+          Identifier: 'store-greeting',
           Type: 'UpdateContactAttributes',
           Parameters: {
             TargetContact: 'Current',
-            Attributes: { message: '$.External.ssml' },
+            Attributes: { menuSsml: '$.External.ssml' },
           },
           Transitions: {
-            NextAction: 'play-message',
+            NextAction: 'collect-digit',
             Errors: [{ NextAction: 'play-fallback', ErrorType: 'NoMatchingError' }],
           },
         },
+
+        // ---- Phase 2: play greeting + collect DTMF ----
         {
-          Identifier: 'play-message',
+          Identifier: 'collect-digit',
+          Type: 'GetUserInput',
+          Parameters: {
+            Text: '$.Attributes.menuSsml',
+            TextToSpeechType: 'ssml',
+            Timeout: '8',
+            MaxDigits: '1',
+            TerminatingKeypress: '#',
+          },
+          Transitions: {
+            NextAction: 'play-fallback',
+            Conditions: [
+              { NextAction: 'invoke-ext-1', Operator: 'Equals', Operand: '1' },
+              { NextAction: 'invoke-ext-2', Operator: 'Equals', Operand: '2' },
+              { NextAction: 'invoke-ext-3', Operator: 'Equals', Operand: '3' },
+              { NextAction: 'invoke-ext-4', Operator: 'Equals', Operand: '4' },
+              { NextAction: 'collect-digit', Operator: 'Equals', Operand: '9' },
+            ],
+            Errors: [
+              { NextAction: 'play-fallback', ErrorType: 'NoMatchingError' },
+              { NextAction: 'play-fallback', ErrorType: 'TimedOut' },
+            ],
+          },
+        },
+
+        // ---- Phase 3: Lambda invocations per extension ----
+        ...(['1', '2', '3', '4'] as const).map((digit) => ({
+          Identifier: `invoke-ext-${digit}`,
+          Type: 'InvokeLambdaFunction',
+          Parameters: {
+            LambdaFunctionARN: phoneResponder.functionArn,
+            InvocationTimeLimitSeconds: '8',
+            LambdaInvocationAttributes: { phase: 'extension', extension: digit },
+            ResponseValidation: { ResponseType: 'STRING_MAP' },
+          },
+          Transitions: {
+            NextAction: `store-ext-${digit}`,
+            Errors: [
+              { NextAction: 'play-fallback', ErrorType: 'NoMatchingError' },
+              { NextAction: 'play-fallback', ErrorType: 'TimedOut' },
+            ],
+          },
+        })),
+
+        // Store extension SSML per digit
+        ...(['1', '2', '3', '4'] as const).map((digit) => ({
+          Identifier: `store-ext-${digit}`,
+          Type: 'UpdateContactAttributes',
+          Parameters: {
+            TargetContact: 'Current',
+            Attributes: { extSsml: '$.External.ssml' },
+          },
+          Transitions: {
+            NextAction: `play-ext-${digit}`,
+            Errors: [{ NextAction: 'play-fallback', ErrorType: 'NoMatchingError' }],
+          },
+        })),
+
+        // Play extension SSML per digit then disconnect
+        ...(['1', '2', '3', '4'] as const).map((digit) => ({
+          Identifier: `play-ext-${digit}`,
           Type: 'MessageParticipant',
           Parameters: {
-            Text: '$.Attributes.message',
+            Text: '$.Attributes.extSsml',
             TextToSpeechType: 'ssml',
           },
           Transitions: {
             NextAction: 'disconnect',
             Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
           },
-        },
+        })),
+
+        // ---- Fallback: hardcoded level-1 closure message ----
         {
-          // Fallback: Lambda timed out or failed — play hardcoded closure message
           Identifier: 'play-fallback',
           Type: 'MessageParticipant',
           Parameters: {
@@ -159,16 +227,13 @@ export class SomnatekPhoneStack extends cdk.Stack {
               '<speak>',
               '  <prosody rate="95%">',
               '    You have reached Somnatek Sleep Health Center.',
-              '    <break time="500ms"/>',
               '    Our offices are no longer in operation.',
-              '    <break time="400ms"/>',
               '    For records inquiries, please contact Dorsal Health Holdings LLC',
               '    at the address listed on our website.',
-              '    <break time="400ms"/>',
-              '    Thank you for contacting Somnatek Sleep Health Center.',
+              '    Thank you.',
               '  </prosody>',
               '</speak>',
-            ].join('\n'),
+            ].join(' '),
             TextToSpeechType: 'ssml',
           },
           Transitions: {
@@ -176,6 +241,7 @@ export class SomnatekPhoneStack extends cdk.Stack {
             Errors: [{ NextAction: 'disconnect', ErrorType: 'NoMatchingError' }],
           },
         },
+
         {
           Identifier: 'disconnect',
           Type: 'DisconnectParticipant',
