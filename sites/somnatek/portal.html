@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Patient portal login for Somnatek Sleep Health Center archived records access." />
+<title>Patient Portal | Somnatek Sleep Health Center</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript">
+/* Portal access module - v1.4 - last updated 2013-09-02 */
+/* Somnatek CMS portal handler */
+
+/**
+ * Validates a submitted participant ID against the portal API.
+ * Displays a status message based on the API response.
+ * @param {Event} e - The form submit event.
+ */
+function handlePortalSubmit(e) {
+  e.preventDefault();
+
+  var idField = document.getElementById('participant-id');
+  var msgEl   = document.getElementById('portal-msg');
+  var val     = idField ? idField.value.trim().toUpperCase() : '';
+
+  if (!val) {
+    msgEl.innerHTML = 'Please enter your participant ID.';
+    return;
+  }
+
+  msgEl.innerHTML = 'Checking record...';
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/portal-login', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState !== 4) { return; }
+    if (xhr.status === 200) {
+      try {
+        var data = JSON.parse(xhr.responseText);
+        if (data.redirect) {
+          window.location.href = data.redirect;
+        } else {
+          msgEl.innerHTML = 'Access granted. Redirecting...';
+        }
+      } catch (err) {
+        msgEl.innerHTML = 'Portal temporarily unavailable. Please try again later.';
+      }
+    } else if (xhr.status === 401) {
+      msgEl.innerHTML = 'Participant ID not recognized. If you believe this is an error, contact Dorsal Health Holdings LLC.';
+    } else {
+      msgEl.innerHTML = 'Portal temporarily unavailable. Please try again later.';
+    }
+  };
+
+  xhr.send(JSON.stringify({ id: val }));
+}
+
+window.onload = function() {
+  var form = document.getElementById('portal-form');
+  if (form) {
+    form.addEventListener('submit', handlePortalSubmit);
+  }
+};
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <div id="header">
+    <div id="header-inner">
+      <div id="header-contact">
+        Tel: (740) 555-0192<br />
+        Fax: (740) 555-0193
+      </div>
+      <div id="site-title">Somnatek Sleep Health Center</div>
+      <div id="site-subtitle">Diagnostic Sleep Medicine &amp; Patient Care &mdash; Harrow County</div>
+    </div>
+  </div>
+
+  <div id="topnav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="sleep-disorders.html">Sleep Disorders</a></li>
+      <li><a href="patient-resources.html">Patient Resources</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="staff.html">Staff</a></li>
+      <li><a href="portal.html" class="active">Patient Portal</a></li>
+    </ul>
+  </div>
+
+  <div id="breadcrumb"><a href="index.html">Home</a> &gt; Patient Portal</div>
+
+  <div id="content-wrapper">
+
+    <div id="sidebar">
+      <h3>Portal</h3>
+      <ul>
+        <li><a href="portal.html" class="active">Login</a></li>
+        <li><a href="patient-resources.html">Patient Resources</a></li>
+        <li><a href="insurance.html">Billing</a></li>
+        <li><a href="closure-notice.html">Closure Notice</a></li>
+      </ul>
+      <div id="sidebar-note">
+        This portal has been archived. Active patient records are managed by Dorsal Health Holdings LLC.
+      </div>
+    </div>
+
+    <div id="main">
+
+      <h1>Patient Portal</h1>
+
+      <!-- SYSTEM: portal_mode=archive | auth_backend=legacy | last_sync=2014-09-18 -->
+
+      <div class="closure-notice">
+        <strong>Portal Archived</strong>
+        This portal has been archived as of September 18, 2014. Active patient records management has transferred to Dorsal Health Holdings LLC. Former patients may use their assigned participant ID to access archived study materials retained under the terms of the records transfer agreement.
+      </div>
+
+      <p>If you participated in the Wexler University longitudinal sleep recall study conducted at this facility between 2008 and 2013, you may use your assigned participant ID to access your archived recall summaries below.</p>
+
+      <p>Participant IDs were provided at study enrollment and appear on your original intake documentation in the format <strong>PTX-###</strong>. If you do not have your participant ID, contact Dorsal Health Holdings LLC.</p>
+
+      <form id="portal-form" action="/api/portal-login" method="post">
+        <label for="participant-id">Participant ID</label>
+        <input type="text" id="participant-id" name="participant_id" maxlength="10" autocomplete="off" placeholder="PTX-000" />
+        <!-- field: session_token -->
+        <input type="hidden" name="session_token" value="" />
+        <input type="hidden" name="src" value="portal_archive_v1" />
+        <input type="submit" value="Access Archive" />
+      </form>
+
+      <div id="portal-msg"></div>
+
+      <hr />
+
+      <p class="small">This portal does not provide access to standard clinical records, test results, or billing history. For clinical records requests, contact Dorsal Health Holdings LLC. This system is provided for research study archive access only and is not monitored by clinical staff.</p>
+
+    </div>
+
+  </div>
+
+  <div id="footer">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          Somnatek Sleep Health Center &mdash; 114 Aldenmoor Road, Suite 2, Harrow County<br />
+          Tel: (740) 555-0192 &nbsp;|&nbsp; <a href="mailto:records@somnatekhealth.com">records@somnatekhealth.com</a>
+        </td>
+        <td align="right" valign="top">
+          <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp;
+          <a href="closure-notice.html">Closure Notice</a>
+        </td>
+      </tr>
+    </table>
+    <div style="margin-top:6px;">
+      &copy; 2006&ndash;2014 Somnatek Sleep Health Center. All rights reserved.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

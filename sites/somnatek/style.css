@@ -1,0 +1,363 @@
+/* ============================================================
+   Somnatek Sleep Health Center — Main Stylesheet
+   Last modified: 2013-11-04
+   ============================================================ */
+
+/* Reset */
+* { margin: 0; padding: 0; }
+body, td, th, input, select, textarea {
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+
+body {
+    background-color: #e8eef2;
+}
+
+a { color: #2a5f8a; text-decoration: none; }
+a:hover { text-decoration: underline; color: #1a3f5a; }
+a:visited { color: #5a4a7a; }
+
+/* ---- Page wrapper ---- */
+#wrapper {
+    width: 760px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-left: 1px solid #c0cdd6;
+    border-right: 1px solid #c0cdd6;
+}
+
+/* ---- Header ---- */
+#header {
+    background-color: #2a5f8a;
+    padding: 0;
+    overflow: hidden;
+}
+
+#header-inner {
+    padding: 14px 18px 10px 18px;
+}
+
+#site-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+#site-subtitle {
+    font-size: 11px;
+    color: #b8d0e4;
+    margin-top: 2px;
+}
+
+#header-contact {
+    float: right;
+    text-align: right;
+    padding-top: 4px;
+    font-size: 11px;
+    color: #b8d0e4;
+}
+
+/* ---- Top nav bar ---- */
+#topnav {
+    background-color: #1a3f5a;
+    padding: 0;
+    overflow: hidden;
+}
+
+#topnav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#topnav ul li {
+    display: inline;
+}
+
+#topnav ul li a {
+    display: inline-block;
+    color: #c8dcea;
+    font-size: 11px;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-right: 1px solid #2a5070;
+}
+
+#topnav ul li a:hover,
+#topnav ul li a.active {
+    background-color: #2a5f8a;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* ---- Breadcrumb ---- */
+#breadcrumb {
+    background-color: #f0f4f7;
+    border-bottom: 1px solid #c8d4dc;
+    padding: 5px 18px;
+    font-size: 11px;
+    color: #777777;
+}
+
+/* ---- Content area with left sidebar ---- */
+#content-wrapper {
+    overflow: hidden;
+    padding: 0;
+}
+
+#sidebar {
+    float: left;
+    width: 158px;
+    border-right: 1px solid #d0dce4;
+    min-height: 420px;
+    background-color: #f5f8fa;
+}
+
+#sidebar h3 {
+    background-color: #2a5f8a;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar ul li a {
+    display: block;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #2a5f8a;
+    border-bottom: 1px solid #e0e8ee;
+    text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+    background-color: #dce8f0;
+    text-decoration: none;
+}
+
+#sidebar ul li a.active {
+    background-color: #c8dcea;
+    color: #1a3f5a;
+    font-weight: bold;
+}
+
+#sidebar-note {
+    padding: 10px;
+    font-size: 10px;
+    color: #888888;
+    line-height: 1.5;
+    border-top: 1px solid #d0dce4;
+    margin-top: 8px;
+}
+
+/* ---- Main content ---- */
+#main {
+    float: left;
+    width: 576px;
+    padding: 18px 20px;
+}
+
+#main h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    color: #1a3f5a;
+    font-weight: normal;
+    border-bottom: 1px solid #c0cdd6;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+}
+
+#main h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    color: #2a5f8a;
+    font-weight: normal;
+    margin: 16px 0 8px 0;
+}
+
+#main h3 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333333;
+    margin: 14px 0 6px 0;
+}
+
+#main p {
+    line-height: 1.7;
+    margin-bottom: 10px;
+    color: #444444;
+}
+
+#main ul, #main ol {
+    margin: 0 0 10px 20px;
+    line-height: 1.7;
+    color: #444444;
+}
+
+/* ---- Info box ---- */
+.infobox {
+    background-color: #eef4f8;
+    border: 1px solid #b8cedd;
+    border-left: 3px solid #2a5f8a;
+    padding: 10px 12px;
+    margin: 12px 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #444444;
+}
+
+.infobox strong {
+    color: #1a3f5a;
+}
+
+/* ---- Notice / alert box ---- */
+.noticebox {
+    background-color: #fdfaf0;
+    border: 1px solid #d8c870;
+    padding: 10px 12px;
+    margin: 12px 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #5a5020;
+}
+
+/* ---- Closure notice ---- */
+.closure-notice {
+    background-color: #f5f5f5;
+    border: 1px solid #cccccc;
+    border-top: 3px solid #888888;
+    padding: 12px 14px;
+    margin: 14px 0;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #555555;
+}
+
+.closure-notice strong {
+    display: block;
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 6px;
+}
+
+/* ---- Staff table ---- */
+table.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 11px;
+}
+
+table.staff-table th {
+    background-color: #2a5f8a;
+    color: #ffffff;
+    padding: 6px 8px;
+    text-align: left;
+    font-weight: normal;
+}
+
+table.staff-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #dde6ec;
+    vertical-align: top;
+}
+
+table.staff-table tr:nth-child(even) td {
+    background-color: #f5f8fa;
+}
+
+table.staff-table td.staff-name {
+    font-weight: bold;
+    color: #1a3f5a;
+    width: 160px;
+}
+
+table.staff-table td.staff-status {
+    color: #888888;
+    font-style: italic;
+    width: 120px;
+}
+
+/* ---- PDF link ---- */
+a.pdf-link {
+    padding-left: 18px;
+    background: url('img/icon-pdf.gif') no-repeat left center;
+    color: #2a5f8a;
+}
+
+/* ---- Footer ---- */
+#footer {
+    clear: both;
+    background-color: #f0f4f7;
+    border-top: 1px solid #c0cdd6;
+    padding: 10px 18px;
+    font-size: 10px;
+    color: #888888;
+    line-height: 1.7;
+}
+
+#footer a {
+    color: #777777;
+}
+
+/* ---- Portal form ---- */
+#portal-form {
+    max-width: 340px;
+    margin: 14px 0;
+}
+
+#portal-form label {
+    display: block;
+    font-size: 11px;
+    color: #444444;
+    margin-bottom: 3px;
+    margin-top: 10px;
+}
+
+#portal-form input[type=text],
+#portal-form input[type=password] {
+    width: 220px;
+    padding: 4px 6px;
+    border: 1px solid #aabbcc;
+    font-size: 12px;
+    color: #333333;
+    background-color: #fafcfe;
+}
+
+#portal-form input[type=submit] {
+    margin-top: 12px;
+    padding: 4px 14px;
+    background-color: #2a5f8a;
+    color: #ffffff;
+    border: 1px solid #1a3f5a;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+#portal-form input[type=submit]:hover {
+    background-color: #1a4f7a;
+}
+
+#portal-msg {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #888888;
+}
+
+/* ---- Misc ---- */
+.small { font-size: 10px; color: #888888; }
+.grey { color: #888888; }
+.red { color: #aa3333; }
+hr { border: none; border-top: 1px solid #d0dce4; margin: 14px 0; }
