@@ -1,6 +1,6 @@
 # Somnatek ARG — Master Roadmap
 
-Last updated: April 30, 2026 (late evening)
+Last updated: April 30, 2026 (night)
 
 ---
 
@@ -77,6 +77,7 @@ The portal becomes functional. Players can find and use a PTX participant ID to 
   | `admin_t1` | 10 | ✓ | fake admin fires beacon `admin-t1` |
   | `admin_t2` | 20 | ✓ | fake admin fires beacon `admin-t2` |
   | `admin_t3` | 35 | ✓ | fake admin fires beacon `admin-t3` |
+  | `supp_010_found` | 35 | ✓ | beacon: `supp-010` |
   | `recall_accessed` | 25 | ✓ | beacon: `ptx-018` (fires when player visits portal/ptx-018/ with VIS ID) |
   | `admin_t1` | 10 | ✓ | fake admin fires beacon `admin-t1` |
   | `admin_t2` | 20 | ✓ | fake admin fires beacon `admin-t2` |
@@ -84,7 +85,7 @@ The portal becomes functional. Players can find and use a PTX participant ID to 
   | `protocol_7a` | 30 | ✓ | beacon: `protocol-7a` (fires on successful puzzle unlock) |
   | `restwell_found` | 40 | — | future |
   | `wexler_found` | 40 | — | future |
-  Released: **210 pts** / All-time: **275 pts**
+  Released: **245 pts** / All-time: **315 pts**
 - [x] `percentComplete` and `level` computed on each solve (Apr 29)
 - [x] Pre-solve ANON visitor record promoted to VISITOR# on first valid solve — journey data (pages visited, first seen, referrer) carried forward (Apr 29)
 - [x] Portal page writes `sntk_vis` to localStorage on successful solve (Apr 29)
@@ -176,7 +177,7 @@ failed handshake sequence.
   - `admin-t1/t2/t3` → `admin_t1/t2/t3`
   - `ptx-018` → `recall_accessed`
   - `protocol-7a` → `protocol_7a`
-- [x] Known pages: `index`, `about`, `research`, `staff`, `patient-resources`, `closure-notice`, `portal`, `404`, `sleep-disorders`, `insurance`, `ptx-018`, `7a-internal`, `correspondence`, `admin`, `supp-index`, `admin-t1`, `admin-t2`, `admin-t3`, `protocol-7a`
+- [x] Known pages: `index`, `about`, `research`, `staff`, `patient-resources`, `closure-notice`, `portal`, `404`, `sleep-disorders`, `insurance`, `ptx-018`, `7a-internal`, `correspondence`, `admin`, `supp-index`, `admin-t1`, `admin-t2`, `admin-t3`, `protocol-7a`, `supp-010`
 
 ### Admin System
 - [x] `/admin/index.html` — **Fake in-world admin portal** (Apr 30)
@@ -215,9 +216,23 @@ failed handshake sequence.
 - [x] `X-Archive-Ref: 7A-SUPP-001` HTTP response header on `/research.html` (Apr 30)
 - [x] HTML comment in `patient-resources.html`: internal doc ref with last_modified L. Ortiz, pages 3–4 status unresolved (Apr 30)
 - [x] HTML comment in `research.html`: `<!-- correspondence archive: archive/correspondence/ - ref 7A-SUPP-001 -->` (Apr 30)
+- [x] RestWell discovery vector in `staff.html` (Apr 30) — HTML comment on Lena Ortiz profile:
+  `<!-- cached external reference: restwell.net/forum/memberlist.php?mode=viewprofile&u=lortiz`
+  `     user: lortiz — registered 2010, last active 2019-11-04`
+  `     google cache snapshot: 2020-01-15 — profile still visible at time of indexing -->`
 - [ ] Lena Ortiz staff checklist PDF — final line: "do not include room 413 in the standard environmental checklist"
 - [ ] Study summary PDF with last two pages missing
-- [ ] `7A-SUPP-010` page — Ellison's 14-page write-up about entering room 413 (Phase 2 drop)
+- [x] `7A-SUPP-010` page — Ellison's 14-page write-up about entering room 413 (Apr 30)
+  - `archive/7A-SUPP-010/index.html` — full report, 14 pages with appendix field notes
+  - Ellison's first-person account of five access events March–April 2013
+  - Confirms: room 413 is physically in the building, door blue/left, hallway bends left, time discrepancy ~4–6x, vending machine (accepts room keys), secondary hallway with locked door bearing the PLEASE WAIT TO BE RECALLED sign
+  - Section 5: explicitly states the participants were not dreaming — they were accessing a real location
+  - Section 6: Ellison notes she wrote the PLEASE WAIT TO BE RECALLED language and now doubts what it means
+  - Field notes: access event 4 includes the sign; April 7 post-exit note asks if the space learned the phrase from the study or the study learned it from the space
+  - Final note: "The data is clean because the place is real."
+  - Discoverable via SUPP-INDEX HTML source (path: `/archive/7A-SUPP-010/` added to comment)
+  - Fires `supp-010` beacon → writes `supp_010_found` milestone (35 pts)
+  - Added to `robots.txt` as `Disallow: /archive/7A-SUPP-010/`
 
 ---
 

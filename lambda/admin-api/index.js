@@ -45,6 +45,7 @@ const MILESTONES = [
   { id: 'admin_t3',             label: 'Admin portal \u2014 Tier 3',    points: 35, phase: 1, released: true  },
   { id: 'recall_accessed',      label: 'Recall summaries found',         points: 25, phase: 1, released: true  },
   { id: 'protocol_7a',          label: 'Protocol 7A unlocked',           points: 30, phase: 1, released: true  },
+  { id: 'supp_010_found',       label: 'Night floor access report found',points: 35, phase: 1, released: true  },
   { id: 'restwell_found',       label: 'RestWell forum found',           points: 40, phase: 2, released: false },
   { id: 'wexler_found',         label: 'Wexler archive found',           points: 40, phase: 3, released: false },
 ];
