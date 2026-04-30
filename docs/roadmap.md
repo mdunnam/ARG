@@ -1,6 +1,6 @@
 # Somnatek ARG — Master Roadmap
 
-Last updated: April 30, 2026 (evening)
+Last updated: April 30, 2026 (late evening)
 
 ---
 
@@ -28,7 +28,7 @@ Infrastructure and the first live site. Nothing is publicly promoted yet. The si
 - [x] API Gateway wired to puzzle Lambda — `SomnatekPortalStack` deployed
 - [x] `SomnatekAdminStack` — admin API Lambda + HTTP API Gateway deployed
 - [x] `SomnatekBeaconStack` — page beacon Lambda + HTTP API Gateway deployed (Apr 29)
-- [ ] `www.somnatek.org` DNS alias (currently 404)
+- [x] `www.somnatek.org` DNS alias (already resolves — cert and nginx both cover www)
 
 ### Somnatek Site — Core Pages
 - [x] `index.html` — Home
@@ -77,11 +77,14 @@ The portal becomes functional. Players can find and use a PTX participant ID to 
   | `admin_t1` | 10 | ✓ | fake admin fires beacon `admin-t1` |
   | `admin_t2` | 20 | ✓ | fake admin fires beacon `admin-t2` |
   | `admin_t3` | 35 | ✓ | fake admin fires beacon `admin-t3` |
-  | `recall_accessed` | 25 | — | future |
-  | `protocol_7a` | 30 | — | future |
+  | `recall_accessed` | 25 | ✓ | beacon: `ptx-018` (fires when player visits portal/ptx-018/ with VIS ID) |
+  | `admin_t1` | 10 | ✓ | fake admin fires beacon `admin-t1` |
+  | `admin_t2` | 20 | ✓ | fake admin fires beacon `admin-t2` |
+  | `admin_t3` | 35 | ✓ | fake admin fires beacon `admin-t3` |
+  | `protocol_7a` | 30 | ✓ | beacon: `protocol-7a` (fires on successful puzzle unlock) |
   | `restwell_found` | 40 | — | future |
   | `wexler_found` | 40 | — | future |
-  Released: **160 pts** / All-time: **275 pts**
+  Released: **210 pts** / All-time: **275 pts**
 - [x] `percentComplete` and `level` computed on each solve (Apr 29)
 - [x] Pre-solve ANON visitor record promoted to VISITOR# on first valid solve — journey data (pages visited, first seen, referrer) carried forward (Apr 29)
 - [x] Portal page writes `sntk_vis` to localStorage on successful solve (Apr 29)
@@ -143,11 +146,19 @@ failed handshake sequence.
 - [x] Key sessions have `<!-- FLAGGED: ... -->` HTML comments for players scanning source
 - [ ] PDF metadata: author `L. Ortiz`, last-modified date post-closure
 
-### Hidden Puzzle — Protocol 7A Page
-- [ ] Unlocked by combining: session number + participant ID + room number from revised checklist
-- [ ] `portal/protocol-7a/` — Dense bureaucratic document
-- [ ] Final section "Recall Termination Criteria" contains the key line about Room 413 and archive category 7
-- [ ] `7A_INTERNAL_DO_NOT_DISTRIBUTE.pdf` — appears in a filename on patient-resources, looks like a normal intake form with last two pages missing
+### Hidden Puzzle — Protocol 7A Page — COMPLETE (Apr 30)
+- [x] `portal/protocol-7a/index.html` — full Protocol 7A source document (EC-004, March 2012)
+  - Puzzle gate: client-side SHA-256 — answer derived from session 15 + PTX-018 + room 413 → `15PTX018413`
+  - Input normalization: strip dashes/spaces, uppercase — accepts any reasonable format
+  - On unlock: fires `protocol-7a` beacon → writes `protocol_7a` milestone; session-persisted via `sessionStorage`
+  - Document content (4 pages, full version — pages 3–4 were removed from the Dorsal copy):
+    - Pages 1–2: objectives, participant selection, session protocol, full EC-004 EEC with cross-reference notes
+    - Page 3 (Section 8): **Recall Termination Criteria** — defines archive category 7, room 413 as primary indexed space, `PLEASE WAIT TO BE RECALLED` as the formal administrative communication
+    - Page 3 (Section 8.6): observer reclassification with VIS-XXXXX format — players who find this see themselves described in the protocol
+    - Page 4 (Section 9): Supplemental Observations — added by Ellison/Vale after IRB submission, not included in Dorsal transfer; states plainly that the indexed space is self-sustaining and existed before the study
+    - Ellison's note: "I would rather they understand what we found than read around it."
+  - Linked from `portal/ptx-018/` sidebar under "Study Archive"
+  - Page-load beacon fires `portal` slug (no milestone); milestone only on unlock
 
 ### Page Beacon System — COMPLETE (Apr 29, updated Apr 30)
 - [x] `lambda/page-beacon/index.js` — fire-and-forget. Records every page load as `ANON#<ipHash>` before any solve
@@ -163,7 +174,9 @@ failed handshake sequence.
   - `supp-index` → `supp_index_found`
   - `7a-internal` → `doc_7a_found`
   - `admin-t1/t2/t3` → `admin_t1/t2/t3`
-- [x] Known pages: `index`, `about`, `research`, `staff`, `patient-resources`, `closure-notice`, `portal`, `404`, `sleep-disorders`, `insurance`, `ptx-018`, `7a-internal`, `correspondence`, `admin`, `supp-index`, `admin-t1`, `admin-t2`, `admin-t3`
+  - `ptx-018` → `recall_accessed`
+  - `protocol-7a` → `protocol_7a`
+- [x] Known pages: `index`, `about`, `research`, `staff`, `patient-resources`, `closure-notice`, `portal`, `404`, `sleep-disorders`, `insurance`, `ptx-018`, `7a-internal`, `correspondence`, `admin`, `supp-index`, `admin-t1`, `admin-t2`, `admin-t3`, `protocol-7a`
 
 ### Admin System
 - [x] `/admin/index.html` — **Fake in-world admin portal** (Apr 30)

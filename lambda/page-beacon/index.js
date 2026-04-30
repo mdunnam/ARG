@@ -26,6 +26,7 @@ const KNOWN_PAGES = new Set([
   'closure-notice', 'portal', '404', 'sleep-disorders', 'insurance',
   'ptx-018', '7a-internal', 'correspondence', 'admin',
   'supp-index', 'admin-t1', 'admin-t2', 'admin-t3',
+  'protocol-7a',
 ]);
 
 /**
@@ -39,6 +40,8 @@ const MILESTONE_SLUGS = {
   'admin-t1':       'admin_t1',
   'admin-t2':       'admin_t2',
   'admin-t3':       'admin_t3',
+  'ptx-018':        'recall_accessed',
+  'protocol-7a':    'protocol_7a',
 };
 
 const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: REGION }));

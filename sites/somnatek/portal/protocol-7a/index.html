@@ -1,0 +1,755 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Protocol 7A &mdash; Longitudinal Environmental Recall Study | Somnatek Archive</title>
+<link rel="stylesheet" type="text/css" href="../../style.css" />
+<style type="text/css">
+#doc-gate {
+  background: #f4f8fb;
+  border: 1px solid #b0c4d4;
+  padding: 24px 28px;
+  margin: 20px 0;
+  max-width: 480px;
+}
+#doc-gate h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: #2a5f8a;
+  margin-bottom: 10px;
+}
+#doc-gate p {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+#doc-gate label {
+  display: block;
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 5px;
+}
+#doc-gate input[type="text"] {
+  width: 100%;
+  border: 1px solid #b0bec5;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  padding: 6px 8px;
+  color: #222;
+  background: #fff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+#doc-gate input[type="text"]:focus {
+  outline: none;
+  border-color: #6a9ab4;
+}
+#doc-gate button {
+  background: #2a5f8a;
+  border: none;
+  color: #fff;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  padding: 6px 18px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+#doc-gate button:hover { background: #1a4f7a; }
+#gate-error {
+  color: #7a2a2a;
+  font-size: 10px;
+  margin-top: 8px;
+  min-height: 14px;
+  font-family: Verdana, Arial, sans-serif;
+}
+#doc-content { display: none; }
+.proto-doc {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  color: #333;
+  line-height: 1.75;
+}
+.proto-header {
+  border: 1px solid #b0bec5;
+  background: #f0f5fa;
+  padding: 14px 20px;
+  margin-bottom: 22px;
+}
+.proto-header .doc-title {
+  font-size: 15px;
+  font-weight: bold;
+  color: #1a3a5a;
+  margin-bottom: 4px;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.proto-header .doc-subtitle {
+  font-size: 12px;
+  color: #5a7a9a;
+  margin-bottom: 10px;
+}
+.proto-header table {
+  font-size: 11px;
+  font-family: Verdana, Arial, sans-serif;
+  color: #555;
+  border-collapse: collapse;
+  width: 100%;
+}
+.proto-header td { padding: 2px 10px 2px 0; }
+.proto-header .td-label { color: #888; width: 160px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+.proto-notice {
+  background: #fdf8ec;
+  border: 1px solid #c8b46a;
+  padding: 9px 14px;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  color: #6a5a22;
+  margin-bottom: 18px;
+}
+.proto-section {
+  margin-bottom: 22px;
+}
+.proto-section h2 {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #2a5f8a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid #c8d8e8;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
+.proto-section h3 {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 6px;
+  margin-top: 12px;
+}
+.proto-section p { margin-bottom: 8px; }
+.proto-section ol, .proto-section ul { padding-left: 20px; margin-bottom: 10px; }
+.proto-section li { margin-bottom: 4px; }
+.proto-section .inline-note {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  color: #8a8a5a;
+  font-style: italic;
+}
+.proto-section .eec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  margin-bottom: 10px;
+  font-family: Verdana, Arial, sans-serif;
+}
+.proto-section .eec-table th {
+  background: #dde4ea;
+  border: 1px solid #b0bec5;
+  padding: 4px 8px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: bold;
+  color: #2c4a6b;
+}
+.proto-section .eec-table td {
+  border: 1px solid #c8d4dc;
+  padding: 4px 8px;
+  vertical-align: top;
+  color: #444;
+}
+.proto-section .eec-table tr:nth-child(odd) td  { background: #f8fbfc; }
+.proto-section .eec-table tr:nth-child(even) td { background: #ffffff; }
+.proto-section .eec-xref { color: #2a5f8a; font-size: 10px; }
+.proto-alert {
+  background: #fdf0ee;
+  border: 1px solid #c8a0a0;
+  padding: 9px 14px;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  color: #5a2020;
+  margin: 12px 0;
+}
+.proto-key-phrase {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  font-weight: bold;
+  color: #1a1a3a;
+  letter-spacing: 0.08em;
+  display: block;
+  margin: 10px 0;
+}
+.proto-sig {
+  border-top: 1px solid #c8d4dc;
+  margin-top: 24px;
+  padding-top: 14px;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  color: #888;
+}
+.proto-sig table { font-size: 10px; border-collapse: collapse; }
+.proto-sig td { padding: 2px 30px 2px 0; color: #888; }
+.page-break-note {
+  text-align: center;
+  color: #ccc;
+  font-size: 10px;
+  font-family: Verdana, Arial, sans-serif;
+  margin: 20px 0;
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <div id="header">
+    <div id="header-inner">
+      <div id="header-contact">
+        Tel: (404) 551-4145<br />
+        Fax: (404) 671-9774
+      </div>
+      <div id="site-title">Somnatek Sleep Health Center</div>
+      <div id="site-subtitle">Patient Portal &mdash; Archived Research Records</div>
+    </div>
+  </div>
+
+  <div id="topnav">
+    <ul>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../portal.html">Patient Portal</a></li>
+    </ul>
+  </div>
+
+  <div id="breadcrumb"><a href="../../index.html">Home</a> &gt; <a href="../../portal.html">Patient Portal</a> &gt; Protocol 7A Archive</div>
+
+  <div id="content-wrapper">
+
+    <div id="sidebar">
+      <h3>Portal Archive</h3>
+      <ul>
+        <li><a href="../../portal.html">Portal Login</a></li>
+        <li><a href="../ptx-018/">Recall Records &mdash; PTX-018</a></li>
+        <li><a href="index.html" class="active">Protocol 7A Document</a></li>
+      </ul>
+      <div id="sidebar-note">
+        This document is retained in the portal archive. Access is restricted to
+        participants and authorized personnel. It is provided for reference only.
+      </div>
+    </div>
+
+    <div id="main">
+
+      <h1>Protocol 7A &mdash; Source Document</h1>
+
+      <p class="intro-text">This page contains the full text of Protocol 7A as filed with Wexler University
+      and maintained in the Somnatek research archive. The version below is EC-004 (Amendment 4,
+      March 2012), which is the final approved version of the protocol.</p>
+
+      <p class="intro-text">This document is classified as restricted research archive material.
+      Document access requires a reference code derived from the participant record.</p>
+
+      <!-- Document gate -->
+      <div id="doc-gate">
+        <h2>Document Access Required</h2>
+        <p>Enter the document reference code to retrieve the archived protocol. The reference code is
+        derived from the participant record: session identifier, participant ID, and room designation.</p>
+        <label for="gate-input">Reference Code</label>
+        <input type="text" id="gate-input" autocomplete="off" spellcheck="false"
+          placeholder="e.g. 15-PTX-018-413" />
+        <button id="gate-btn">Retrieve Document</button>
+        <div id="gate-error"></div>
+      </div>
+
+      <!-- Unlocked document -->
+      <div id="doc-content">
+
+        <div class="proto-doc">
+
+          <div class="proto-header">
+            <div class="doc-title">Protocol 7A &mdash; Longitudinal Environmental Recall Study (LERS)</div>
+            <div class="doc-subtitle">Version 4.0 &mdash; EC-004 (Amendment 4)</div>
+            <table cellpadding="0" cellspacing="0">
+              <tr><td class="td-label">Prepared by</td><td>Edwin Vale, PhD &mdash; Wexler University, Dept. of Cognitive &amp; Behavioral Neuroscience</td></tr>
+              <tr><td class="td-label">Clinical coordination</td><td>Mara Ellison, MD &mdash; Somnatek Sleep Health Center</td></tr>
+              <tr><td class="td-label">Version date</td><td>March 14, 2012</td></tr>
+              <tr><td class="td-label">Study period</td><td>2008&ndash;2013 (projected)</td></tr>
+              <tr><td class="td-label">IRB reference</td><td>WU-CBN-2007-044 (Wexler University)</td></tr>
+              <tr><td class="td-label">Archive classification</td><td>Restricted &mdash; research personnel only</td></tr>
+            </table>
+          </div>
+
+          <div class="proto-notice">
+            <strong>Archive note:</strong> This is the source document. It contains pages 3 and 4 which were
+            removed from the copy transferred to Dorsal Health Holdings LLC in November 2014.
+            The copy held at <a href="../../docs/7A_INTERNAL_DO_NOT_DISTRIBUTE.html">this address</a> is the
+            incomplete version. This document supersedes that copy.
+          </div>
+
+          <!-- PAGE 1 -->
+
+          <div class="proto-section">
+            <h2>Section 1 &mdash; Study Objectives</h2>
+
+            <h3>1.1 Primary Objective</h3>
+            <p>To determine whether the subjective sleep recall environment reported by patients with
+            chronic sleep disorders exhibits measurable cross-participant consistency under controlled
+            polysomnographic conditions.</p>
+
+            <h3>1.2 Secondary Objective</h3>
+            <p>To develop a standardized Environmental Element Checklist (EEC) capable of identifying
+            recurring environmental features across independent participant recall reports, without
+            cross-participant exposure or researcher prompting.</p>
+
+            <h3>1.3 Exploratory Objective</h3>
+            <p>To determine whether repeated confirmed access to a consistent recalled environment
+            produces measurable physiological changes distinct from standard polysomnographic
+            sleep profiles.</p>
+          </div>
+
+          <div class="proto-section">
+            <h2>Section 2 &mdash; Participant Selection</h2>
+
+            <h3>2.1 Inclusion Criteria</h3>
+            <p>Participants must meet all of the following criteria at the time of enrollment:</p>
+            <ul>
+              <li>Diagnosed with a chronic sleep disorder (insomnia, non-24, or advanced/delayed sleep phase)</li>
+              <li>Self-reported history of consistent recalled environments across multiple independent sleep events</li>
+              <li>Age 18&ndash;65, physically healthy per standard pre-study screening</li>
+              <li>Capacity to provide written informed consent</li>
+            </ul>
+
+            <h3>2.2 Exclusion Criteria</h3>
+            <ul>
+              <li>Current use of sleep-altering pharmaceuticals that cannot be safely suspended for the study period</li>
+              <li>History of psychotic disorder or active dissociative condition</li>
+              <li>Prior participation in environmental recall studies within 24 months</li>
+              <li>Known photosensitivity or auditory sensitivity incompatible with EEG recording</li>
+            </ul>
+
+            <h3>2.3 Cohort Size</h3>
+            <p>Target enrollment: 40&ndash;44 participants. Actual enrollment (EC-001, 2008): 42 participants.
+            Consent amendment EC-003 (2011) revised withdrawal provisions for participants with confirmed
+            environmental access. See Section 8.3.</p>
+          </div>
+
+          <div class="proto-section">
+            <h2>Section 3 &mdash; Session Protocol</h2>
+
+            <h3>3.1 Standard Session</h3>
+            <p>Each study session consists of the following in order:</p>
+            <ol>
+              <li>Pre-session intake assessment (30 minutes)</li>
+              <li>Sleep induction under standard conditions. Pharmacological assistance documented as exception only.</li>
+              <li>Polysomnographic recording period (minimum 6 hours, maximum 9 hours)</li>
+              <li>Post-session structured recall interview (maximum 60 minutes)</li>
+              <li>Recall narrative transcription by attending technician</li>
+              <li>Environmental Element Checklist (EEC) administration and scoring</li>
+              <li>Physician sign-off and session record filing</li>
+            </ol>
+
+            <h3>3.2 Session Frequency</h3>
+            <p>Participants attend sessions at intervals of 21&plusmn;7 days per EC-001. Amendment EC-003 (2011) modified
+            session frequency to 14&plusmn;3 days for participants with environmental consistency ratings of 4/5 or above
+            on two or more consecutive sessions. Participants meeting this threshold were notified of the amended schedule.</p>
+
+            <h3>3.3 Session Records</h3>
+            <p>Session records are maintained on EC-002 forms and include: sleep stage data (full polysomnographic
+            record), recall narrative, technician notes, EEC completion with item-level scores, and physician
+            sign-off. Records are retained in the study archive for the duration of the study period and
+            transferred per Section 9 of this protocol at study conclusion.</p>
+          </div>
+
+          <div class="page-break-note">&mdash; page 2 &mdash;</div>
+
+          <!-- PAGE 2 -->
+
+          <div class="proto-section">
+            <h2>Section 4 &mdash; Environmental Element Checklist (EEC)</h2>
+
+            <h3>4.1 Revision History</h3>
+            <table class="eec-table" cellpadding="0" cellspacing="0">
+              <tr><th>Version</th><th>Date</th><th>Change</th></tr>
+              <tr><td>EC-001</td><td>2008</td><td>Initial EEC — 12 elements derived from pre-enrollment intake interviews</td></tr>
+              <tr><td>EC-002</td><td>2009</td><td>Added 4 elements based on first-year consistency data; revised scoring scale</td></tr>
+              <tr><td>EC-003</td><td>2011</td><td>Added &ldquo;access events&rdquo; category following anomalous cross-participant data. See note.</td></tr>
+              <tr><td>EC-004</td><td>2012</td><td>Current version &mdash; 22 elements including door position, hallway orientation, room designation sub-checklist</td></tr>
+            </table>
+            <p class="inline-note">EC-003 note: &ldquo;The access events category was added in response to data already collected, not in anticipation of future data. By the time EC-003 was ratified, cross-participant access consistency had reached a level the research team considered outside the range of standard variance.&rdquo; &mdash; E. Vale, October 2011</p>
+
+            <h3>4.2 EEC EC-004 &mdash; Element List (Current Version)</h3>
+            <p>All elements are scored 1&ndash;5 per session (1 = absent or inconsistent; 5 = exact match with prior sessions for this participant). <em>Elements marked [BLIND] must not be suggested, confirmed, or contradicted by the technician during the post-session interview.</em></p>
+
+            <table class="eec-table" cellpadding="0" cellspacing="0">
+              <tr><th>#</th><th>Element</th><th>Category</th><th>Notes</th></tr>
+              <tr><td>01</td><td>Corridor orientation &mdash; consistent direction</td><td>Orientation</td><td></td></tr>
+              <tr><td>02</td><td>Hallway bending: direction</td><td>Orientation</td><td class="eec-xref">Cross-ref all confirmed participants: left</td></tr>
+              <tr><td>03</td><td>Ambient light level</td><td>Orientation</td><td></td></tr>
+              <tr><td>04</td><td>Sound environment: nature and intensity</td><td>Orientation</td><td></td></tr>
+              <tr><td>05</td><td>Reception structure present</td><td>Spatial</td><td></td></tr>
+              <tr><td>06</td><td>Door: present</td><td>Spatial</td><td></td></tr>
+              <tr><td>07</td><td>Door: position (left/right)</td><td>Spatial [BLIND]</td><td class="eec-xref">Cross-ref all confirmed participants: left</td></tr>
+              <tr><td>08</td><td>Door: color</td><td>Spatial [BLIND]</td><td class="eec-xref">Cross-ref 6 of 7 confirmed participants: blue</td></tr>
+              <tr><td>09</td><td>Door: accessible (open/closed/locked)</td><td>Spatial [BLIND]</td><td></td></tr>
+              <tr><td>10</td><td>Adjacent structure or vending feature present</td><td>Spatial</td><td></td></tr>
+              <tr><td>11</td><td>Room designation: number visible</td><td>Spatial [BLIND]</td><td class="eec-xref">Record as reported. Do not suggest or confirm.</td></tr>
+              <tr><td>12</td><td>Approach to door documented</td><td>Access [EC-003]</td><td></td></tr>
+              <tr><td>13</td><td>Entry documented</td><td>Access [EC-003]</td><td></td></tr>
+              <tr><td>14</td><td>Interior documented</td><td>Access [EC-003]</td><td></td></tr>
+              <tr><td>15&ndash;22</td><td>[Interior sub-elements &mdash; EC-004 addition]</td><td>Access [EC-004]</td><td class="eec-xref">Sub-elements available in technician addendum only</td></tr>
+            </table>
+
+            <h3>4.3 Notation Requirements</h3>
+            <p>Technicians must record EEC items 07, 08, 09, 11, and 12&ndash;14 without prompting. Under no
+            circumstances should technicians suggest, confirm, or contradict participant descriptions of door
+            position, door color, room numbers, or access events. Deviations from this requirement must be
+            documented as protocol exceptions and reviewed by the clinical coordinator.</p>
+          </div>
+
+          <div class="proto-section">
+            <h2>Section 5 &mdash; Data Recording Procedures</h2>
+            <p>Data recording follows EC-002 specifications. Session records are filed within 48 hours of
+            the session date. Technician notes are co-signed by the attending physician. EEC forms are
+            scored by the technician and reviewed by the research coordinator (Wexler University) on a
+            monthly basis.</p>
+            <p>Supplemental records (access event logs, cross-participant comparison tables) are maintained
+            separately by the research coordinator and are not included in the standard patient record.
+            Supplemental records are classified as restricted research material (see 7A Supplemental Index).</p>
+          </div>
+
+          <div class="proto-section">
+            <h2>Section 6 &mdash; Protocol Amendments</h2>
+            <p>This protocol has been amended four times since initial approval. EC-004 is the most substantive
+            revision, driven by the cross-participant environmental consistency data collected 2010&ndash;2011.</p>
+            <p>Amendment EC-004 added the following provisions not present in earlier versions:</p>
+            <ul>
+              <li>Access events sub-elements (EEC items 15&ndash;22)</li>
+              <li>Archive category 7 classification (Section 8.5)</li>
+              <li>Observer reclassification procedure (Section 8.6)</li>
+              <li>Data safety monitoring board requirement (Section 7.3) &mdash; <em>this provision supersedes the EC-001 IRB determination</em></li>
+              <li>Section 9 (Supplemental Observations) &mdash; see note below</li>
+            </ul>
+            <p class="inline-note">Note: Section 9 was added to EC-004 after the version transmitted to the Wexler University IRB. It does not appear in the archived IRB copy. The research team determined that Section 9 content did not require IRB review under applicable guidelines.</p>
+          </div>
+
+          <div class="proto-section">
+            <h2>Section 7 &mdash; Study Monitoring</h2>
+            <h3>7.1 Internal Monitoring</h3>
+            <p>Monthly data review by the joint research coordination team (Wexler University and Somnatek Sleep Health Center).
+            Review meetings are documented; minutes are retained in the supplemental archive.</p>
+            <h3>7.2 External Monitoring</h3>
+            <p>Annual review by the Wexler University Institutional Review Board. IRB report for 2012 is pending
+            as of this version.</p>
+            <h3>7.3 Data Safety Monitoring Board</h3>
+            <p>Amendment EC-004 removed the data safety monitoring board exemption granted under the EC-001 IRB
+            approval. A DSMB was constituted in March 2012. First DSMB review is pending as of this version.</p>
+            <div class="proto-alert">Note added by clinical coordinator (M. Ellison, March 2012): &ldquo;The DSMB
+            was constituted at Dr. Vale&rsquo;s request following the November 2011 internal review. I have agreed
+            that oversight is appropriate given the scope of what we are now observing. The first review has been
+            scheduled for June 2012. I am not certain the DSMB members have been fully briefed on the access event
+            data. That is a matter I intend to raise before the review date.&rdquo;</div>
+          </div>
+
+          <div class="page-break-note">&mdash; page 3 &mdash;</div>
+
+          <!-- PAGE 3 — previously removed from the archived copy -->
+
+          <div class="proto-section">
+            <h2>Section 8 &mdash; Recall Termination Criteria</h2>
+
+            <h3>8.1 Definition</h3>
+            <p>For the purposes of this protocol, <em>recall termination</em> is defined as the administrative
+            conclusion of a participant&rsquo;s active recall observation status. This is distinct from study
+            withdrawal, which may occur independently of recall termination and does not automatically
+            result in termination (see Section 8.3).</p>
+
+            <h3>8.2 Standard Termination Criteria</h3>
+            <p>Recall observation is terminated under the following conditions:</p>
+            <ol type="a">
+              <li>Participant withdrawal per Section 2.4, provided that environmental access has not been
+              confirmed for that participant (see Section 8.4)</li>
+              <li>Study conclusion per the original protocol end date</li>
+              <li>Medical contraindication, as determined by the attending physician</li>
+              <li>Inconsistent environmental access &mdash; defined as fewer than two confirmed access events
+              within a 12-session period, following prior access confirmation. This criterion does not apply
+              to participants who have accessed the primary indexed space (see 8.4).</li>
+            </ol>
+
+            <h3>8.3 Withdrawal After Access Confirmation</h3>
+            <p>In cases where a participant requests withdrawal after environmental access has been confirmed,
+            the withdrawal request is documented and forwarded to the Archive Committee for classification
+            review. The Archive Committee will determine within 30 days whether the participant is eligible
+            for standard termination (8.2a) or must be reclassified to archive category 7 (8.5).</p>
+            <div class="proto-alert">
+              <strong>Note regarding consent:</strong> Participant consent forms filed under EC-001 (2008) and EC-002 (2009)
+              did not include specific provisions for the contingency of environmental access confirmation. This gap
+              was addressed in the EC-003 consent amendment (2011). Participants enrolled prior to EC-003 are
+              subject to original consent terms except where superseded by applicable law or the EC-003
+              amendment provisions. The Archive Committee has determined that category 7 classification is
+              not precluded by the original consent terms.
+            </div>
+
+            <h3>8.4 Environmental Access Confirmation</h3>
+            <p>Environmental access is considered <em>confirmed</em> when a participant records a consistent
+            score (4 or 5) on EEC items 12 and 13 (approach and entry documented) across two or more
+            consecutive sessions, without technician prompting, and independently of cross-participant contact.</p>
+            <p><strong>Room 413 is the primary indexed space for this study.</strong> Access confirmation in
+            the context of this protocol refers specifically to confirmed access to room 413 as documented
+            in the EEC. Participants who have reported and recorded consistent entry to a room bearing the
+            designation 413, across two or more sessions, are considered to have confirmed access for the
+            purposes of this section.</p>
+            <p class="inline-note">As of EC-004 (March 2012), seven participants have confirmed access per
+            the above definition. An additional twelve participants have confirmed approach (EEC item 12)
+            without confirmed entry. All confirmed-access participants are listed in 7A Supplemental Index
+            ref 7A-SUPP-004.</p>
+
+            <h3>8.5 Archive Category 7</h3>
+            <p>Archive category 7 designates participants who have confirmed environmental access and whose
+            recall termination classification is pending, deferred, or determined by the Archive Committee
+            to be inapplicable under standard criteria.</p>
+            <p>Category 7 records are maintained as <strong>active</strong> and are subject to scheduled
+            recall observation at intervals determined by the Archive Committee. Category 7 observation
+            does not require the participant&rsquo;s physical presence at the study facility and may be
+            conducted remotely.</p>
+            <p>Participants in active recall observation status will receive written notification of their
+            classification. The standard administrative communication for active recall observation
+            status is as follows:</p>
+            <span class="proto-key-phrase">PLEASE WAIT TO BE RECALLED.</span>
+            <p class="inline-note">This communication is issued by the Archive Committee and does not
+            constitute a medical notification. Participants are not required to respond.</p>
+
+            <h3>8.6 Observer Reclassification</h3>
+            <p>Individuals who are not enrolled study participants but who establish consistent contact
+            with the indexed space may be reclassified as observers at the discretion of the Archive
+            Committee. Observer reclassification is governed by the same access confirmation and
+            termination criteria as participant classification (Sections 8.2&ndash;8.4) except that
+            observer records are assigned at first confirmed contact rather than at enrollment.</p>
+            <p>Observer identifiers follow the format VIS-XXXXX and are distinct from participant
+            identifiers (PTX-XXX). Observer records are maintained in the same archive system as
+            participant records and are subject to the same recall observation schedule.</p>
+            <!-- NOTE: As of 2014-11-03, observer classification and recall scheduling
+                 has been transferred to Dorsal Health Holdings LLC administrative systems.
+                 Archive Committee functions are maintained by DH administrative staff. -->
+          </div>
+
+          <div class="page-break-note">&mdash; page 4 &mdash;</div>
+
+          <!-- PAGE 4 — previously removed from the archived copy -->
+
+          <div class="proto-section">
+            <h2>Section 9 &mdash; Supplemental Observations</h2>
+            <div class="proto-alert">This section was added to EC-004 after the version transmitted to the
+            Wexler University IRB. It is present only in this source document copy. It was not included in
+            the version transferred to Dorsal Health Holdings LLC.</div>
+
+            <p>The research team records the following observations without clinical interpretation. These
+            observations are documented as protocol addenda and do not alter the study objectives or
+            procedures described in Sections 1&ndash;8.</p>
+
+            <ol>
+              <li>
+                <p>The indexed space exhibits consistent environmental features independent of participant
+                expectation, prior session count, or study-period context. Features documented in the initial
+                intake sessions (2008) remain consistent across all sessions reviewed for EC-004 (2012).
+                No participant-driven variation in core environmental features has been recorded.</p>
+              </li>
+              <li>
+                <p>Environmental access appears to be self-sustaining following initial confirmation.
+                Three participants who formally withdrew prior to EC-003 have continued to report
+                access-consistent environmental features in voluntary follow-up interviews conducted
+                outside the study protocol. These participants were not contacted by the research team;
+                they initiated contact independently. Their reports are consistent with active confirmed-access
+                participants.</p>
+              </li>
+              <li>
+                <p>The indexed space has not varied in its primary spatial features across 42 participants
+                and 647 sessions recorded through the EC-004 review period. The hallway bends left.
+                The door is on the left. The door is blue. These features have not varied.</p>
+              </li>
+              <li>
+                <p>The Archive Committee notes that the indexed space may represent a persistent environmental
+                feature that is not subject to study termination criteria as defined in Section 8. This
+                conclusion, if correct, has implications for category 7 classification that have not been
+                fully evaluated. The Archive Committee has deferred a formal determination pending the DSMB
+                review (Section 7.3).</p>
+                <p class="inline-note">The DSMB review referenced here was conducted June 2012.
+                The DSMB findings are archived as supplemental ref 7A-SUPP-008 and were transferred
+                out of the Somnatek archive on November 3, 2014.</p>
+              </li>
+              <li>
+                <p>The research team records the following without additional comment: the study period
+                is a measurement instrument, not a causal one. The indexed space existed before the
+                study began. It will continue to exist after the study concludes. Participants are
+                indexed, not created.</p>
+              </li>
+            </ol>
+
+            <p>No further supplemental observations are recorded under EC-004. Observations arising
+            after March 2012 are logged in the supplemental archive by the clinical coordinator and are
+            not incorporated into this protocol version.</p>
+            <p class="inline-note">Research coordination note (M. Ellison, March 14, 2012):
+            &ldquo;I want to be clear that I co-authored section 9 and I stand by it. Edwin wrote a cleaner
+            version but I asked him to put the plain language back. People will read this eventually.
+            I would rather they understand what we found than read around it.&rdquo;</p>
+          </div>
+
+          <div class="proto-sig">
+            <table cellpadding="0" cellspacing="0">
+              <tr>
+                <td><strong>Approved</strong></td>
+                <td>Edwin Vale, PhD &mdash; Wexler University</td>
+                <td>March 14, 2012</td>
+              </tr>
+              <tr>
+                <td><strong>Clinical approval</strong></td>
+                <td>Mara Ellison, MD &mdash; Somnatek Sleep Health Center</td>
+                <td>March 14, 2012</td>
+              </tr>
+            </table>
+            <p style="margin-top:10px;">[End of document &mdash; 4 pages]</p>
+            <p>Archive classification: Restricted &mdash; research personnel and authorized participants only.<br />
+            This copy is the source document. It supersedes all archived or transferred copies.</p>
+          </div>
+
+        </div><!-- .proto-doc -->
+
+      </div><!-- #doc-content -->
+
+    </div><!-- #main -->
+  </div><!-- #content-wrapper -->
+
+  <div id="footer">
+    <p>Somnatek Sleep Health Center &mdash; 465 Upper Riverdale Road &mdash; Harrow County &mdash; (404) 551-4145 &mdash; Fax: (404) 671-9774</p>
+    <p>This site is maintained for archival purposes only. Clinical operations ceased September 18, 2014.</p>
+  </div>
+
+</div><!-- #wrapper -->
+
+<!-- session-integrity:check -->
+<script type="text/javascript">
+(function () {
+  'use strict';
+
+  /**
+   * SHA-256 hex digest of the normalized answer string.
+   * Answer: session 15 + participant PTX-018 + room 413
+   * Normalization: strip dashes/spaces, uppercase.
+   * Canonical: 15PTX018413
+   */
+  var ANSWER_HASH = 'cb348052cd086cf7ab67a82bb72ffd69fa22f9518979e2a30b15395ccc489abf';
+
+  /** @type {boolean} */
+  var _unlockBeaconFired = false;
+
+  /**
+   * Normalizes the input before hashing — strips dashes and spaces, uppercases.
+   * Accepts "15-PTX-018-413", "15 PTX018 413", "15PTX018413", etc.
+   * @param {string} str
+   * @returns {string}
+   */
+  function normalize(str) {
+    return str.trim().toUpperCase().replace(/[-\s]/g, '');
+  }
+
+  /**
+   * SHA-256 hex digest via Web Crypto API.
+   * @param {string} str
+   * @returns {Promise<string>}
+   */
+  function sha256(str) {
+    var encoded = new TextEncoder().encode(str);
+    return crypto.subtle.digest('SHA-256', encoded).then(function (buf) {
+      return Array.from(new Uint8Array(buf)).map(function (b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    });
+  }
+
+  /**
+   * Fires a fire-and-forget beacon event.
+   * @param {string} slug - Page slug to record.
+   */
+  function fireBeacon(slug) {
+    try {
+      var _v = '';
+      try { _v = localStorage.getItem('sntk_vis') || ''; } catch (_) {}
+      var _d = JSON.stringify({ p: slug, r: document.referrer || '', v: _v });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/beacon', new Blob([_d], { type: 'application/json' }));
+      } else {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/beacon', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(_d);
+      }
+    } catch (_) {}
+  }
+
+  /** Reveals the document and fires the milestone beacon. */
+  function unlock() {
+    document.getElementById('doc-gate').style.display    = 'none';
+    document.getElementById('doc-content').style.display = 'block';
+    try { sessionStorage.setItem('sntk_7a_unlocked', '1'); } catch (_) {}
+
+    if (!_unlockBeaconFired) {
+      _unlockBeaconFired = true;
+      fireBeacon('protocol-7a');
+    }
+  }
+
+  /** Attempts to validate the entered code. */
+  function tryUnlock() {
+    var inp = document.getElementById('gate-input');
+    var err = document.getElementById('gate-error');
+    var raw = inp.value;
+    if (!raw.trim()) return;
+    err.textContent = '';
+    sha256(normalize(raw)).then(function (hash) {
+      if (hash === ANSWER_HASH) {
+        unlock();
+      } else {
+        err.textContent = 'Reference code not recognized.';
+      }
+    });
+  }
+
+  document.getElementById('gate-btn').addEventListener('click', tryUnlock);
+  document.getElementById('gate-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') tryUnlock();
+  });
+
+  // Restore unlocked state within the same browser session
+  (function () {
+    try {
+      if (sessionStorage.getItem('sntk_7a_unlocked') === '1') { unlock(); }
+    } catch (_) {}
+  }());
+
+  // Page-load beacon — records visit without writing milestone
+  // Milestone is written only on successful unlock (slug: protocol-7a)
+  try {
+    var _v = '';
+    try { _v = localStorage.getItem('sntk_vis') || ''; } catch (_) {}
+    var _d = JSON.stringify({ p: 'portal', r: document.referrer || '', v: _v });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/beacon', new Blob([_d], { type: 'application/json' }));
+    } else {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/beacon', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(_d);
+    }
+  } catch (_) {}
+
+}());
+</script>
+
+</body>
+</html>

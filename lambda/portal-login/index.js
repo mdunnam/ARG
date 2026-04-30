@@ -184,8 +184,8 @@ const MILESTONES = [
   { id: 'admin_t1',             points: 10, released: true  },
   { id: 'admin_t2',             points: 20, released: true  },
   { id: 'admin_t3',             points: 35, released: true  },
-  { id: 'recall_accessed',      points: 25, released: false },
-  { id: 'protocol_7a',          points: 30, released: false },
+  { id: 'recall_accessed',      points: 25, released: true  },
+  { id: 'protocol_7a',          points: 30, released: true  },
   { id: 'restwell_found',       points: 40, released: false },
   { id: 'wexler_found',         points: 40, released: false },
 ];
