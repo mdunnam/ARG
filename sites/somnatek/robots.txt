@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /docs/internal/
+Disallow: /archive/7A-SUPP-INDEX/
+Disallow: /archive/participant-records/
+
+# This site is maintained for archival purposes only.
+# Clinical operations ceased September 18, 2014.
+# Automated indexing of patient portal pages is not permitted.

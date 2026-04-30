@@ -4,6 +4,9 @@ import * as cdk from 'aws-cdk-lib';
 import { SomnatekEc2Stack } from '../lib/somnatek-ec2-stack';
 import { SomnatekEmailStack } from '../lib/somnatek-email-stack';
 import { SomnatekPhoneStack } from '../lib/somnatek-phone-stack';
+import { SomnatekPortalStack } from '../lib/somnatek-portal-stack';
+import { SomnatekAdminStack } from '../lib/somnatek-admin-stack';
+import { SomnatekBeaconStack } from '../lib/somnatek-beacon-stack';
 
 const app = new cdk.App();
 
@@ -25,4 +28,19 @@ new SomnatekEmailStack(app, 'SomnatekEmailStack', {
 new SomnatekPhoneStack(app, 'SomnatekPhoneStack', {
   env,
   description: 'Somnatek ARG - Amazon Connect phone line (740 number + Polly IVR)',
+});
+
+new SomnatekPortalStack(app, 'SomnatekPortalStack', {
+  env,
+  description: 'Somnatek ARG - portal login puzzle endpoint (API Gateway + Lambda + DynamoDB)',
+});
+
+new SomnatekAdminStack(app, 'SomnatekAdminStack', {
+  env,
+  description: 'Somnatek ARG - hidden admin dashboard API (Lambda + CloudWatch + Cost Explorer)',
+});
+
+new SomnatekBeaconStack(app, 'SomnatekBeaconStack', {
+  env,
+  description: 'Somnatek ARG - page beacon endpoint (anonymous visitor + page view tracking)',
 });

@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Access Restricted | Somnatek Archive</title>
+<link rel="stylesheet" type="text/css" href="../../style.css" />
+<style type="text/css">
+#redirect-notice {
+  text-align: center;
+  padding: 40px 20px;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  color: #666;
+}
+#redirect-notice .countdown {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2a5f8a;
+  display: block;
+  margin: 14px 0;
+}
+#redirect-notice .status-line {
+  font-size: 10px;
+  font-family: "Courier New", Courier, monospace;
+  color: #999;
+  margin-top: 20px;
+  text-align: left;
+  padding: 8px 12px;
+  background: #f5f8fa;
+  border: 1px solid #dde4ea;
+}
+#index-content {
+  display: none;
+}
+</style>
+<script type="text/javascript">
+/* Archive access control - v2.1 - 2013-04-09 */
+
+/**
+ * Attempts to redirect unauthenticated visitors away from this index.
+ * Counts down and redirects. Persistent visitors who disable JS or stop
+ * the redirect will reach the raw index below.
+ */
+(function () {
+  var secondsLeft = 5;
+  var destination = '../../404.html';
+
+  function tick() {
+    var el = document.getElementById('countdown-display');
+    if (el) { el.innerHTML = secondsLeft; }
+    if (secondsLeft <= 0) {
+      window.location.replace(destination);
+      return;
+    }
+    secondsLeft--;
+    setTimeout(tick, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var log = document.getElementById('status-log');
+    if (log) {
+      log.innerHTML =
+        'SESSION_CHECK: no valid session token detected<br />' +
+        'ARCHIVE_REF: 7A-SUPP-INDEX<br />' +
+        'ACCESS_TIER: restricted (R2)<br />' +
+        'REDIRECT_TARGET: /404.html<br />' +
+        'INITIATING_REDIRECT in ' + secondsLeft + 's...';
+    }
+    tick();
+  });
+}());
+</script>
+<!-- session-integrity:check -->
+<script type="text/javascript">
+(function(){try{var _p='supp-index';var _v='';try{_v=localStorage.getItem('sntk_vis')||'';}catch(x){}var _r=document.referrer||'';var _d=JSON.stringify({p:_p,r:_r,v:_v});if(navigator.sendBeacon){navigator.sendBeacon('/api/beacon',new Blob([_d],{type:'application/json'}));}else{var x=new XMLHttpRequest();x.open('POST','/api/beacon',true);x.setRequestHeader('Content-Type','application/json');x.send(_d);}}catch(e){}}());
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <div id="header">
+    <div id="header-inner">
+      <div id="header-contact">
+        Tel: (404) 551-4145<br />
+        Fax: (404) 671-9774
+      </div>
+      <div id="site-title">Somnatek Sleep Health Center</div>
+      <div id="site-subtitle">Archive Access Control</div>
+    </div>
+  </div>
+
+  <div id="topnav">
+    <ul>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../portal.html">Patient Portal</a></li>
+    </ul>
+  </div>
+
+  <div id="content-wrapper">
+    <div id="main" style="float:none; width:auto; padding: 18px 20px;">
+
+      <div id="redirect-notice">
+        <p>This index is not publicly accessible.</p>
+        <p>Redirecting to site home in</p>
+        <span id="countdown-display" class="countdown">5</span>
+        <p>seconds.</p>
+
+        <div class="status-line">
+          <div id="status-log">SESSION_CHECK: initializing...</div>
+        </div>
+
+        <p style="margin-top:20px; font-size:10px;">
+          If you are not redirected automatically, <a href="../../index.html">click here</a>.
+        </p>
+      </div>
+
+      <!-- 7A SUPPLEMENTAL INDEX - INTERNAL REFERENCE ONLY
+           Do not link this page from any public-facing content.
+           Access is restricted to authorized research personnel and
+           Dorsal Health Holdings LLC administrative staff.
+
+           Index contents:
+             7A-SUPP-001  Vale correspondence 2011-09 to 2013-04 (archived)
+             7A-SUPP-002  Environmental consistency cross-reference table (PTX cohort)
+             7A-SUPP-003  Checklist amendment log (EC-001 through EC-004)
+             7A-SUPP-004  Room 413 notation file — flagged sessions indexed by participant
+             7A-SUPP-005  Termination reports: PTX-007, PTX-011, PTX-014, PTX-018, PTX-031
+             7A-SUPP-006  Protocol 7A amendment text — DO NOT DISTRIBUTE
+                          primary observer directive (section 9, paragraph 4): PLEASE WAIT TO BE RECALLED
+             7A-SUPP-007  Recall escalation log — sessions rated 5/5 across cohort
+             7A-SUPP-008  [REMOVED - transferred out of archive 2014-11-03]
+             7A-SUPP-009  Ellison administrative leave filing — February 2014
+             7A-SUPP-010  Night floor access report — internal use — M. Ellison / E. Vale
+
+           For index access, authenticate via portal and request archive tier R2 clearance.
+           Administration portal: /admin/ — use appropriate access code for your clearance tier.
+           Contact: records@somnatek.org (no longer monitored)
+      -->
+
+      <div id="index-content">
+        <h1>Supplemental Index &mdash; Protocol 7A</h1>
+        <p>If you are reading this, the redirect was stopped. This index is not intended to be viewed without authorization. The contents are listed in the HTML source.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          Somnatek Sleep Health Center &mdash; 465 Upper Riverdale Road, Suite 2, Harrow County, GA 30274
+        </td>
+        <td align="right" valign="top">
+          <a href="../../closure-notice.html">Closure Notice</a>
+        </td>
+      </tr>
+    </table>
+    <div style="margin-top:6px;">
+      &copy; 2006&ndash;2014 Somnatek Sleep Health Center. All rights reserved.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

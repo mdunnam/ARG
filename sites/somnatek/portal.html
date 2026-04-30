@@ -39,6 +39,7 @@ function handlePortalSubmit(e) {
       try {
         var data = JSON.parse(xhr.responseText);
         if (data.redirect) {
+          try { localStorage.setItem('sntk_vis', data.visitorId || ''); } catch(x) {}
           window.location.href = data.redirect;
         } else {
           msgEl.innerHTML = 'Access granted. Redirecting...';
@@ -62,6 +63,9 @@ window.onload = function() {
     form.addEventListener('submit', handlePortalSubmit);
   }
 };
+
+/* session-integrity:check */
+(function(){try{var _p='portal';var _v='';try{_v=localStorage.getItem('sntk_vis')||'';}catch(x){}var _r=document.referrer||'';var _d=JSON.stringify({p:_p,r:_r,v:_v});if(navigator.sendBeacon){navigator.sendBeacon('/api/beacon',new Blob([_d],{type:'application/json'}));}else{var x=new XMLHttpRequest();x.open('POST','/api/beacon',true);x.setRequestHeader('Content-Type','application/json');x.send(_d);}}catch(e){}}());
 </script>
 </head>
 <body>
@@ -72,7 +76,7 @@ window.onload = function() {
     <div id="header-inner">
       <div id="header-contact">
         Tel: (404) 551-4145<br />
-        Fax: (740) 555-0193
+        Fax: (404) 671-9774
       </div>
       <div id="site-title">Somnatek Sleep Health Center</div>
       <div id="site-subtitle">Diagnostic Sleep Medicine &amp; Patient Care &mdash; Harrow County</div>
@@ -110,6 +114,15 @@ window.onload = function() {
 
     <div id="main">
 
+      <h1>Patient Portal</h1>
+
+      <!-- SYSTEM: portal_mode=archive | auth_backend=legacy | last_sync=2014-09-18 -->
+
+      <div class="closure-notice">
+        <strong>Portal Archived</strong>
+        This portal has been archived as of September 18, 2014. Active patient records management has transferred to Dorsal Health Holdings LLC. Former patients may use their assigned participant ID to access archived study materials retained under the terms of the records transfer agreement.
+      </div>
+
       <!--
         IMAGE: img/sleep-room-413.jpg
         Interior photograph of patient sleep study room, Somnatek diagnostic facility.
@@ -118,16 +131,7 @@ window.onload = function() {
         Taken approximately 2012. Dimensions: 420x280. JPEG.
       -->
       <div class="img-float-right">
-        <img src="img/sleep-room-413.jpg" width="420" height="280" alt="Patient sleep study room, Somnatek Sleep Health Center diagnostic facility" border="0" />
-      </div>
-
-      <h1>Patient Portal</h1>
-
-      <!-- SYSTEM: portal_mode=archive | auth_backend=legacy | last_sync=2014-09-18 -->
-
-      <div class="closure-notice">
-        <strong>Portal Archived</strong>
-        This portal has been archived as of September 18, 2014. Active patient records management has transferred to Dorsal Health Holdings LLC. Former patients may use their assigned participant ID to access archived study materials retained under the terms of the records transfer agreement.
+        <img src="img/sleep-room-413.jpg" width="220" height="148" alt="Patient sleep study room, Somnatek Sleep Health Center diagnostic facility" border="0" />
       </div>
 
       <p>If you participated in the Wexler University longitudinal sleep recall study conducted at this facility between 2008 and 2013, you may use your assigned participant ID to access your archived recall summaries below.</p>
@@ -157,7 +161,7 @@ window.onload = function() {
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td>
-          Somnatek Sleep Health Center &mdash; 114 Aldenmoor Road, Suite 2, Harrow County<br />
+          Somnatek Sleep Health Center &mdash; 465 Upper Riverdale Road, Suite 2, Harrow County, GA 30274<br />
           Tel: (404) 551-4145 &nbsp;|&nbsp; <a href="mailto:records@somnatek.org">records@somnatek.org</a>
         </td>
         <td align="right" valign="top">

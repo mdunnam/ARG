@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Facility &amp; Clinical Administration | Somnatek Sleep Health Center</title>
+<style type="text/css">
+* { margin: 0; padding: 0; }
+body {
+  font-family: Verdana, Arial, Tahoma, sans-serif;
+  font-size: 11px;
+  background: #dce4ec;
+  color: #333333;
+}
+#login-screen {
+  background: #dce4ec;
+  min-height: 100vh;
+  display: table;
+  width: 100%;
+}
+#login-center {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+#login-box {
+  display: inline-block;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid #9ab0c4;
+  padding: 28px 34px 24px 34px;
+  width: 320px;
+}
+#login-box h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: normal;
+  color: #2a5f8a;
+  margin-bottom: 4px;
+}
+#login-box .login-sub {
+  font-size: 10px;
+  color: #888;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #dde4ea;
+}
+#login-box label {
+  display: block;
+  font-size: 10px;
+  color: #777;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+#login-box input[type="text"],
+#login-box input[type="password"] {
+  width: 100%;
+  border: 1px solid #b0bec5;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  padding: 6px 8px;
+  color: #333;
+  background: #f8fbfc;
+  margin-bottom: 14px;
+}
+#login-box input[type="text"]:focus,
+#login-box input[type="password"]:focus {
+  outline: none;
+  border-color: #6a9ab4;
+}
+#login-box button {
+  width: 100%;
+  background: #2a5f8a;
+  border: none;
+  color: #ffffff;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  padding: 7px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+#login-box button:hover { background: #1a4f7a; }
+#login-error { color: #8a2a2a; font-size: 10px; margin-top: 8px; min-height: 14px; }
+#login-box .login-footer {
+  font-size: 9px;
+  color: #bbb;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  line-height: 1.5;
+}
+#dashboard { display: none; min-height: 100vh; }
+#topbar {
+  background: #2a5f8a;
+  padding: 0 16px;
+  height: 36px;
+  line-height: 36px;
+  overflow: hidden;
+}
+#topbar .title { color: #c8dcea; font-size: 11px; float: left; letter-spacing: 0.06em; }
+#topbar .right { float: right; font-size: 10px; }
+#topbar .right a { color: #a0c0d8; text-decoration: none; margin-left: 16px; cursor: pointer; }
+#topbar .right a:hover { color: #ffffff; }
+#topbar .tier-label {
+  display: inline-block;
+  background: #1a3f5a;
+  color: #7ab0d0;
+  font-size: 9px;
+  padding: 2px 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+#subnav {
+  background: #1a3f5a;
+  padding: 0 16px;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+}
+#subnav a {
+  display: inline-block;
+  color: #9ab8cc;
+  font-size: 10px;
+  padding: 0 12px;
+  height: 30px;
+  line-height: 30px;
+  text-decoration: none;
+  border-right: 1px solid #2a4f6a;
+  letter-spacing: 0.04em;
+}
+#subnav a:hover { background: #2a5f8a; color: #ffffff; }
+#subnav a.active { background: #2a5f8a; color: #ffffff; }
+#main-content { padding: 18px 20px; }
+.panel { display: none; }
+.panel.active { display: block; }
+.section-head {
+  background: #e4ecf2;
+  border: 1px solid #b0c4d4;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #2a5f8a;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0;
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  margin-bottom: 18px;
+  border: 1px solid #b0c4d4;
+}
+.admin-table th {
+  background: #c8d8e8;
+  padding: 5px 9px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: bold;
+  color: #2a4a6a;
+  border-bottom: 1px solid #9ab0c4;
+  border-right: 1px solid #b0c4d4;
+}
+.admin-table td {
+  padding: 5px 9px;
+  border-bottom: 1px solid #dde8f0;
+  border-right: 1px solid #e8f0f4;
+  vertical-align: top;
+}
+.admin-table tr:nth-child(odd) td  { background: #f4f8fc; }
+.admin-table tr:nth-child(even) td { background: #ffffff; }
+.admin-table tr:hover td           { background: #e4f0f8; }
+.status-ok         { color: #2a6a2a; font-weight: bold; }
+.status-warn       { color: #7a6a00; font-weight: bold; }
+.status-alert      { color: #7a1a1a; font-weight: bold; }
+.status-grey       { color: #888888; }
+.status-active     { color: #1a3f8a; font-weight: bold; }
+.status-restricted { color: #7a1a1a; font-style: italic; }
+.infobox  { background: #f0f8e8; border: 1px solid #9aba7a; padding: 8px 12px; margin-bottom: 16px; font-size: 11px; color: #3a5a1a; }
+.alertbox { background: #fdf0ee; border: 1px solid #c8a0a0; padding: 8px 12px; margin-bottom: 16px; font-size: 11px; color: #6a2a2a; }
+.notebox  { background: #f8f8ee; border: 1px solid #c8c87a; padding: 8px 12px; margin-bottom: 16px; font-size: 11px; color: #5a5a1a; }
+.t3-status-bar {
+  background: #0a0a14;
+  color: #3a8a6a;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  padding: 5px 12px;
+  border-bottom: 1px solid #1a2a2a;
+}
+.t3-block { background: #ffffff; border: 2px solid #8a0000; padding: 14px 16px; margin-bottom: 16px; }
+.t3-block-head {
+  font-size: 10px;
+  font-weight: bold;
+  color: #8a0000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e8c0c0;
+  padding-bottom: 5px;
+}
+.t3-visitor-id {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: #1a1a3a;
+  padding: 8px;
+  background: #f4f4f8;
+  border: 1px solid #c0c0d0;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  margin: 4px 0 8px 0;
+}
+</style>
+<!-- session-integrity:check -->
+<script type="text/javascript">
+(function(){try{var _p='admin';var _v='';try{_v=localStorage.getItem('sntk_vis')||'';}catch(x){}var _r=document.referrer||'';var _d=JSON.stringify({p:_p,r:_r,v:_v});if(navigator.sendBeacon){navigator.sendBeacon('/api/beacon',new Blob([_d],{type:'application/json'}));}else{var x=new XMLHttpRequest();x.open('POST','/api/beacon',true);x.setRequestHeader('Content-Type','application/json');x.send(_d);}}catch(e){}}());
+</script>
+</head>
+<body>
+
+<!-- Login screen -->
+<div id="login-screen">
+  <div id="login-center">
+    <div id="login-box">
+      <h1>Somnatek Sleep Health Center</h1>
+      <div class="login-sub">Facility &amp; Clinical Administration Portal<br />Authorized personnel only</div>
+      <label for="admin-code">Access Code</label>
+      <input type="password" id="admin-code" autocomplete="off" spellcheck="false" />
+      <button id="login-btn">Sign In</button>
+      <div id="login-error"></div>
+      <div class="login-footer">
+        This system is for authorized Somnatek Sleep Health Center and Dorsal Health Holdings LLC personnel only.
+        Unauthorized access attempts are logged and may be referred for administrative or legal review.<br /><br />
+        Somnatek Facility &amp; Clinical Administration Portal v4.1 &mdash; last updated 2014-09-15
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard">
+
+  <div id="topbar">
+    <span class="title">Somnatek Sleep Health Center &mdash; Administration</span>
+    <span class="right">
+      <span class="tier-label" id="tier-badge">Facility Access</span>
+      <a id="logout-link">Sign out</a>
+    </span>
+  </div>
+
+  <div id="subnav">
+    <a href="#" class="nav-link active" data-panel="facility">Facility</a>
+    <a href="#" class="nav-link" data-panel="staff" id="nav-staff">Staff Records</a>
+    <a href="#" class="nav-link" data-panel="protocol" id="nav-protocol">Protocol Admin</a>
+  </div>
+
+  <div id="main-content">
+
+    <!-- TIER 1: Facility Management -->
+    <div id="panel-facility" class="panel active">
+
+      <div class="infobox">Facility access granted. You are viewing general facility management records as of the final operating period. Some records have been transferred to Dorsal Health Holdings LLC.</div>
+
+      <div class="section-head">Room Status &mdash; Clinical Wing</div>
+      <table class="admin-table" cellpadding="0" cellspacing="0">
+        <tr><th>Room</th><th>Designation</th><th>Status</th><th>Last Inspection</th><th>Notes</th></tr>
+        <tr><td>101</td><td>Sleep Lab A</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-15</td><td>Equipment removed per transfer protocol.</td></tr>
+        <tr><td>102</td><td>Sleep Lab B</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-15</td><td>Equipment removed per transfer protocol.</td></tr>
+        <tr><td>103</td><td>Sleep Lab C</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-15</td><td></td></tr>
+        <tr><td>104</td><td>Sleep Lab D</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-15</td><td></td></tr>
+        <tr><td>110</td><td>Patient Reception</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-17</td><td></td></tr>
+        <tr><td>111</td><td>Nurse Station</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-17</td><td></td></tr>
+        <tr><td>112</td><td>Medical Records</td><td class="status-ok">Cleared &mdash; transferred</td><td>2014-09-17</td><td>Records transferred to Dorsal Health Holdings LLC.</td></tr>
+        <tr><td>200</td><td>Administrative Offices</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-16</td><td></td></tr>
+        <tr><td>201</td><td>Director&rsquo;s Office</td><td class="status-grey">See admin note</td><td>2014-02-08</td><td>Inspection deferred per admin directive 2014-02-11. Not rescheduled.</td></tr>
+        <tr><td>247</td><td>Research Coordination</td><td class="status-ok">Cleared &mdash; decommissioned</td><td>2014-09-16</td><td>All research materials transferred per DH-247-T.</td></tr>
+        <tr><td>413</td><td>Supplemental Research</td><td class="status-restricted">ACCESS RESTRICTED &mdash; see administrator note</td><td>2014-08-15</td><td class="status-warn">Inspection attempted 2014-08-15. Access denied by on-site personnel. No follow-up scheduled prior to closure.</td></tr>
+      </table>
+
+      <!-- admin note for room 413: last key card swipe - L. Ortiz - 2014-09-18 09:31:04
+           key card status: ACTIVE as of badge system last sync 2014-09-18
+           badge system not decommissioned - running on UPS
+           contact Dorsal Health Holdings LLC to revoke active credentials -->
+
+      <div class="section-head">Maintenance Log &mdash; Final Operating Period</div>
+      <table class="admin-table" cellpadding="0" cellspacing="0">
+        <tr><th>Date</th><th>Request</th><th>Location</th><th>Status</th><th>Technician</th></tr>
+        <tr><td>2014-09-17</td><td>Final utility check</td><td>All floors</td><td class="status-ok">Complete</td><td>Facilities</td></tr>
+        <tr><td>2014-09-16</td><td>HVAC shutdown</td><td>Clinical wing</td><td class="status-ok">Complete</td><td>Facilities</td></tr>
+        <tr><td>2014-09-15</td><td>Equipment removal coordination</td><td>Sleep Labs A&ndash;D</td><td class="status-ok">Complete</td><td>Vendor</td></tr>
+        <tr><td>2014-08-15</td><td>Standard room inspection</td><td>Room 413</td><td class="status-alert">Access denied</td><td>Facilities</td></tr>
+        <tr><td>2014-07-22</td><td>HVAC filter replacement</td><td>Third corridor</td><td class="status-ok">Complete</td><td>Facilities</td></tr>
+        <tr><td>2014-06-04</td><td>Corridor lighting (east)</td><td>Third corridor</td><td class="status-ok">Complete</td><td>Facilities</td></tr>
+        <tr><td>2014-04-10</td><td>Room 413 &mdash; scheduled inspection</td><td>Room 413</td><td class="status-alert">No entry &mdash; see log</td><td>Facilities</td></tr>
+        <tr><td>2014-02-08</td><td>Director&rsquo;s office request</td><td>Room 201</td><td class="status-grey">Deferred</td><td>&mdash;</td></tr>
+      </table>
+
+      <div class="section-head">Utility Readings &mdash; Final Month</div>
+      <table class="admin-table" cellpadding="0" cellspacing="0">
+        <tr><th>System</th><th>Reading (Sep 2014)</th><th>Expected</th><th>Status</th></tr>
+        <tr><td>HVAC &mdash; Clinical wing</td><td>0.0 kWh</td><td>0 (shutdown)</td><td class="status-ok">Normal</td></tr>
+        <tr><td>HVAC &mdash; Third corridor</td><td>14.2 kWh</td><td>&lt; 20 kWh</td><td class="status-ok">Normal</td></tr>
+        <tr><td>Lighting &mdash; Third corridor</td><td>3.1 kWh</td><td>&lt; 5 kWh</td><td class="status-ok">Normal</td></tr>
+        <tr><td>Electrical &mdash; Room 413</td><td>18.8 kWh</td><td>0 (unoccupied)</td><td class="status-warn">Elevated &mdash; source unverified</td></tr>
+        <tr><td>Badge access system</td><td>Active (UPS)</td><td>Shutdown</td><td class="status-warn">Running on backup power</td></tr>
+      </table>
+
+    </div>
+
+    <!-- TIER 2: Staff / Clinical Records -->
+    <div id="panel-staff" class="panel">
+
+      <div id="tier2-lock" style="display:none;">
+        <div class="notebox">
+          <strong>Access level required:</strong> Clinical Records Administration.<br />
+          Your current access code does not include this section. Enter a Clinical Records access code to continue.
+        </div>
+        <label style="display:block; font-size:10px; color:#777; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.06em;">Clinical Records Code</label>
+        <input type="password" id="tier2-code" style="border:1px solid #b0bec5; font-family:Courier New,monospace; font-size:12px; padding:6px 8px; width:240px; margin-bottom:10px;" autocomplete="off" />
+        <button id="tier2-btn" style="background:#2a5f8a; border:none; color:#fff; font-family:Verdana,sans-serif; font-size:11px; padding:6px 18px; cursor:pointer;">Submit</button>
+        <div id="tier2-error" style="color:#8a2a2a; font-size:10px; margin-top:6px; min-height:14px;"></div>
+      </div>
+
+      <div id="tier2-content" style="display:none;">
+        <div class="alertbox"><strong>Clinical Records Access.</strong> You are viewing staff status records and participant roster. Some records have been redacted per the records transfer agreement with Dorsal Health Holdings LLC.</div>
+
+        <div class="section-head">Staff Status &mdash; Final Operating Period</div>
+        <table class="admin-table" cellpadding="0" cellspacing="0">
+          <tr><th>Name</th><th>Title</th><th>Employee No.</th><th>Status</th><th>Last System Access</th><th>Notes</th></tr>
+          <tr><td>Ellison, M.</td><td>Medical Director</td><td>EMP-001</td><td class="status-alert">Leave &mdash; indefinite</td><td>2014-09-18 09:31</td><td>Admin leave effective 2014-02-11. No return date on file. Last system login matches L. Ortiz record timestamp.</td></tr>
+          <tr><td>Ortiz, L.</td><td>Sleep Technician II</td><td>EMP-024</td><td class="status-warn">Position eliminated &mdash; badge ACTIVE</td><td>2014-09-18 09:31</td><td>Position eliminated 2014-08-01. Badge system not decommissioned. Key card still registered as active. Last swipe: Room 413, 2014-09-18 09:31:04.</td></tr>
+          <tr><td>Vance, H.</td><td>Staff Physician</td><td>EMP-007</td><td class="status-grey">Departed 2013</td><td>2013-11-14</td><td></td></tr>
+          <tr><td>Chambers, R.</td><td>Sleep Technician I</td><td>EMP-019</td><td class="status-grey">Departed 2013</td><td>2013-08-22</td><td></td></tr>
+          <tr><td>Nguyen, P.</td><td>Registered Nurse</td><td>EMP-031</td><td class="status-grey">Departed 2014</td><td>2014-06-17</td><td></td></tr>
+          <tr><td>Hargrove, D.</td><td>Practice Manager</td><td>EMP-003</td><td class="status-grey">Departed 2014</td><td>2014-09-12</td><td></td></tr>
+          <tr><td>Forsythe, M.</td><td>Billing Coordinator</td><td>EMP-015</td><td class="status-grey">Transferred</td><td>2014-09-01</td><td>Transferred to Dorsal Health Holdings LLC.</td></tr>
+        </table>
+
+        <!-- Note: employee 247 (Research Coordination) not listed in standard personnel file.
+             Position appears in facility room assignments and in DH transfer documentation.
+             Cross-reference: EMP-247 — see supplemental research personnel records. -->
+
+        <div class="section-head">Participant Roster &mdash; Protocol 7A Cohort</div>
+        <table class="admin-table" cellpadding="0" cellspacing="0">
+          <tr><th>ID</th><th>Enrolled</th><th>Sessions</th><th>Final Status</th><th>Notes</th></tr>
+          <tr><td>PTX-007</td><td>2008-04-12</td><td>24</td><td class="status-grey">Transferred</td><td>Records transferred. See DH supplemental archive.</td></tr>
+          <tr><td>PTX-011</td><td>2008-05-01</td><td>19</td><td class="status-grey">Transferred</td><td>Records transferred.</td></tr>
+          <tr><td>PTX-014</td><td>2008-06-18</td><td>22</td><td class="status-grey">Transferred</td><td>Records transferred. See DH supplemental archive.</td></tr>
+          <tr><td>PTX-018</td><td>2009-03-11</td><td>22</td><td class="status-grey">Concluded &mdash; 2013-08-04</td><td>Withdrawal per participant request. See flag notes (7A supplemental index).</td></tr>
+          <tr><td>PTX-031</td><td>2009-01-07</td><td>18</td><td class="status-grey">Transferred</td><td>Records transferred. See DH supplemental archive.</td></tr>
+          <tr><td colspan="5" style="color:#888; font-style:italic; text-align:center; padding:8px;">Remaining 37 participant records &mdash; access level insufficient. Upgrade to Protocol Administration access to view full roster.</td></tr>
+        </table>
+
+        <div class="section-head">System Audit Log &mdash; Final 30 Days</div>
+        <table class="admin-table" cellpadding="0" cellspacing="0">
+          <tr><th>Timestamp</th><th>Action</th><th>User</th><th>Terminal</th></tr>
+          <tr><td>2014-09-18 09:31</td><td>Participant record access &mdash; PTX-018, PTX-007, PTX-031</td><td>EMP-001 / EMP-024</td><td class="status-warn">Terminal ID: 00000000 (unregistered)</td></tr>
+          <tr><td>2014-09-18 09:28</td><td>Document archive write &mdash; ref 7A-SUPP-006</td><td>EMP-024</td><td class="status-warn">Terminal ID: 00000000 (unregistered)</td></tr>
+          <tr><td>2014-09-17 14:02</td><td>Records transfer confirmation &mdash; Dorsal Health Holdings LLC</td><td>EMP-003</td><td>Terminal ID: ADMIN-002</td></tr>
+          <tr><td>2014-09-16 11:45</td><td>Employee file update &mdash; EMP-024 (position status)</td><td>EMP-003</td><td>Terminal ID: ADMIN-002</td></tr>
+          <tr><td>2014-09-12 16:30</td><td>Final payroll processing</td><td>EMP-003</td><td>Terminal ID: ADMIN-002</td></tr>
+          <tr><td>2014-08-01 08:00</td><td>Position elimination notice &mdash; EMP-024</td><td>EMP-003</td><td>Terminal ID: ADMIN-002</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TIER 3: Protocol Administration -->
+    <div id="panel-protocol" class="panel">
+
+      <div id="tier3-lock" style="display:none;">
+        <div class="notebox">
+          <strong>Access level required:</strong> Protocol Administration.<br />
+          Enter the Protocol Administration recall phrase to continue.
+        </div>
+        <label style="display:block; font-size:10px; color:#777; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.06em;">Recall Phrase</label>
+        <input type="text" id="tier3-code" style="border:1px solid #b0bec5; font-family:Courier New,monospace; font-size:12px; padding:6px 8px; width:340px; margin-bottom:10px; text-transform:uppercase;" autocomplete="off" spellcheck="false" />
+        <button id="tier3-btn" style="background:#2a5f8a; border:none; color:#fff; font-family:Verdana,sans-serif; font-size:11px; padding:6px 18px; cursor:pointer;">Submit</button>
+        <div id="tier3-error" style="color:#8a2a2a; font-size:10px; margin-top:6px; min-height:14px;"></div>
+      </div>
+
+      <div id="tier3-content" style="display:none;">
+
+        <div class="t3-status-bar">
+          PROTOCOL ADMINISTRATION ACCESS GRANTED &nbsp;|&nbsp; RECALL PHRASE VERIFIED &nbsp;|&nbsp; SESSION: <span id="t3-session-ts"></span>
+        </div>
+
+        <div style="padding: 14px 0 8px 0;">
+
+          <div class="t3-block">
+            <div class="t3-block-head">Protocol 7A &mdash; Current Status</div>
+            <table class="admin-table" cellpadding="0" cellspacing="0" style="margin-bottom:0;">
+              <tr><th style="width:200px;">Parameter</th><th>Value</th></tr>
+              <tr><td>Study designation</td><td><strong>Protocol 7A &mdash; Longitudinal Environmental Recall</strong></td></tr>
+              <tr><td>Public status</td><td class="status-grey">Concluded (public record) &mdash; 2013</td></tr>
+              <tr><td>Administrative status</td><td class="status-alert"><strong>ACTIVE</strong></td></tr>
+              <tr><td>Participants enrolled</td><td>42</td></tr>
+              <tr><td>Concluded (withdrawn)</td><td>7</td></tr>
+              <tr><td>Transferred (active)</td><td>35 &mdash; <span class="status-alert">observation ongoing</span></td></tr>
+              <tr><td>Observation authority</td><td>Dorsal Health Holdings LLC (transferred 2014-11-03)</td></tr>
+              <tr><td>Night floor index</td><td class="status-active"><strong>INDEXED &mdash; access confirmed</strong></td></tr>
+              <tr><td>Recall system</td><td class="status-active"><strong>ACTIVE</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="t3-block">
+            <div class="t3-block-head">Room 413 &mdash; Indexed Space Access Log</div>
+            <table class="admin-table" cellpadding="0" cellspacing="0" style="margin-bottom:0;">
+              <tr><th>Timestamp</th><th>Access type</th><th>Source</th><th>Status</th></tr>
+              <tr><td>2014-09-18 09:31</td><td>Physical &mdash; authorized</td><td>EMP-024 (L. Ortiz)</td><td class="status-ok">Confirmed</td></tr>
+              <tr><td>2013-04-03</td><td>Physical &mdash; authorized</td><td>EMP-001 (M. Ellison)</td><td class="status-ok">Confirmed &mdash; 14-page record filed</td></tr>
+              <tr><td class="status-warn">Ongoing</td><td>Indexed access &mdash; participant recall</td><td>Active cohort (35 participants)</td><td class="status-warn">Unconfirmed / pending</td></tr>
+              <tr><td class="status-active" id="t3-visitor-access-ts"></td><td>Indexed access &mdash; observer</td><td id="t3-visitor-id-cell">Visitor ID pending</td><td class="status-active">Logged &mdash; <strong>RECALL PENDING</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="t3-block">
+            <div class="t3-block-head">Automatic Recall System &mdash; Queue Status</div>
+            <div class="alertbox" style="margin-bottom:10px;">The automatic recall system was activated by Dorsal Health Holdings LLC effective 2014-11-03. Recall is ongoing for all participants with confirmed night floor contact. This system operates independently of the study schedule.</div>
+            <table class="admin-table" cellpadding="0" cellspacing="0" style="margin-bottom:0;">
+              <tr><th>Category</th><th>Count</th><th>Status</th></tr>
+              <tr><td>Active participants (transferred)</td><td>35</td><td class="status-alert">Recall queue: active</td></tr>
+              <tr><td>Withdrawn participants (study-period)</td><td>7</td><td class="status-warn">Recall queue: pending classification</td></tr>
+              <tr><td>Post-study observers (VIS series)</td><td id="t3-vis-count">Loading&hellip;</td><td class="status-active">Recall queue: <strong>open</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="t3-block">
+            <div class="t3-block-head">Your Visitor Record</div>
+            <table class="admin-table" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
+              <tr><th style="width:180px;">Field</th><th>Value</th></tr>
+              <tr><td>Visitor identifier</td><td><span class="t3-visitor-id" id="t3-vis-id-display">Not assigned</span></td></tr>
+              <tr><td>Observer status</td><td class="status-active"><strong>ACTIVE</strong></td></tr>
+              <tr><td>Night floor contact</td><td id="t3-nf-contact">Unconfirmed</td></tr>
+              <tr><td>Recall classification</td><td class="status-alert"><strong>PENDING</strong></td></tr>
+              <tr><td>Queue position</td><td id="t3-queue-pos">&mdash;</td></tr>
+            </table>
+            <!-- RECALL_SYSTEM_NOTE: Observer records are assigned at first indexed access.
+                 Once assigned, recall cannot be cancelled through administrative request.
+                 Contact: records@somnatek.org (no longer monitored). -->
+            <p style="font-size:10px; color:#888; line-height:1.6;">Observer records are created automatically on first confirmed contact with the indexed space. Recall classification is assigned by the Dorsal Health Holdings LLC administration system and is not subject to participant withdrawal provisions under the original study consent terms.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+(function () {
+  'use strict';
+
+  /**
+   * SHA-256 hex digest hashes for each access tier credential.
+   * Credentials are validated client-side via Web Crypto API.
+   * Tier 1: Facility Management
+   * Tier 2: Clinical Records Administration
+   * Tier 3: Protocol Administration (recall phrase)
+   */
+  var TIER_HASHES = {
+    1: '4fa1f3084cfaa684559332a5520a77a08f9b20bffd04107af7999e3620e1c18c',
+    2: '6f7dfad7ff56b64d696670f2a769efb2a6fceea2c020efff8c0feb163b49cf32',
+    3: '338fc1874c7af97484a216af32878335996f2e95fd9a89f5ed9cfc04a185a8d6',
+  };
+
+  var TIER_LABELS = {
+    1: 'Facility Access',
+    2: 'Clinical Records',
+    3: 'Protocol Administration',
+  };
+
+  var currentTier  = 0;
+  var STORAGE_KEY  = 'sntk_admin_tier';
+
+  /** Tier unlock events already beaconed this session (avoids duplicate writes). */
+  var _beaconedTiers = new Set();
+
+  /**
+   * Fires a fire-and-forget beacon for a named page slug.
+   * Used to record tier unlocks as milestone events.
+   * @param {string} slug
+   */
+  function fireBeacon(slug) {
+    try {
+      var _v = '';
+      try { _v = localStorage.getItem('sntk_vis') || ''; } catch (_) {}
+      var _d = JSON.stringify({ p: slug, r: document.referrer || '', v: _v });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/beacon', new Blob([_d], { type: 'application/json' }));
+      } else {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/beacon', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(_d);
+      }
+    } catch (_) {}
+  }
+
+  /**
+   * Returns a SHA-256 hex string for the given plaintext.
+   * Input is uppercased and trimmed before hashing.
+   * @param {string} str
+   * @returns {Promise<string>}
+   */
+  function sha256(str) {
+    var encoded = new TextEncoder().encode(str.trim().toUpperCase());
+    return crypto.subtle.digest('SHA-256', encoded).then(function (buf) {
+      return Array.from(new Uint8Array(buf)).map(function (b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    });
+  }
+
+  /**
+   * Hashes the input code and compares against stored tier hashes.
+   * Returns the matching tier number, or 0 if no match.
+   * @param {string} code
+   * @returns {Promise<number>}
+   */
+  function tryAuthenticate(code) {
+    return sha256(code).then(function (hash) {
+      var tiers = Object.keys(TIER_HASHES).map(Number).sort(function (a, b) { return b - a; });
+      for (var i = 0; i < tiers.length; i++) {
+        if (TIER_HASHES[tiers[i]] === hash) return tiers[i];
+      }
+      return 0;
+    });
+  }
+
+  /**
+   * Shows the dashboard panels appropriate for the given access tier.
+   * @param {number} tier
+   */
+  function showDashboard(tier) {
+    currentTier = tier;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display    = 'block';
+    document.getElementById('tier-badge').textContent     = TIER_LABELS[tier] || 'Access';
+    try { sessionStorage.setItem(STORAGE_KEY, String(tier)); } catch (_) {}
+    applyTierAccess(tier);
+    if (tier >= 3) { populateTier3(); }
+    // Fire a beacon event for each newly reached tier (idempotent — server deduplicates)
+    for (var t = 1; t <= tier; t++) {
+      if (!_beaconedTiers.has(t)) {
+        _beaconedTiers.add(t);
+        fireBeacon('admin-t' + t);
+      }
+    }
+  }
+
+  /**
+   * Applies lock / unlock state to nav items and panel content based on tier.
+   * @param {number} tier
+   */
+  function applyTierAccess(tier) {
+    document.getElementById('nav-staff').style.opacity    = tier >= 2 ? '' : '0.5';
+    document.getElementById('nav-protocol').style.opacity = tier >= 3 ? '' : '0.5';
+
+    document.getElementById('tier2-lock').style.display    = tier >= 2 ? 'none'  : 'block';
+    document.getElementById('tier2-content').style.display = tier >= 2 ? 'block' : 'none';
+
+    document.getElementById('tier3-lock').style.display    = tier >= 3 ? 'none'  : 'block';
+    document.getElementById('tier3-content').style.display = tier >= 3 ? 'block' : 'none';
+  }
+
+  /** Populates visitor-specific dynamic fields in the Tier 3 panel. */
+  function populateTier3() {
+    var visId = '';
+    try { visId = localStorage.getItem('sntk_vis') || ''; } catch (_) {}
+
+    var now = new Date();
+    var ts  = now.getFullYear() + '-' +
+      String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0') + ' ' +
+      String(now.getHours()).padStart(2, '0') + ':' +
+      String(now.getMinutes()).padStart(2, '0');
+
+    document.getElementById('t3-session-ts').textContent      = ts;
+    document.getElementById('t3-visitor-access-ts').textContent = ts;
+    document.getElementById('t3-visitor-id-cell').textContent  = visId || 'Observer (unregistered)';
+    document.getElementById('t3-vis-id-display').textContent   = visId || 'Not assigned';
+    document.getElementById('t3-nf-contact').textContent       = visId ? 'Logged \u2014 ' + ts : 'Unconfirmed';
+    document.getElementById('t3-queue-pos').textContent        = visId ? 'Assigned' : 'Pending registration';
+    document.getElementById('t3-vis-count').textContent        = visId ? '1 or more' : '0 (this session)';
+  }
+
+  // ---- Nav tab switching ----
+
+  document.querySelectorAll('.nav-link').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelectorAll('.nav-link').forEach(function (x) { x.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (x)   { x.classList.remove('active'); });
+      a.classList.add('active');
+      var p = document.getElementById('panel-' + a.dataset.panel);
+      if (p) p.classList.add('active');
+    });
+  });
+
+  // ---- Primary login ----
+
+  function doLogin(codeEl, errEl) {
+    var code = codeEl.value.trim();
+    if (!code) return;
+    errEl.textContent = '';
+    tryAuthenticate(code).then(function (tier) {
+      if (!tier) { errEl.textContent = 'Access code not recognized.'; return; }
+      showDashboard(tier);
+    });
+  }
+
+  document.getElementById('admin-code').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') doLogin(this, document.getElementById('login-error'));
+  });
+  document.getElementById('login-btn').addEventListener('click', function () {
+    doLogin(document.getElementById('admin-code'), document.getElementById('login-error'));
+  });
+
+  // ---- Tier 2 upgrade from within the dashboard ----
+
+  document.getElementById('tier2-btn').addEventListener('click', function () {
+    var inp = document.getElementById('tier2-code');
+    var err = document.getElementById('tier2-error');
+    tryAuthenticate(inp.value.trim()).then(function (tier) {
+      if (tier >= 2) { showDashboard(tier); }
+      else           { err.textContent = 'Code not recognized for Clinical Records access.'; }
+    });
+  });
+  document.getElementById('tier2-code').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('tier2-btn').click();
+  });
+
+  // ---- Tier 3 upgrade from within the dashboard ----
+
+  document.getElementById('tier3-btn').addEventListener('click', function () {
+    var inp = document.getElementById('tier3-code');
+    var err = document.getElementById('tier3-error');
+    tryAuthenticate(inp.value.trim()).then(function (tier) {
+      if (tier >= 3) { showDashboard(tier); }
+      else           { err.textContent = 'Recall phrase not recognized.'; }
+    });
+  });
+  document.getElementById('tier3-code').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('tier3-btn').click();
+  });
+
+  // ---- Logout ----
+
+  document.getElementById('logout-link').addEventListener('click', function () {
+    currentTier = 0;
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (_) {}
+    document.getElementById('dashboard').style.display    = 'none';
+    document.getElementById('login-screen').style.display = 'table';
+    document.getElementById('admin-code').value           = '';
+    document.getElementById('login-error').textContent    = '';
+  });
+
+  // ---- Auto-restore tier from sessionStorage ----
+
+  (function restoreSession() {
+    try {
+      var saved = parseInt(sessionStorage.getItem(STORAGE_KEY), 10);
+      if (saved >= 1 && saved <= 3) { showDashboard(saved); }
+    } catch (_) {}
+  }());
+
+}());
+</script>
+
+</body>
+</html>

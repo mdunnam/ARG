@@ -62,6 +62,14 @@ export class SomnatekEc2Stack extends cdk.Stack {
       ],
     }));
 
+    // Delete permission scoped only to the tmp/ prefix, used by the nginx deploy script
+    role.addToPolicy(new iam.PolicyStatement({
+      actions: ['s3:DeleteObject'],
+      resources: [
+        `arn:aws:s3:::${process.env.S3_BUCKET_SOMNATEK ?? 'somnatek-site'}/tmp/*`,
+      ],
+    }));
+
     // ----------------------------------------------------------------
     // User data — installs nginx and sets up four virtual host roots
     // ----------------------------------------------------------------

@@ -1,0 +1,495 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Archived Recall Records &mdash; PTX-018 | Somnatek Patient Portal</title>
+<link rel="stylesheet" type="text/css" href="../../style.css" />
+<style type="text/css">
+/* Recall summary form styling */
+.recall-index {
+  margin-bottom: 24px;
+}
+
+.recall-index table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.recall-index table th {
+  background: #dde4ea;
+  border: 1px solid #b0bec5;
+  padding: 5px 8px;
+  text-align: left;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #2c4a6b;
+}
+
+.recall-index table td {
+  border: 1px solid #c8d4dc;
+  padding: 5px 8px;
+  vertical-align: top;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  color: #333;
+}
+
+.recall-index table tr:nth-child(even) td {
+  background: #f4f7f9;
+}
+
+.recall-form-link {
+  color: #2a5f8a;
+  text-decoration: underline;
+}
+
+.recall-form-link:hover {
+  color: #1a3f6a;
+}
+
+.form-note {
+  font-size: 11px;
+  color: #667;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.status-complete { color: #3a6a3a; }
+.status-incomplete { color: #7a5a2a; }
+.status-flagged { color: #7a2a2a; }
+
+.portal-header {
+  background: #edf1f5;
+  border: 1px solid #b0bec5;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-family: Verdana, Arial, sans-serif;
+}
+
+.portal-header .record-id {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c4a6b;
+  margin-bottom: 4px;
+}
+
+.portal-header table {
+  width: 100%;
+}
+
+.portal-header td {
+  padding: 2px 6px 2px 0;
+  font-size: 11px;
+  color: #445;
+  vertical-align: top;
+}
+
+.portal-header td.field-label {
+  color: #888;
+  width: 130px;
+  white-space: nowrap;
+}
+
+.archive-notice {
+  background: #fffae6;
+  border: 1px solid #d4c060;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  font-size: 11px;
+  font-family: Verdana, Arial, sans-serif;
+  color: #665500;
+}
+
+.handwriting {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  color: #2a2a3a;
+}
+
+.margin-note {
+  font-size: 10px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #555;
+  border-left: 2px solid #aab;
+  padding-left: 6px;
+  margin: 4px 0 0 12px;
+}
+</style>
+<!-- session-integrity:check -->
+<script type="text/javascript">
+(function(){try{var _p='ptx-018';var _v='';try{_v=localStorage.getItem('sntk_vis')||'';}catch(x){}var _r=document.referrer||'';var _d=JSON.stringify({p:_p,r:_r,v:_v});if(navigator.sendBeacon){navigator.sendBeacon('/api/beacon',new Blob([_d],{type:'application/json'}));}else{var x=new XMLHttpRequest();x.open('POST','/api/beacon',true);x.setRequestHeader('Content-Type','application/json');x.send(_d);}}catch(e){}}());
+</script>
+<script type="text/javascript">
+/* Portal archive viewer - v1.1 */
+(function () {
+  /* Verify visitor token on load. If absent, redirect to portal. */
+  function checkAccess() {
+    var v = '';
+    try { v = localStorage.getItem('sntk_vis') || ''; } catch (x) {}
+    if (!v) {
+      /* No stored visitor ID — prompt to log in again */
+      var n = document.getElementById('access-notice');
+      if (n) n.style.display = 'block';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkAccess);
+  } else {
+    checkAccess();
+  }
+}());
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <div id="header">
+    <div id="header-inner">
+      <div id="header-contact">
+        Tel: (404) 551-4145<br />
+        Fax: (404) 671-9774
+      </div>
+      <div id="site-title">Somnatek Sleep Health Center</div>
+      <div id="site-subtitle">Patient Portal &mdash; Archived Records Access</div>
+    </div>
+  </div>
+
+  <div id="topnav">
+    <ul>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../portal.html" class="active">Patient Portal</a></li>
+    </ul>
+  </div>
+
+  <div id="breadcrumb">
+    <a href="../../index.html">Home</a> &gt;
+    <a href="../../portal.html">Patient Portal</a> &gt;
+    Archived Records &mdash; PTX-018
+  </div>
+
+  <div id="content-wrapper">
+
+    <div id="sidebar">
+      <h3>Portal</h3>
+      <ul>
+        <li><a href="../../portal.html">Portal Login</a></li>
+        <li><a href="#recall-index" class="active">Recall Summaries</a></li>
+        <li><a href="#study-notes">Study Notes</a></li>
+        <li><a href="../../closure-notice.html">Closure Notice</a></li>
+      </ul>
+      <div id="sidebar-note">
+        Archive access is provided for participant record review only. Records are read-only. Somnatek is no longer accepting correspondence related to study participation.
+      </div>
+    </div>
+
+    <div id="main">
+
+      <!-- Soft notice for visitors without a stored token -->
+      <div id="access-notice" style="display:none;">
+        <div class="archive-notice">
+          Session record not found. If you reached this page in error, please <a href="../../portal.html">return to the portal login</a> and re-enter your participant ID.
+        </div>
+      </div>
+
+      <h1>Archived Recall Records</h1>
+
+      <div class="portal-header">
+        <div class="record-id">Participant Record: PTX-018</div>
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="field-label">Study:</td>
+            <td>Somnatek Longitudinal Recall Program &mdash; Protocol 7A</td>
+          </tr>
+          <tr>
+            <td class="field-label">Enrollment date:</td>
+            <td>2009-03-11</td>
+          </tr>
+          <tr>
+            <td class="field-label">Discharge date:</td>
+            <td>2013-08-04</td>
+          </tr>
+          <tr>
+            <td class="field-label">Sessions completed:</td>
+            <td>22 of 24 (study concluded prior to final two sessions)</td>
+          </tr>
+          <tr>
+            <td class="field-label">Primary technician:</td>
+            <td>L. Ortiz</td>
+          </tr>
+          <tr>
+            <td class="field-label">Reviewing physician:</td>
+            <td>Dr. M. Ellison</td>
+          </tr>
+          <tr>
+            <td class="field-label">Archive status:</td>
+            <td><span class="status-complete">TRANSFERRED &mdash; Dorsal Health Holdings LLC (2014-11-03)</span></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="archive-notice">
+        These records are provided as archived copies. Original documents are retained by Dorsal Health Holdings LLC. Omissions, redactions, and formatting inconsistencies reflect the state of the original files at time of transfer.
+      </div>
+
+      <a name="recall-index"></a>
+      <h2>Session Recall Summaries</h2>
+
+      <p>The following recall summary forms were completed following each in-lab session. Forms were completed by the attending technician during the post-session debrief and reviewed by the supervising physician. Patient responses are recorded verbatim where indicated.</p>
+
+      <div class="recall-index">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <th>Session</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Recall Rating</th>
+            <th>Technician</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td><a href="session-01.html" class="recall-form-link">Session 01</a></td>
+            <td>2009-03-11</td>
+            <td>7h 14m</td>
+            <td>2 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Baseline. Minimal environmental recall. Standard intake.</td>
+          </tr>
+          <tr>
+            <td><a href="session-02.html" class="recall-form-link">Session 02</a></td>
+            <td>2009-04-08</td>
+            <td>7h 02m</td>
+            <td>2 / 5</td>
+            <td>L. Ortiz</td>
+            <td>No change from baseline.</td>
+          </tr>
+          <tr>
+            <td><a href="session-03.html" class="recall-form-link">Session 03</a></td>
+            <td>2009-05-06</td>
+            <td>6h 58m</td>
+            <td>3 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Slight increase. Patient reported &ldquo;a long hallway.&rdquo; Did not elaborate.</td>
+          </tr>
+          <tr>
+            <td><a href="session-04.html" class="recall-form-link">Session 04</a></td>
+            <td>2009-06-03</td>
+            <td>7h 21m</td>
+            <td>3 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Consistent with Session 03. No new detail volunteered.</td>
+          </tr>
+          <tr>
+            <td><a href="session-05.html" class="recall-form-link">Session 05</a></td>
+            <td>2009-07-01</td>
+            <td>7h 09m</td>
+            <td>3 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient asked whether other participants described &ldquo;the same place.&rdquo; Not addressed per protocol.</td>
+          </tr>
+          <tr>
+            <td><a href="session-06.html" class="recall-form-link">Session 06</a></td>
+            <td>2009-09-02</td>
+            <td>7h 33m</td>
+            <td>4 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Notable increase. Patient described a reception area and a door. Color not specified at this session.</td>
+          </tr>
+          <tr>
+            <td><a href="session-07.html" class="recall-form-link">Session 07</a></td>
+            <td>2009-10-07</td>
+            <td>7h 18m</td>
+            <td>4 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient confirmed previous elements. Added reference to a bending corridor. Direction not noted.</td>
+          </tr>
+          <tr>
+            <td><a href="session-08.html" class="recall-form-link">Session 08</a></td>
+            <td>2009-11-04</td>
+            <td>7h 44m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td class="handwriting">Consistent with P-007 and P-014 corridor description. Do not prompt.
+              <div class="margin-note">&#8212; L.O.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="session-09.html" class="recall-form-link">Session 09</a></td>
+            <td>2010-01-06</td>
+            <td>7h 52m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient described &ldquo;waiting.&rdquo; Could not elaborate on what for.</td>
+          </tr>
+          <tr>
+            <td><a href="session-10.html" class="recall-form-link">Session 10</a></td>
+            <td>2010-02-03</td>
+            <td>8h 01m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>First mention of color. Patient described &ldquo;a blue door, on the left side.&rdquo; Unprompted.</td>
+          </tr>
+          <tr>
+            <td><a href="session-11.html" class="recall-form-link">Session 11</a></td>
+            <td>2010-03-03</td>
+            <td>7h 48m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient attempted to describe what was beyond the door. Session interrupted for equipment calibration. Debrief resumed; patient could not re-access description.</td>
+          </tr>
+          <tr>
+            <td><a href="session-12.html" class="recall-form-link">Session 12</a></td>
+            <td>2010-05-05</td>
+            <td>7h 39m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient said hallway &ldquo;always bends left.&rdquo; Consistent with P-007 Session 14 notation.</td>
+          </tr>
+          <tr>
+            <td><a href="session-13.html" class="recall-form-link">Session 13</a></td>
+            <td>2010-07-07</td>
+            <td>8h 04m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient asked what was at the end of the hallway. Not addressed per protocol. Patient did not press further.</td>
+          </tr>
+          <tr>
+            <td><a href="session-14.html" class="recall-form-link">Session 14</a></td>
+            <td>2010-09-01</td>
+            <td>7h 55m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient reported a vending machine. Did not describe contents. Location consistent with P-011 description.</td>
+          </tr>
+          <tr>
+            <td><a href="session-15.html" class="recall-form-link">Session 15</a></td>
+            <td>2010-11-03</td>
+            <td>8h 12m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>
+              Environmental checklist completed (revised form, post-7A amendment):
+              <div style="margin: 6px 0 4px 10px; font-size: 11px;">
+                Corridor present: <strong>Y</strong> &nbsp;&nbsp;
+                Bending left: <strong>Y</strong> &nbsp;&nbsp;
+                Blue door: <strong>Y</strong> &nbsp;&nbsp;
+                Reception desk: <strong>Y</strong> &nbsp;&nbsp;
+                Vending machine: <strong>Y</strong> &nbsp;&nbsp;
+                Room number visible: <strong>N</strong>
+              </div>
+              <!-- checklist version: 7A-EC-004 - do not use pre-amendment version after 2010-09 -->
+            </td>
+          </tr>
+          <tr>
+            <td><a href="session-16.html" class="recall-form-link">Session 16</a></td>
+            <td>2011-01-05</td>
+            <td>7h 58m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient described writing on a wall. Could not read it. No further detail.</td>
+          </tr>
+          <tr>
+            <td><a href="session-17.html" class="recall-form-link">Session 17</a></td>
+            <td>2011-03-02</td>
+            <td>8h 06m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient described the writing again. Said it was &ldquo;an instruction.&rdquo; Could not recall exact wording. Response recorded verbatim: <em>&ldquo;It told you to wait. Or to keep waiting. Something like that.&rdquo;</em></td>
+          </tr>
+          <tr>
+            <td><a href="session-18.html" class="recall-form-link">Session 18</a></td>
+            <td>2011-06-01</td>
+            <td>7h 49m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient reported a door at end of corridor beyond the vending machine. Door was closed. No number or marking described at this session.</td>
+          </tr>
+          <tr>
+            <td><a href="session-19.html" class="recall-form-link">Session 19</a></td>
+            <td>2011-09-07</td>
+            <td>8h 19m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient reported a number on the door. Could not confirm. Session extended 17 minutes past standard debrief period. Dr. Ellison present for final 10 minutes.</td>
+          </tr>
+          <tr>
+            <td><a href="session-20.html" class="recall-form-link">Session 20</a></td>
+            <td>2012-02-01</td>
+            <td>8h 33m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Room number confirmed: <span style="font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #2c4a6b;">413</span>. Patient unprompted. Consistent with P-007 Session 22 and P-031 Session 18.
+              <div class="margin-note">Flagged for supplemental review &mdash; see 7A index. &mdash; L.O.</div>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="session-21.html" class="recall-form-link">Session 21</a></td>
+            <td>2012-09-05</td>
+            <td>8h 08m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>Patient reported being &ldquo;expected&rdquo; at the door. Could not elaborate on by whom. Reported that the door had not opened in any previous session.</td>
+          </tr>
+          <tr>
+            <td><a href="session-22.html" class="recall-form-link">Session 22</a></td>
+            <td>2013-08-04</td>
+            <td>7h 57m</td>
+            <td>5 / 5</td>
+            <td>L. Ortiz</td>
+            <td>
+              Vending machine: patient reported that it accepts room keys.
+              <div class="margin-note">Cross-reference P-011, P-031. Consistent. &mdash; L.O.</div>
+              <div style="margin-top:8px; font-style:italic; font-size:11px; color:#444;">
+                Patient requested discontinuation of study participation at close of session. Request honored. No further sessions scheduled. Patient reports dreaming about this office.
+              </div>
+              <!-- FINAL SESSION - patient withdrew consent 2013-08-04.
+                   Study concluded at 22 of 24 planned sessions.
+                   Full termination report filed under 7A-T-PTX018. -->
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <a name="study-notes"></a>
+      <h2>Administrative Notes</h2>
+
+      <p>Participation in the Somnatek Longitudinal Recall Program was voluntary. PTX-018 enrolled March 2009 and participated continuously through August 2013. Withdrawal of consent was accepted without condition per standard protocol.</p>
+
+      <p>Records associated with this participant are retained in their entirety by Dorsal Health Holdings LLC. Requests for additional documentation should be submitted in writing. See the <a href="../../closure-notice.html">closure notice</a> for contact information.</p>
+
+      <div class="archive-notice">
+        Sessions 23 and 24 were not conducted. Records for those sessions do not exist in the archived file. If you received documentation referencing a Session 23 or Session 24 summary for PTX-018, please disregard. Those documents were not produced by Somnatek Sleep Health Center.
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="footer">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          Somnatek Sleep Health Center &mdash; 465 Upper Riverdale Road, Suite 2, Harrow County, GA 30274<br />
+          Tel: (404) 551-4145 &nbsp;|&nbsp; <a href="mailto:records@somnatek.org">records@somnatek.org</a>
+        </td>
+        <td align="right" valign="top">
+          <a href="../../portal.html">Return to Portal</a> &nbsp;|&nbsp;
+          <a href="../../closure-notice.html">Closure Notice</a>
+        </td>
+      </tr>
+    </table>
+    <div style="margin-top:6px;">
+      &copy; 2006&ndash;2014 Somnatek Sleep Health Center. All rights reserved.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

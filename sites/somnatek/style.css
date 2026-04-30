@@ -291,6 +291,22 @@ table.staff-table td.staff-status {
     width: 120px;
 }
 
+/* ---- Staff profile blocks ---- */
+.staff-profile {
+    border-top: 1px solid #dce8f0;
+    padding: 14px 0 10px 0;
+    margin-bottom: 4px;
+}
+
+.staff-profile h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: normal;
+    color: #1a3f5a;
+    margin: 0 0 8px 0;
+    border-bottom: none;
+}
+
 /* ---- PDF link ---- */
 a.pdf-link {
     padding-left: 18px;
@@ -387,6 +403,10 @@ hr { border: none; border-top: 1px solid #d0dce4; margin: 14px 0; }
 .img-float-right img,
 .img-float-left img {
     display: block;
+    line-height: 1.4;
+    font-size: 10px;
+    color: #555555;
+    font-family: Verdana, Arial, sans-serif;
     /* image renders over grey background once file exists */
 }
 

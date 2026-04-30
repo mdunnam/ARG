@@ -1,0 +1,7 @@
+{
+  "name": "portal-login",
+  "version": "1.0.0",
+  "description": "Somnatek ARG - portal login puzzle validation Lambda",
+  "main": "index.js",
+  "dependencies": {}
+}
