@@ -23,11 +23,12 @@ const CORS_HEADERS = {
 };
 
 /**
- * Generates a VIS-XXXXX visitor ID with a zero-padded five-digit number.
+ * Generates a VIS-XXXXX visitor ID with a cryptographically random five-digit number.
+ * Uses crypto.randomBytes to avoid predictable ID sequencing.
  * @returns {string}
  */
 function generateVisitorId() {
-  const n = Math.floor(10000 + Math.random() * 90000);
+  const n = 10000 + (crypto.randomBytes(3).readUIntBE(0, 3) % 90000);
   return `VIS-${String(n).padStart(5, '0')}`;
 }
 
@@ -187,6 +188,7 @@ const MILESTONES = [
   { id: 'recall_accessed',      points: 25, released: true  },
   { id: 'protocol_7a',          points: 30, released: true  },
   { id: 'supp_010_found',       points: 35, released: true  },
+  { id: 'supp_005_found',       points: 40, released: true  },
   { id: 'restwell_found',       points: 40, released: false },
   { id: 'wexler_found',         points: 40, released: false },
 ];
