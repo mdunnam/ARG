@@ -1,0 +1,127 @@
+SOMNATEK RESEARCH ARCHIVE — PATREON OBSERVER TIER
+Tier name: Observer
+Price: $5 / month
+Visibility: Public
+
+─────────────────────────────────────────────────────────────────────
+TIER DESCRIPTION (Patreon page copy — paste directly)
+─────────────────────────────────────────────────────────────────────
+
+Observer status is available to former patients, researchers, and
+individuals who have made contact with the Dorsal Health Holdings
+records management system.
+
+Observer tier benefits:
+
+— Monthly administrative transmission from the Dorsal Health Holdings
+  records archive. Transmissions are formatted as automated system
+  correspondence and may contain materials not accessible through
+  the public investigation path.
+
+— Access to the #observer-transmissions channel in the Somnatek
+  Research Archive Discord server.
+
+— Priority position in the active recall scheduling queue.
+  When your recall window is assigned, Observer participants
+  will be notified in advance of general participants.
+
+— Physical evidence kit (shipped quarterly, beginning when
+  production is confirmed). Contents are consistent with
+  materials referenced in the Somnatek archive. Contents vary
+  by issue. First issue: one document from the transfer archive,
+  redacted per standard protocol. Postage included.
+
+Observer designation does not accelerate or alter the investigation
+path. Content accessible to Observer participants remains consistent
+with the ARG narrative.
+
+─────────────────────────────────────────────────────────────────────
+PATREON PAGE SETUP NOTES
+─────────────────────────────────────────────────────────────────────
+
+Page name:    Somnatek Research Archive
+URL:          patreon.com/somnatek
+Category:     Writing / Fiction / Interactive
+Cover image:  Use the somnatek.org institutional header or a plain
+              low-contrast image with the clinic address.
+Profile bio:  "Unofficial archive for former Somnatek Sleep Health
+              Center patients and Protocol 7A study participants.
+              The records management system is still active."
+
+─────────────────────────────────────────────────────────────────────
+OBSERVER TRANSMISSION SCHEDULE (months 1–4)
+─────────────────────────────────────────────────────────────────────
+
+Month 1:
+  Subject: Records Management — Observer Designation Confirmed
+  Content: Standard Dorsal HRMS form letter confirming Observer
+           status. Reference number format: DHHRMS-XXXXXX-OBS1.
+           Ends with: "Your file has been marked for priority review.
+           PLEASE WAIT TO BE RECALLED."
+
+Month 2:
+  Subject: Records Management — Supplemental Archive Access: Memo
+  Content: A two-paragraph internal memo from Dr. Ellison to the
+           Somnatek administrative team, dated March 2013.
+           Subject line: "Protocol 7A extended session procedures."
+           The memo refers to "participants demonstrating consistent
+           indexed space access" and instructs staff to note the
+           EEC score threshold on each file. One sentence is
+           redacted. The redacted portion ends the memo.
+
+Month 3:
+  Subject: Records Management — Active Recall: Status Update
+  Content: A one-page status form with checkboxes. Most boxes are
+           checked: "File active," "Environmental access confirmed,"
+           "Recall window: pending." One box at the bottom is
+           checked that reads: "Participant: unaware." Below the
+           form, a hand-written margin note (scan-quality):
+           "413 is not a room number. —L.O."
+
+Month 4:
+  Subject: Records Management — Transfer Agreement Exhibit C
+  Content: A scan of a two-page legal document. Page 1 is the
+           cover page of Exhibit C of the Somnatek-Dorsal transfer
+           agreement. Page 2 contains the operative clause defining
+           "confirmed contact" and "active recall eligibility."
+           The definition includes language about "any individual
+           who has accessed Protocol 7A session records sufficient
+           to produce environmental orientation." The last line of
+           the definition is partially obscured by a binding mark.
+
+─────────────────────────────────────────────────────────────────────
+PHYSICAL EVIDENCE KIT — ISSUE 1 CONTENTS
+─────────────────────────────────────────────────────────────────────
+
+Item 1: SHC-INT-2009-07 patient intake form (reproduction)
+  A printed reproduction of the patient intake form for PTX-007.
+  Fields filled in with fictional patient data consistent with
+  ARG lore. The form number is visible. Study reference number
+  field is left blank. A handwritten note in the margin reads
+  "environmental access: pending — see 7A file."
+
+Item 2: Dorsal Health Holdings LLC letterhead (blank)
+  One sheet of reproduction letterhead. Address: Dorsal Health
+  Holdings LLC, PO Box [fictional number], Harrow County, GA.
+  Players can use this to compose their own in-world correspondence.
+
+Item 3: Laminated participant ID card (fictional)
+  VIS-00000 — "Observer" designation. Somnatek Sleep Health Center
+  logo (reproduction). Date field: blank. Not a real credential.
+  Standard disclaimer printed on reverse.
+
+Shipping: USPS first class. Quarterly. First shipment at 50 Observers.
+
+─────────────────────────────────────────────────────────────────────
+ACTIVATION CHECKLIST
+─────────────────────────────────────────────────────────────────────
+
+[ ] Discord server has reached 100 members
+[ ] Run: node scripts/activate-patreon-tier.js
+    (with opt-in email list piped to stdin)
+[ ] Deploy portal-login Lambda with recalled_active released:true:
+    1. Edit lambda/portal-login/index.js — set recalled_active released: true
+    2. cd infra && npx cdk deploy SomnatekPortalStack
+[ ] Create Patreon page using copy above
+[ ] Post in Discord #announcements
+[ ] Update content ledger: node scripts/release-drop.js event-discord-100-milestone

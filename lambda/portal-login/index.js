@@ -177,21 +177,23 @@ async function getOrCreateVisitor(ipHash) {
  * points contribute to percentComplete calculation.
  */
 const MILESTONES = [
-  { id: 'portal_solved',        points: 20, released: true  },
-  { id: 'fax_decoded',          points: 15, released: true  },
-  { id: 'restwell_found',        points: 40, released: true  },
-  { id: 'supp_index_found',     points: 20, released: true  },
-  { id: 'doc_7a_found',         points: 15, released: true  },
-  { id: 'correspondence_found', points: 25, released: true  },
-  { id: 'admin_t1',             points: 10, released: true  },
-  { id: 'admin_t2',             points: 20, released: true  },
-  { id: 'admin_t3',             points: 35, released: true  },
-  { id: 'recall_accessed',      points: 25, released: true  },
-  { id: 'protocol_7a',          points: 30, released: true  },
-  { id: 'supp_010_found',       points: 35, released: true  },
-  { id: 'supp_005_found',       points: 40, released: true  },
-  { id: 'restwell_found',       points: 40, released: false },
-  { id: 'wexler_found',         points: 40, released: false },
+  { id: 'portal_solved',        points: 20,  released: true  },
+  { id: 'fax_decoded',          points: 15,  released: true  },
+  { id: 'restwell_found',       points: 40,  released: true  },
+  { id: 'supp_index_found',     points: 20,  released: true  },
+  { id: 'doc_7a_found',         points: 15,  released: true  },
+  { id: 'correspondence_found', points: 25,  released: true  },
+  { id: 'admin_t1',             points: 10,  released: true  },
+  { id: 'admin_t2',             points: 20,  released: true  },
+  { id: 'admin_t3',             points: 35,  released: true  },
+  { id: 'recall_accessed',      points: 25,  released: true  },
+  { id: 'protocol_7a',          points: 30,  released: true  },
+  { id: 'supp_010_found',       points: 35,  released: true  },
+  { id: 'supp_005_found',       points: 40,  released: true  },
+  // Stage 3 — set released:true when drop-stage3-portal-unlock fires (Day 25)
+  { id: 'recalled_active',      points: 75,  released: false },
+  // Stage 4 (not yet built)
+  { id: 'wexler_found',         points: 40,  released: false },
 ];
 
 const TOTAL_RELEASED_POINTS = MILESTONES

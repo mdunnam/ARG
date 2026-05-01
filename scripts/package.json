@@ -4,7 +4,10 @@
   "description": "Content generation scripts for Somnatek ARG",
   "scripts": {
     "generate-pdfs": "node generate-pdfs.js",
-    "generate-fax-audio": "node generate-fax-audio.js"
+    "generate-fax-audio": "node generate-fax-audio.js",
+    "check-drops": "node check-drops.js",
+    "seed-ledger": "node seed-content-ledger.js",
+    "release-drop": "node release-drop.js"
   },
   "dependencies": {
     "pdfkit": "^0.14.0"
@@ -13,6 +16,7 @@
     "@aws-sdk/client-cloudfront": "^3.1040.0",
     "@aws-sdk/client-dynamodb": "^3.1040.0",
     "@aws-sdk/client-s3": "^3.1040.0",
+    "@aws-sdk/client-ses": "^3.1040.0",
     "@aws-sdk/lib-dynamodb": "^3.1040.0"
   }
 }

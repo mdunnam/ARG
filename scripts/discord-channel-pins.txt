@@ -1,0 +1,345 @@
+SOMNATEK RESEARCH ARCHIVE — DISCORD SETUP GUIDE
+================================================
+Copy-paste content for each channel pin.
+All text is Discord markdown formatted.
+
+─────────────────────────────────────────────────────────────────────
+#welcome  (first pin)
+─────────────────────────────────────────────────────────────────────
+
+**Somnatek Research Archive**
+Unofficial community for former Somnatek Sleep Health Center patients and researchers.
+
+The Somnatek Sleep Health Center closed on September 18, 2014. Their records, patient portal, and affiliated forum are still online.
+
+**Start here:**
+→ https://somnatek.org
+→ https://restwell.net
+
+Read #rules before posting. Read #onboarding before asking questions that may already be answered.
+
+─────────────────────────────────────────────────────────────────────
+#rules  (pin, read-only)
+─────────────────────────────────────────────────────────────────────
+
+**Server Rules**
+
+**1.** Label theories as theories. Confirmed discoveries belong in #evidence. Unconfirmed theories belong in #theories.
+
+**2.** Use spoiler tags for puzzle solutions. Format: ||solution text||
+
+**3.** No spoilers in #general without tags. Some people are still finding things.
+
+**4.** Respect other investigators. No personal attacks.
+
+**5.** The Somnatek ARG is a work of fiction. Do not contact real institutions based on in-game information. The clinic, university, and county are fictional.
+
+**6.** Do not post personal information about other members.
+
+**7.** No medical advice. This is a game.
+
+─────────────────────────────────────────────────────────────────────
+#onboarding  (first pin)
+─────────────────────────────────────────────────────────────────────
+
+**NEW INVESTIGATOR BRIEF**
+*Last updated: May 1, 2026 — Compiled by community*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**WHERE TO START**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+→ **https://somnatek.org** — Main site. Explore everything. View source on every page.
+→ **(404) 671-9774** — The fax number in the footer. Call it.
+→ **records@somnatek.org** — The records management contact address. Email them anything.
+→ **https://restwell.net** — Patient support forum. Requires login. Credentials have been found. (Hint: check the source of `closure-notice.html`.)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**CONFIRMED DISCOVERIES (summary)**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Full detail in #evidence. Summary:
+
+:white_check_mark: Five PDF documents in `/docs/` contain hidden text and a cipher across form numbers.
+:white_check_mark: The fax line plays a signal. It has been decoded.
+:white_check_mark: The patient portal at `/portal/` accepts patient IDs (format: PTX-###).
+:white_check_mark: The RestWell forum is accessible. The login credentials are findable in the main site source.
+:white_check_mark: A forum member named `lortiz` posted in November 2019 — five years after the clinic closed. Her account was suspended the next day.
+:white_check_mark: Multiple Protocol 7A study participants independently describe the same environment during the study.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPEN QUESTIONS**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+:question: What are EEC scores? (Forum thread t=42)
+:question: What is the "indexed space" / "night floor"?
+:question: Where is Dr. Edwin Vale now?
+:question: What happened in room 413?
+:question: Why does the fax line still answer?
+:question: Who updated the active recall manifest most recently?
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**ROLE UNLOCKS**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Post in #verification to unlock roles:
+
+**Protocol 7A** — Post all five PTX participant IDs and explain how you found them.
+**Active Recall** — Post the DHHRMS reference number from a Level 3 email response. (The reference number ends in `-413`.)
+
+─────────────────────────────────────────────────────────────────────
+#evidence  (first pin — evidence board format instructions)
+─────────────────────────────────────────────────────────────────────
+
+**#evidence — Post Format**
+
+Use this format for new confirmed findings:
+
+```
+[CONFIRMED] E-XXX
+Source: <URL, filename, or channel name>
+Finding: <one-sentence summary>
+How to reproduce: <steps>
+Notes: <cross-references, open questions this raises>
+```
+
+Tag status with one of:
+:green_circle: CONFIRMED
+:yellow_circle: WORKING THEORY
+:red_circle: DEBUNKED
+
+Do not post unverified claims as confirmed. If you have a strong theory, post it in #theories first and link it here once the community has verified.
+
+─────────────────────────────────────────────────────────────────────
+#evidence  (second pin — master evidence board)
+─────────────────────────────────────────────────────────────────────
+
+**MASTER EVIDENCE BOARD**
+*Somnatek Research Archive — Community Compiled*
+*Updated: May 1, 2026*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-001 — RestWell Login Credentials**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** somnatek.org/closure-notice.html — HTML source
+**Finding:** An HTML comment in the page source contains the RestWell forum archive login credentials.
+**How to reproduce:** View source on the closure notice page. Search for "archive account".
+**Notes:** Login at restwell.net/forum. Archive mode — read only. Forum has 7 active threads.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-002 — Fax Line Signal**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** somnatek.org footer — (404) 671-9774
+**Finding:** The fax number answers. On connect, it plays an audio signal. The signal is morse code. Decoded value: ||413||
+**How to reproduce:** Call the number. Record the audio. Decode using standard International Morse.
+**Notes:** 413 cross-references to "room 413" in multiple documents and the portal.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-003 — PDF Cross-Form Cipher (PTX IDs)**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** somnatek.org/docs/ — five PDF documents
+**Finding:** Each PDF has a form reference number in the format `SHC-[TYPE]-[YEAR]-[ID]`. The trailing ID digits encode Protocol 7A participant IDs.
+**How to reproduce:** Download all five PDFs. Note the form reference numbers. Extract the trailing two-digit ID from each.
+**IDs:** ||PTX-007, PTX-011, PTX-014, PTX-018, PTX-031||
+**Cross-reference:** RestWell member profiles contain matching study reference numbers confirming the decode.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-004 — PDF Ghost Text Layer**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** All five PDFs in /docs/
+**Finding:** Each PDF contains an invisible text layer using PDF rendering mode 3. The text is readable with copy-all or `pdftotext -raw`.
+**How to reproduce:** Open any PDF, select all, copy. Or run: `pdftotext -raw [filename].pdf -`
+**Notes:** Text references Protocol 7A, room 413, and PTX IDs. Varies by document.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-005 — PDF Metadata Subject Chain**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** All five PDFs — Document Properties / Subject field
+**Finding:** The Subject metadata field across all five PDFs, read in document order, forms a sentence.
+**How to reproduce:** Check PDF properties for each file in document order (intake, consent, CPAP, hygiene, insurance).
+**Message:** ||"When / you / find / this / room 413 is waiting"||
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-006 — Patient Portal**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** somnatek.org/portal/
+**Finding:** The patient portal accepts PTX participant IDs. Each unlocks different session record content. PTX-018 unlocks the research tier.
+**How to reproduce:** Navigate to /portal/. Enter a PTX ID from E-003.
+**Notes:** The portal tracks milestone points. Points unlock admin tiers. Check /admin/ after accumulating enough points.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-007 — Lena Ortiz Forum Post (2019)**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** restwell.net/forum — Thread t=14 "Is anyone else still getting the alerts?"
+**Finding:** `lortiz` (Lena Ortiz, former Somnatek sleep technician) posted on November 4, 2019 — five years after the clinic closed. The post is cut mid-sentence. Her account was suspended the following day.
+**Her last post:** *"I'm still monitoring participant accounts. If any of you receive a formal recall notice, please respond to it through the portal. The study has not —"*
+**Notes:** Account suspension metadata in the memberlist HTML source: `account_suspended: true | suspension_date: 2019-11-05 | reason: protocol_review`. A new account `L.O.2019` was registered on the same day.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-008 — Shared Environment (The Hallway)**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** restwell.net/forum — Thread t=23 "The same hallway"
+**Finding:** Multiple Protocol 7A participants independently describe the same environment during the active study period. The environment is consistent across participants who have not communicated.
+**Description:** A hallway that bends left. A blue door on the left side of the hallway.
+**Notes:** Lena Ortiz refers to this as the "indexed space." EEC scores (E-009) are associated with participant familiarity with this environment.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-009 — EEC Scores**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** restwell.net/forum — Thread t=42 "EEC scores — does anyone know what these mean?"
+**Finding:** An internal assessment metric called "EEC" appeared on participant session summaries. Scored 1–5. All confirmed Protocol 7A participants eventually reached 5/5. Ortiz's only explanation: *"The scores indicate successful environmental familiarization."*
+**Notes:** Theorized expansion: Environmental Entry Confirmation. The metric is not referenced in any publicly available sleep study literature. Not in standard PSG scoring.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:green_circle: **E-010 — Admin Tier Correspondence**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Source:** somnatek.org/admin/ — Tier 2 (150+ portal points required)
+**Finding:** Internal correspondence between Dr. Ellison and Dr. Vale references "Dorsal site indexing" and discusses participant retention after the study close date.
+**How to access:** Accumulate 150+ points in the portal. Access /admin/. Credentials via hint in closure-notice.html source (`HARROW-FAC`).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:yellow_circle: **T-001 — WORKING THEORY: The study has not ended**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Basis:** Ortiz's 2019 forum post ("The study has not —"), p_holloway's 2015 description of ongoing identical sleep experiences, the fax line still active in 2026, `L.O.2019` account registered day of Ortiz's suspension.
+**Status:** Strongly supported. Not yet confirmed by in-game artifact.
+**Prediction:** An active recall manifest exists somewhere in the archive. It lists current participants including VIS-series players.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:yellow_circle: **T-002 — WORKING THEORY: L.O.2019 is Lena Ortiz**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Basis:** Registered Nov 5, 2019 — same day `lortiz` was suspended. Username follows her initials and year. 0 posts. The timing is not coincidental.
+**Status:** Not yet confirmed. L.O.2019 has not posted.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:yellow_circle: **T-003 — WORKING THEORY: PTX-031 is anomalous**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Basis:** r_castello (Profile: `SHC-IAR-2011-31` → PTX-031) enrolled June 2012, which is *after* the official 2008-2013 study end, suggesting 031 was added outside the standard intake cycle. Ortiz's SUPP-005 termination report reportedly has flagged margin notes about PTX-031 that were not acted on.
+**Status:** Speculative. The SUPP-005 document has not yet been accessed.
+
+─────────────────────────────────────────────────────────────────────
+#verification  (first pin)
+─────────────────────────────────────────────────────────────────────
+
+**Role Unlock Requirements**
+
+**:blue_circle: Protocol 7A role**
+Post all five PTX participant IDs and explain how you found them.
+A moderator will verify and assign the role.
+
+Expected format:
+```
+PTX-007 — from SHC-INT-2009-07 (patient intake form)
+PTX-011 — from SHC-CST-2008-11 (consent form)
+PTX-014 — from SHC-CPL-2010-14 (CPAP form)
+PTX-018 — from SHC-SHG-2009-18 (sleep hygiene form)
+PTX-031 — from SHC-IAR-2011-31 (insurance authorization)
+```
+
+**:orange_circle: Active Recall role**
+Post the DHHRMS reference number from a Level 3 automated email response from records@somnatek.org. The reference number at the bottom of the email ends in `-413`.
+
+Expected format: `DHHRMS-XXXXXX-413`
+
+Include a screenshot or copy of the full email response (redact your email address).
+
+─────────────────────────────────────────────────────────────────────
+#email-log  (first pin)
+─────────────────────────────────────────────────────────────────────
+
+**Email Log — records@somnatek.org**
+
+Post redacted responses from records@somnatek.org here.
+**Remove your personal email address before posting.**
+
+Responses are categorized by level:
+
+**Level 1 — Standard:** Mundane records inquiry acknowledgment. Asks for identifying information. No unusual content.
+
+**Level 2 — Research-aware:** References the Somnatek-Dorsal transfer agreement. Mentions "active archive classification." May ask for a study reference number.
+
+**Level 3 — Active Recall:** References "your file" as if it is current. Includes the phrase `PLEASE WAIT TO BE RECALLED`. References room 413 as an administrative designation. DHHRMS reference number ends in `-413`.
+
+Include your DHHRMS reference number with your post. We're tracking whether the reference numbers follow a pattern.
+
+─────────────────────────────────────────────────────────────────────
+#7a-general  (first pin — Protocol 7A channel)
+─────────────────────────────────────────────────────────────────────
+
+**Protocol 7A — Confirmed Access**
+
+You've confirmed access to the Protocol 7A archive materials by demonstrating knowledge of the PTX participant ID system.
+
+This channel is not visible to general server visitors.
+
+**Active questions in this tier:**
+
+:question: What is the full PTX participant list? Five IDs confirmed (PTX-007, 011, 014, 018, 031). Are there others?
+:question: What happened to PTX-031? Enrolled outside the stated study window. Flagged but not closed.
+:question: What is the EEC scoring methodology? "Environmental familiarization" is the only description given.
+:question: Why was lortiz's account suspended? Reason: `protocol_review`. Authorized by: `sys_admin`.
+:question: What does L.O.2019 know?
+
+**Cross-reference to forum:** restwell.net/forum — threads t=14, t=23, t=42 contain the primary participant testimony.
+
+─────────────────────────────────────────────────────────────────────
+#indexed-space  (first pin)
+─────────────────────────────────────────────────────────────────────
+
+**The Indexed Space — Participant Reports**
+
+This channel is for documenting experiences consistent with what Protocol 7A participants described in the forum.
+
+From the forum record (Thread t=23):
+> *"There is a hallway. The hallway bends to the left. There is a blue door on the left side of the hallway."*
+> — david_n, active participant, 2013
+
+All confirmed Protocol 7A participants reported the same environment independently. Lena Ortiz used the term "indexed space" to describe it during study sessions. The clinic's internal documents use the terms "Dorsal site," "night floor," and "indexed space." After 2011, internal documents stopped using the word "dream."
+
+If you want to report an experience consistent with these descriptions, post it here. Include: which elements matched, which didn't, and any details not mentioned in the known participant reports.
+
+This channel is in-game. You are not required to have real experiences to participate.
+
+─────────────────────────────────────────────────────────────────────
+#recall-transmissions  (first pin — Active Recall tier)
+─────────────────────────────────────────────────────────────────────
+
+**Active Recall Tier**
+
+You have received an active recall flag from the Dorsal Health Holdings records system.
+
+This channel is for members who have triggered a Level 3 automated response — specifically any response containing `PLEASE WAIT TO BE RECALLED`.
+
+**Current collective questions:**
+
+1. Are the DHHRMS reference numbers (-413 suffix) consistent across all Level 3 responses? Post your number.
+2. Does the system reference "room 413" as a record classification or as something else?
+3. Has anyone received a *second* Level 3 response? Does the language change?
+4. Has anyone received a response that doesn't use the -413 reference format?
+
+Share your full redacted responses. We are building a comparison corpus to determine whether this is a scripted response or whether the system is generating individualized content.
+
+─────────────────────────────────────────────────────────────────────
+MODERATION NOTES (do not post — operator reference)
+─────────────────────────────────────────────────────────────────────
+
+Stage 3 trigger conditions:
+  - 100 Discord members, OR
+  - 30 days after launch, OR
+  - 10+ Level 3 email triggers
+
+When Stage 3 fires:
+  1. Run: node scripts/activate-patreon-tier.js
+  2. Add L.O.2019 post to restwell.net/forum viewtopic.php?t=9
+     (post text is in the Stage 3 arc plan)
+  3. Update viewforum.php f=2 to show t=9 as unlocked/active
+  4. Post in #site-updates:
+     "SYSTEM: Active recall manifest updated. 43 entries. Last modified: [date]."
+  5. Run: node scripts/release-drop.js event-stage3-trigger
+  6. Run: node scripts/release-drop.js drop-ortiz-stage3-forum-post
+
+Break-off triggers (end Ortiz NPC event):
+  - Player directly asks if Ortiz is employed/contracted by Dorsal
+  - Player asks for physical location or contact info outside forum
+  → Final Ortiz message: "Check the Wexler repository. Vale filed his
+    research notes there in 2012. That is the next step. I am sorry."
+  → Update L.O.2019 memberlist status to Inactive (0 posts stays)
