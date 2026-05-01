@@ -284,6 +284,7 @@ body {
 .tag-archive  { background: #2a1e1e; color: #8a5a5a; border: 1px solid #3a2a2a; }
 .tag-real     { background: #2a2a1e; color: #8a8a5a; border: 1px solid #3a3a2a; }
 .tag-pdf      { background: #1e2a2a; color: #5a8a8a; border: 1px solid #2a3a3a; }
+.tag-pending  { background: #2a2010; color: #8a7040; border: 1px solid #3a3020; }
 
 /* ---- Loading / error ---- */
 .loading { color: #444; font-size: 12px; padding: 40px 0; }
@@ -810,11 +811,11 @@ body {
     {
       group: 'PDFs (docs/)',
       pages: [
-        { label: 'Patient Intake Form',         path: '/docs/patient-intake-form.pdf',       note: 'SHC-INT-2009-07',  tag: 'pdf', tagLabel: 'PDF' },
-        { label: 'Sleep Study Consent',         path: '/docs/sleep-study-consent.pdf',       note: 'SHC-CST-2008-11',  tag: 'pdf', tagLabel: 'PDF' },
-        { label: 'CPAP Compliance Log',         path: '/docs/cpap-compliance-log.pdf',       note: 'SHC-CPL-2010-14',  tag: 'pdf', tagLabel: 'PDF' },
-        { label: 'Sleep Hygiene Guide',         path: '/docs/sleep-hygiene-guide.pdf',       note: 'SHC-SHG-2009-18',  tag: 'pdf', tagLabel: 'PDF' },
-        { label: 'Insurance Auth Request',      path: '/docs/insurance-auth-request.pdf',    note: 'SHC-IAR-2011-31',  tag: 'pdf', tagLabel: 'PDF' },
+        { label: 'Patient Intake Form',         path: '/docs/patient-intake-form.pdf',       note: 'SHC-INT-2009-07',  tag: 'pdf', tagLabel: 'PDF', pending: true },
+        { label: 'Sleep Study Consent',         path: '/docs/sleep-study-consent.pdf',       note: 'SHC-CST-2008-11',  tag: 'pdf', tagLabel: 'PDF', pending: true },
+        { label: 'CPAP Compliance Log',         path: '/docs/cpap-compliance-log.pdf',       note: 'SHC-CPL-2010-14',  tag: 'pdf', tagLabel: 'PDF', pending: true },
+        { label: 'Sleep Hygiene Guide',         path: '/docs/sleep-hygiene-guide.pdf',       note: 'SHC-SHG-2009-18',  tag: 'pdf', tagLabel: 'PDF', pending: true },
+        { label: 'Insurance Auth Request',      path: '/docs/insurance-auth-request.pdf',    note: 'SHC-IAR-2011-31',  tag: 'pdf', tagLabel: 'PDF', pending: true },
         { label: '7A Internal (HTML)',          path: '/docs/7A_INTERNAL_DO_NOT_DISTRIBUTE.html', note: 'error page / pp 1–2', tag: 'hidden', tagLabel: 'hidden' },
       ],
     },
@@ -864,7 +865,7 @@ body {
       group: 'robots.txt / meta',
       pages: [
         { label: 'robots.txt',                  path: '/robots.txt',                         note: '' },
-        { label: 'privacy.html',                path: '/privacy.html',                       note: '' },
+        { label: 'privacy.html',                path: '/privacy.html',                       note: '', pending: true },
       ],
     },
   ];
@@ -884,11 +885,20 @@ body {
         var noteHtml = page.note
           ? ' <span class="sl-note">' + esc(page.note) + '</span>'
           : '';
-        html += '<a class="sitemap-link" href="' + esc(href) + '" target="_blank" rel="noopener">' +
-          '<span class="sl-label">' + esc(page.label) + '</span>' +
-          noteHtml +
-          tagHtml +
-          '</a>';
+        if (page.pending) {
+          html += '<span class="sitemap-link" style="opacity:0.45;cursor:default" title="not yet deployed">' +
+            '<span class="sl-label">' + esc(page.label) + '</span>' +
+            noteHtml +
+            tagHtml +
+            ' <span class="sl-tag tag-pending">pending</span>' +
+            '</span>';
+        } else {
+          html += '<a class="sitemap-link" href="' + esc(href) + '" target="_blank" rel="noopener">' +
+            '<span class="sl-label">' + esc(page.label) + '</span>' +
+            noteHtml +
+            tagHtml +
+            '</a>';
+        }
       });
       html += '</div>';
     });

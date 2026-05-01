@@ -46,6 +46,7 @@ const MILESTONES = [
   { id: 'recall_accessed',      label: 'Recall summaries found',         points: 25, phase: 1, released: true  },
   { id: 'protocol_7a',          label: 'Protocol 7A unlocked',           points: 30, phase: 1, released: true  },
   { id: 'supp_010_found',       label: 'Night floor access report found',points: 35, phase: 1, released: true  },
+  { id: 'supp_005_found',       label: 'Termination reports decoded',    points: 40, phase: 1, released: true  },
   { id: 'restwell_found',       label: 'RestWell forum found',           points: 40, phase: 2, released: false },
   { id: 'wexler_found',         label: 'Wexler archive found',           points: 40, phase: 3, released: false },
 ];
@@ -58,13 +59,12 @@ const TOTAL_ALL_POINTS = MILESTONES.reduce((s, m) => s + m.points, 0);
 
 /**
  * Validates the admin token using constant-time comparison.
- * If ADMIN_SECRET is not configured, all requests are allowed
- * (maintains backward compatibility with unset secret).
+ * If ADMIN_SECRET is not configured, all requests are denied (fail-closed).
  * @param {object} headers - Lower-cased request headers.
  * @returns {boolean}
  */
 function isAuthorized(headers) {
-  if (!ADMIN_SECRET) return true;
+  if (!ADMIN_SECRET) return false;
   const token = (headers['x-admin-token'] || '').trim();
   if (token.length !== ADMIN_SECRET.length) return false;
   let diff = 0;

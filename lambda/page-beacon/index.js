@@ -26,7 +26,7 @@ const KNOWN_PAGES = new Set([
   'closure-notice', 'portal', '404', 'sleep-disorders', 'insurance',
   'ptx-018', '7a-internal', 'correspondence', 'admin',
   'supp-index', 'admin-t1', 'admin-t2', 'admin-t3',
-  'protocol-7a', 'supp-010',
+  'protocol-7a', 'supp-010', 'supp-005',
 ]);
 
 /**
@@ -43,9 +43,59 @@ const MILESTONE_SLUGS = {
   'ptx-018':        'recall_accessed',
   'protocol-7a':    'protocol_7a',
   'supp-010':       'supp_010_found',
+  'supp-005':       'supp_005_found',
 };
 
 const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: REGION }));
+
+// Milestone registry — must mirror portal-login/index.js. Keep in sync.
+const MILESTONES = [
+  { id: 'portal_solved',        points: 20, released: true  },
+  { id: 'fax_decoded',          points: 15, released: true  },
+  { id: 'supp_index_found',     points: 20, released: true  },
+  { id: 'doc_7a_found',         points: 15, released: true  },
+  { id: 'correspondence_found', points: 25, released: true  },
+  { id: 'admin_t1',             points: 10, released: true  },
+  { id: 'admin_t2',             points: 20, released: true  },
+  { id: 'admin_t3',             points: 35, released: true  },
+  { id: 'recall_accessed',      points: 25, released: true  },
+  { id: 'protocol_7a',          points: 30, released: true  },
+  { id: 'supp_010_found',       points: 35, released: true  },
+  { id: 'supp_005_found',       points: 40, released: true  },
+  { id: 'restwell_found',       points: 40, released: false },
+  { id: 'wexler_found',         points: 40, released: false },
+];
+
+const TOTAL_RELEASED_POINTS = MILESTONES
+  .filter(m => m.released)
+  .reduce((s, m) => s + m.points, 0);
+
+/**
+ * Computes % complete based on which released milestones have been achieved.
+ * @param {string[]} achieved
+ * @returns {number} Integer 0–100.
+ */
+function computePercent(achieved) {
+  if (!TOTAL_RELEASED_POINTS) return 0;
+  const set = new Set(achieved);
+  const earned = MILESTONES
+    .filter(m => m.released && set.has(m.id))
+    .reduce((s, m) => s + m.points, 0);
+  return Math.round((earned / TOTAL_RELEASED_POINTS) * 100);
+}
+
+/**
+ * Derives player level from milestone thresholds.
+ * @param {string[]} achieved
+ * @returns {number}
+ */
+function computeLevel(achieved) {
+  const pct = computePercent(achieved);
+  if (pct >= 80) return 4;
+  if (pct >= 50) return 3;
+  if (pct >= 20) return 2;
+  return 1;
+}
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin':  ALLOWED_ORIGIN,
@@ -112,13 +162,16 @@ async function writeMilestoneIfNew(visitorId, milestoneId) {
   if (!record.Item) return;
   const existing = record.Item.milestones || [];
   if (existing.includes(milestoneId)) return;
-  const updated = [...existing, milestoneId];
+  const updated       = [...existing, milestoneId];
+  const percentComplete = computePercent(updated);
+  const level           = computeLevel(updated);
   await ddb.send(
     new UpdateCommand({
       TableName:                 VISITORS_TABLE,
       Key:                       { pk },
-      UpdateExpression:          'SET milestones = :m',
-      ExpressionAttributeValues: { ':m': updated },
+      UpdateExpression:          'SET milestones = :m, percentComplete = :pc, #lv = :lv',
+      ExpressionAttributeNames:  { '#lv': 'level' },
+      ExpressionAttributeValues: { ':m': updated, ':pc': percentComplete, ':lv': level },
     })
   );
 }

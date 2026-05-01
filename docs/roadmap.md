@@ -79,9 +79,6 @@ The portal becomes functional. Players can find and use a PTX participant ID to 
   | `admin_t3` | 35 | ✓ | fake admin fires beacon `admin-t3` |
   | `supp_010_found` | 35 | ✓ | beacon: `supp-010` |
   | `recall_accessed` | 25 | ✓ | beacon: `ptx-018` (fires when player visits portal/ptx-018/ with VIS ID) |
-  | `admin_t1` | 10 | ✓ | fake admin fires beacon `admin-t1` |
-  | `admin_t2` | 20 | ✓ | fake admin fires beacon `admin-t2` |
-  | `admin_t3` | 35 | ✓ | fake admin fires beacon `admin-t3` |
   | `protocol_7a` | 30 | ✓ | beacon: `protocol-7a` (fires on successful puzzle unlock) |
   | `restwell_found` | 40 | — | future |
   | `wexler_found` | 40 | — | future |
