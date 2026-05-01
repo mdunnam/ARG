@@ -314,6 +314,17 @@ The phone stack provisions an Amazon Connect instance and routes inbound calls t
 - Main line: (404) 551-4145
 - Fax line: (404) 671-9774
 
+### Phone / Fax Operational Status
+
+| Layer | Status |
+|---|---|
+| `lambda/phone-responder` built | ✅ |
+| `SomnatekPhoneStack` deployed (Connect + Lambda) | ✅ |
+| Phone number claimed in Connect | ⚠️ Unconfirmed — verify `PhoneNumberClaimed` output matches (404) 551-4145 |
+| IVR contact flow end-to-end tested (live call) | ⚠️ Unconfirmed |
+| Fax line `(404) 671-9774` confirmed playing morse audio live | ⚠️ Unconfirmed |
+| `fax_decoded` milestone achievable by players | ⚠️ Blocked until fax IVR confirmed live |
+
 ### Cost
 
 - ~$1/month for the DID phone number

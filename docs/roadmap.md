@@ -85,7 +85,7 @@ The portal becomes functional. Players can find and use a PTX participant ID to 
   | ID | Points | Released | Trigger |
   |----|--------|----------|---------|
   | `portal_solved` | 20 | ✓ | portal-login Lambda |
-  | `fax_decoded` | 15 | ✓ | future fax Lambda |
+  | `fax_decoded` | 15 | ✓ | fax IVR — milestone is released but IVR is **untested end-to-end**; no player has triggered this yet |
   | `supp_index_found` | 20 | ✓ | beacon: `supp-index` |
   | `doc_7a_found` | 15 | ✓ | beacon: `7a-internal` |
   | `correspondence_found` | 25 | ✓ | beacon: `correspondence` |
@@ -93,11 +93,14 @@ The portal becomes functional. Players can find and use a PTX participant ID to 
   | `admin_t2` | 20 | ✓ | fake admin fires beacon `admin-t2` |
   | `admin_t3` | 35 | ✓ | fake admin fires beacon `admin-t3` |
   | `supp_010_found` | 35 | ✓ | beacon: `supp-010` |
+  | `supp_005_found` | 40 | ✓ | beacon: `supp-005` |
   | `recall_accessed` | 25 | ✓ | beacon: `ptx-018` (fires when player visits portal/ptx-018/ with VIS ID) |
   | `protocol_7a` | 30 | ✓ | beacon: `protocol-7a` (fires on successful puzzle unlock) |
-  | `restwell_found` | 40 | — | future |
+  | `restwell_found` | 40 | — | future — fires when player visits RestWell forum (discovered via Admin Tier 2 HTML source) |
+  | `recalled_active` | 75 | — | Stage 3 trigger — Day 25 drop |
   | `wexler_found` | 40 | — | future |
-  Released: **245 pts** / All-time: **315 pts**
+  Released: **330 pts** / All-time: **445 pts**
+  *(Source of truth: `lambda/portal-login/index.js` MILESTONES array)*
 - [x] `percentComplete` and `level` computed on each solve (Apr 29)
 - [x] Pre-solve ANON visitor record promoted to VISITOR# on first valid solve — journey data (pages visited, first seen, referrer) carried forward (Apr 29)
 - [x] Portal page writes `sntk_vis` to localStorage on successful solve (Apr 29)

@@ -51,7 +51,7 @@ Alternative names:
 
 ## Core Premise
 
-A defunct sleep clinic ran a longitudinal study from 2008 to 2013. The original site still exists as an abandoned patient education portal with archived pages, appointment resources, study documents, and staff biographies.
+A defunct sleep clinic ran a longitudinal study from 2008 to 2013. The clinic's closure process ran 2013–2014; the public closure date is September 18, 2014. The original site still exists as an abandoned patient education portal with archived pages, appointment resources, study documents, and staff biographies.
 
 At first, it looks like a forgotten medical site: broken links, outdated sleep hygiene PDFs, appointment forms, and research summaries. But players slowly discover that multiple anonymous patients reported dreams with the same impossible geography: a hallway, a waiting room, a locked ward, a specific room number, and a recurring phrase written in different places.
 
@@ -305,8 +305,8 @@ Players uncover Protocol 7A.
 Revelations:
 
 - Patients were exposed to audio cues during sleep.
-- Some patients were asked not to discuss dream content with family.
-- Staff stopped calling it a dream and started calling it an environment.
+- Some patients were asked not to discuss session content with family.
+- Staff stopped calling it a dream and started calling it an indexed space (post-2011 internal documents use "the night floor" or "the Dorsal site" exclusively).
 - A university ethics board requested clarification, then the study disappeared from public abstracts.
 
 Puzzle style:
@@ -373,11 +373,11 @@ The site does not reveal a monster or final answer. It gives players a new appoi
 
 **Location:** Somnatek patient portal.
 
-**Input:** A valid participant ID found in a redacted PDF.
+**Input:** A valid participant ID (`PTX-018`), discoverable via multiple paths: the trailing digits of PDF form numbers, a footnote in the portal table on `portal.html`, or the admin HTML source after solving Tier 1.
 
-**Mechanic:** Redaction is imperfect. Players infer the ID from visible fragments and a table pattern.
+**Mechanic:** Players enter the ID into the portal login form. The Lambda hashes it against `PUZZLE_ANSWER_SALT` and checks for a known participant entry.
 
-**Reward:** Access to patient recall summaries.
+**Reward:** Access to patient recall summaries and the player's assigned `VIS-XXXXX` visitor ID.
 
 ### Puzzle 2: Repeated Phrase Index
 
@@ -950,7 +950,7 @@ Players are never escalated automatically based purely on calling or emailing. E
 | 3 — The Archive Responds | Email the clinic, dig deeper | Automated responses that know too much. Pages change after puzzles are solved. |
 | 4 — Visitor Classification | Opt into email updates | Assigned a VIS-##### ID. Receive in-world appointment notices. |
 | 5 — The Protocol | Find Protocol 7A | Study was not a dream study. Environmental recall was real. |
-| 6 — The Forum | Reach RestWell | Independent patient reports corroborate the archive. MarauderBlue's posts. |
+| 6 — The Forum | Reach RestWell (via Admin Tier 2 HTML source — credential `7A-RC-2012` required) | Independent patient reports corroborate the archive. MarauderBlue's posts. |
 | 7 — Records Contradict | Reach Wexler and Harrow County | Dorsal Health Holdings was created after the transfer. Vale's name should not be there. |
 | 8 — Room 413 | Final puzzle solve | Appointment confirmed. Room 413. Arrival window. |
 

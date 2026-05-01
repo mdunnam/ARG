@@ -296,7 +296,7 @@ Credentials for GitHub Actions use a separate least-privilege IAM role with OIDC
 | Bedrock Claude 3 Haiku | ~$0.25–1.00/month | email-responder inference; varies with email volume |
 | **Total estimate** | **~$13–18/month** | Bedrock/Connect new since initial estimate |
 
-Upgrade path: if traffic grows, move static sites to S3 + CloudFront for better performance and lower EC2 load. The CDK stack is structured to support that migration.
+Upgrade path: if traffic grows, move static sites to S3 + CloudFront for better performance and lower EC2 load. The CDK stack is structured to support that migration. **CloudFront is not currently deployed** — all static serving goes through EC2 + nginx. The `SomnatekPortalStack` and `SomnatekBeaconStack` use HTTP API Gateway for Lambda endpoints, not CloudFront.
 
 ---
 
@@ -307,5 +307,5 @@ Upgrade path: if traffic grows, move static sites to S3 + CloudFront for better 
 - IAM roles use minimum required permissions.
 - Puzzle answer salt is a Lambda environment variable, never in source code.
 - Visitor emails and IDs are not logged to CloudWatch.
-- No real medical data, no real PII, no real patient records.
+- No sensitive medical data. No real patient records. Minimal opt-in contact data only (hashed email/phone, VIS ID, consent timestamp, level, preferences, unsubscribe status) — stored per privacy policy. Raw emails, IPs, and phone numbers are never written to DynamoDB or CloudWatch.
 - The admin IAM user used for initial setup should be replaced with a least-privilege deploy user once the stack is stable.
