@@ -1,0 +1,489 @@
+/* RestWell Patient Support Community — Forum Stylesheet
+   Site software: RestWellBoard v2.0.22
+   Based on classic forum layout circa 2008-2010
+   Do not modify this file — contact site_admin for layout changes */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E5E5E5;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000000;
+}
+
+a {
+    color: #006699;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #DD6900;
+}
+
+a:visited {
+    color: #004466;
+}
+
+img {
+    border: 0;
+}
+
+/* ── Page wrapper ─────────────────────────────────────────────────────────── */
+
+#page-wrap {
+    width: 760px;
+    margin: 0 auto;
+}
+
+/* ── Site header ─────────────────────────────────────────────────────────── */
+
+#site-header {
+    background-color: #006699;
+    padding: 8px 12px;
+    margin-bottom: 0;
+}
+
+#site-header .site-title {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Verdana, Arial, sans-serif;
+    letter-spacing: 0.03em;
+}
+
+#site-header .site-subtitle {
+    color: #BFD7E5;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+/* ── Navigation bar ─────────────────────────────────────────────────────────── */
+
+#nav-bar {
+    background-color: #4C789B;
+    padding: 3px 10px;
+    font-size: 11px;
+}
+
+#nav-bar a {
+    color: #FFFFFF;
+    margin-right: 12px;
+}
+
+#nav-bar a:hover {
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────────────────── */
+
+#breadcrumb {
+    background-color: #DEE3E7;
+    padding: 4px 10px;
+    font-size: 11px;
+    border-bottom: 1px solid #98AAB1;
+    color: #444;
+}
+
+#breadcrumb a {
+    color: #006699;
+}
+
+/* ── Main forum table ─────────────────────────────────────────────────────── */
+
+.forumline {
+    border: 1px solid #98AAB1;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.forumline td {
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+.forumline th {
+    padding: 4px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid #98AAB1;
+}
+
+/* Category header bar */
+.catbg {
+    background-color: #006699;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 5px 8px;
+}
+
+.catbg a {
+    color: #FFFFFF;
+}
+
+/* Row alternation */
+.row1 {
+    background-color: #FFFFFF;
+}
+
+.row2 {
+    background-color: #EFEFEF;
+}
+
+.row3 {
+    background-color: #DEE3E7;
+}
+
+/* Announcement row */
+.rowann {
+    background-color: #FFF8E8;
+}
+
+/* ── Forum index specific ─────────────────────────────────────────────────── */
+
+.forum-icon {
+    width: 30px;
+    text-align: center;
+    color: #7A9AAA;
+    font-size: 16px;
+}
+
+.forum-name {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.forum-desc {
+    font-size: 10px;
+    color: #666;
+    margin-top: 2px;
+}
+
+.forum-stats {
+    font-size: 10px;
+    color: #444;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.forum-lastpost {
+    font-size: 10px;
+    color: #444;
+    white-space: nowrap;
+}
+
+/* ── Thread list ─────────────────────────────────────────────────────────── */
+
+.topic-icon {
+    width: 20px;
+    text-align: center;
+    color: #7A9AAA;
+}
+
+.topic-title {
+    font-weight: bold;
+}
+
+.topic-meta {
+    font-size: 10px;
+    color: #666;
+}
+
+.topic-stats {
+    font-size: 10px;
+    color: #444;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.topic-lastpost {
+    font-size: 10px;
+    color: #444;
+    white-space: nowrap;
+}
+
+/* ── Post view ─────────────────────────────────────────────────────────── */
+
+.post-table {
+    border: 1px solid #98AAB1;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.post-table td {
+    vertical-align: top;
+    border: 1px solid #D1DCE4;
+}
+
+.post-head {
+    background-color: #CAD9E3;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-bottom: 1px solid #98AAB1;
+}
+
+.post-head .post-subject {
+    font-weight: bold;
+}
+
+.post-head .post-meta {
+    float: right;
+    font-size: 10px;
+    color: #555;
+    font-weight: normal;
+}
+
+.post-author {
+    background-color: #E1EEF4;
+    width: 130px;
+    min-width: 130px;
+    padding: 8px 6px;
+    text-align: center;
+    border-right: 1px solid #98AAB1;
+    font-size: 11px;
+}
+
+.post-author .author-name {
+    font-weight: bold;
+    color: #006699;
+    font-size: 12px;
+}
+
+.post-author .author-rank {
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.post-author .author-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #C8D8E0;
+    border: 1px solid #98AAB1;
+    margin: 6px auto;
+    display: block;
+}
+
+.post-author .author-stats {
+    font-size: 10px;
+    color: #666;
+    margin-top: 4px;
+    text-align: left;
+}
+
+.post-body {
+    padding: 8px 10px;
+    font-size: 11px;
+    line-height: 1.6;
+    background-color: #FFFFFF;
+}
+
+.post-body p {
+    margin-bottom: 8px;
+}
+
+.post-body p:last-child {
+    margin-bottom: 0;
+}
+
+.post-sig {
+    border-top: 1px dotted #C0C0C0;
+    margin-top: 10px;
+    padding-top: 6px;
+    font-size: 10px;
+    color: #888;
+}
+
+/* ── Post footer row ─────────────────────────────────────────────────────── */
+
+.post-foot {
+    background-color: #DEE3E7;
+    padding: 3px 8px;
+    font-size: 10px;
+    color: #555;
+    border-top: 1px solid #98AAB1;
+}
+
+/* ── Reply box (disabled — read-only archive) ─────────────────────────────── */
+
+.reply-notice {
+    background-color: #F5F5F5;
+    border: 1px solid #C0C0C0;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: #888;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* ── Profile / member list ─────────────────────────────────────────────────── */
+
+.profile-wrap {
+    border: 1px solid #98AAB1;
+    background-color: #FFFFFF;
+    margin-bottom: 12px;
+}
+
+.profile-head {
+    background-color: #4C789B;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.profile-body {
+    padding: 10px 14px;
+}
+
+.profile-field {
+    padding: 4px 0;
+    border-bottom: 1px dotted #E0E0E0;
+    font-size: 11px;
+}
+
+.profile-label {
+    color: #555;
+    font-weight: bold;
+    width: 160px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.profile-value {
+    color: #222;
+}
+
+/* ── Login form ─────────────────────────────────────────────────────────── */
+
+#login-wrap {
+    width: 380px;
+    margin: 30px auto;
+}
+
+.login-table {
+    border: 1px solid #98AAB1;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.login-table td {
+    padding: 6px 12px;
+}
+
+.login-cat {
+    background-color: #006699;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+.login-row1 {
+    background-color: #FFFFFF;
+}
+
+.login-row2 {
+    background-color: #EFEFEF;
+}
+
+.login-label {
+    font-weight: bold;
+    width: 120px;
+    color: #333;
+}
+
+.login-input {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+    border: 1px solid #98AAB1;
+    padding: 3px 4px;
+    width: 180px;
+}
+
+.login-btn {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+    background-color: #D0DCE4;
+    border: 1px solid #7A9AAA;
+    padding: 3px 12px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #B8CCd8;
+}
+
+.login-error {
+    background-color: #FFE8E8;
+    border: 1px solid #CC8888;
+    color: #880000;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    display: none;
+}
+
+.login-notice {
+    background-color: #F0F4F8;
+    border: 1px solid #C0D0DC;
+    color: #444;
+    padding: 8px 12px;
+    font-size: 10px;
+    margin-top: 6px;
+    line-height: 1.6;
+}
+
+/* ── Site footer ─────────────────────────────────────────────────────────── */
+
+#page-footer {
+    text-align: center;
+    padding: 8px 0;
+    font-size: 10px;
+    color: #666;
+    border-top: 1px solid #C0C0C0;
+    margin-top: 12px;
+}
+
+/* ── Utility ─────────────────────────────────────────────────────────── */
+
+.spacer {
+    height: 8px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.small {
+    font-size: 10px;
+}
+
+.muted {
+    color: #888;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.topic-locked {
+    color: #888;
+}
+
+.inline-icon {
+    font-size: 13px;
+    vertical-align: middle;
+}

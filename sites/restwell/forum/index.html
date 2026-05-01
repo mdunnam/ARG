@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Login &mdash; RestWell Patient Support Community</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript">
+(function () {
+  if (sessionStorage.getItem('rwl_auth') === '1') {
+    window.location.replace('board.html');
+  }
+}());
+
+/**
+ * Computes SHA-256 of a string using SubtleCrypto.
+ * @param {string} str
+ * @returns {Promise<string>} hex digest
+ */
+async function sha256(str) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function (b) {
+    return b.toString(16).padStart(2, '0');
+  }).join('');
+}
+
+/**
+ * Handles login form submission.
+ * Credential: username 'archive', password stored as hash of 'username:password'.
+ * Credential source: see closure notice (records@somnatek.org).
+ */
+async function doLogin(e) {
+  e.preventDefault();
+  var u = document.getElementById('username').value.trim();
+  var p = document.getElementById('password').value.trim();
+  if (!u || !p) return;
+
+  document.getElementById('login-btn').disabled = true;
+  document.getElementById('login-btn').value = 'Please wait...';
+
+  var hash = await sha256(u + ':' + p);
+  var VALID_HASH = '1516602d59f917142f43d293b335376e420ff1060726b11ead3c989ac3625d73';
+
+  if (hash === VALID_HASH) {
+    sessionStorage.setItem('rwl_auth', '1');
+    window.location.replace('board.html');
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('password').value = '';
+    document.getElementById('login-btn').disabled = false;
+    document.getElementById('login-btn').value = 'Log in';
+  }
+}
+</script>
+</head>
+<body>
+<div id="page-wrap">
+
+  <div id="site-header">
+    <div class="site-title">RestWell Patient Support Community</div>
+    <div class="site-subtitle">Sleep health support for patients and caregivers &mdash; Established 2009</div>
+  </div>
+
+  <div id="nav-bar">
+    <a href="index.html">Forum Index</a>
+    <a href="memberlist.php">Member List</a>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div id="login-wrap">
+
+    <div id="login-error" class="login-error">
+      The username or password you entered was not recognized. Please check your credentials and try again.
+    </div>
+
+    <form method="post" action="#" onsubmit="doLogin(event)">
+    <table class="login-table" cellspacing="0" cellpadding="0">
+      <tr>
+        <td colspan="2" class="login-cat">Log in to RestWell</td>
+      </tr>
+      <tr class="login-row1">
+        <td class="login-label">Username:</td>
+        <td><input type="text" id="username" name="username" class="login-input" autocomplete="off" /></td>
+      </tr>
+      <tr class="login-row2">
+        <td class="login-label">Password:</td>
+        <td><input type="password" id="password" name="password" class="login-input" /></td>
+      </tr>
+      <tr class="login-row1">
+        <td colspan="2" style="text-align:right; padding: 8px 12px;">
+          <input type="submit" id="login-btn" class="login-btn" value="Log in" />
+        </td>
+      </tr>
+    </table>
+    </form>
+
+    <div class="login-notice">
+      <strong>Archive access notice:</strong> New registrations are no longer accepted. This forum is maintained as a read-only archive for former patients of Somnatek Sleep Health Center and participants in affiliated research programs.<br /><br />
+      If you were a registered member and no longer have your credentials, contact the site administrator. Archive access credentials are available through the Somnatek records transfer process.
+    </div>
+
+  </div>
+
+  <div id="page-footer">
+    RestWellBoard v2.0.22 &nbsp;&bull;&nbsp; &copy; 2009&ndash;2014 RestWell Patient Support Community &nbsp;&bull;&nbsp; This forum is provided as an archival resource. No medical advice is given or implied.
+  </div>
+
+</div>
+</body>
+</html>

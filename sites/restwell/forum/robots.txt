@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# This forum is maintained as a private archival resource.
+# Automated indexing is not permitted.
