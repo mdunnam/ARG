@@ -231,6 +231,60 @@ body {
 .ms-pending { background:#1a1a1a; color:#444;    border:1px solid #222; }
 .pages-list { color:#555; font-size:10px; }
 
+/* ---- Sitemap panel ---- */
+.sitemap-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+.sitemap-group {
+  background: #111;
+  border: 1px solid #222;
+  padding: 14px 18px;
+  min-width: 220px;
+  flex: 1;
+}
+.sitemap-group-title {
+  color: #555;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #1e1e1e;
+}
+.sitemap-link {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7a9ab8;
+}
+.sitemap-link:hover { color: #aac8e0; }
+.sitemap-link .sl-label { flex: 1; }
+.sitemap-link .sl-note {
+  color: #3a3a3a;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.sitemap-link .sl-tag {
+  font-size: 9px;
+  padding: 0px 5px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.tag-hidden   { background: #1e1e2a; color: #5a5a9a; border: 1px solid #2a2a3a; }
+.tag-puzzle   { background: #1e2a1e; color: #5a8a5a; border: 1px solid #2a3a2a; }
+.tag-archive  { background: #2a1e1e; color: #8a5a5a; border: 1px solid #3a2a2a; }
+.tag-real     { background: #2a2a1e; color: #8a8a5a; border: 1px solid #3a3a2a; }
+.tag-pdf      { background: #1e2a2a; color: #5a8a8a; border: 1px solid #2a3a3a; }
+
 /* ---- Loading / error ---- */
 .loading { color: #444; font-size: 12px; padding: 40px 0; }
 .error-msg { color: #7a3030; font-size: 12px; padding: 20px 0; }
@@ -276,6 +330,7 @@ body {
     <button class="tab" data-panel="beacons">Beacons</button>
     <button class="tab" data-panel="metrics">Lambda</button>
     <button class="tab" data-panel="costs">AWS Costs</button>
+    <button class="tab" data-panel="sitemap">Sitemap</button>
   </div>
 
   <div id="content">
@@ -316,6 +371,11 @@ body {
       <div id="costs-stats" class="stat-row"></div>
       <div class="section-title">Month-to-Date by Service</div>
       <div id="costs-bars-wrap"><div class="loading">Loading&hellip;</div></div>
+    </div>
+
+    <!-- Sitemap panel -->
+    <div id="panel-sitemap" class="panel">
+      <div class="sitemap-grid" id="sitemap-grid"></div>
     </div>
   </div>
 </div>
@@ -726,6 +786,118 @@ body {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
   }
+
+  // ---- Sitemap ----
+
+  var SITE_ROOT = 'https://somnatek.org';
+
+  var SITEMAP = [
+    {
+      group: 'Public Pages',
+      pages: [
+        { label: 'Home',                  path: '/',                                   note: 'index.html' },
+        { label: 'About',                 path: '/about.html',                         note: '' },
+        { label: 'Sleep Disorders',       path: '/sleep-disorders.html',               note: '' },
+        { label: 'Patient Resources',     path: '/patient-resources.html',             note: '' },
+        { label: 'Research',              path: '/research.html',                      note: '' },
+        { label: 'Staff Directory',       path: '/staff.html',                         note: '' },
+        { label: 'Closure Notice',        path: '/closure-notice.html',               note: '' },
+        { label: 'Insurance & Billing',   path: '/insurance.html',                    note: '' },
+        { label: 'Patient Portal',        path: '/portal.html',                        note: '' },
+        { label: '404',                   path: '/404.html',                           note: '' },
+      ],
+    },
+    {
+      group: 'PDFs (docs/)',
+      pages: [
+        { label: 'Patient Intake Form',         path: '/docs/patient-intake-form.pdf',       note: 'SHC-INT-2009-07',  tag: 'pdf', tagLabel: 'PDF' },
+        { label: 'Sleep Study Consent',         path: '/docs/sleep-study-consent.pdf',       note: 'SHC-CST-2008-11',  tag: 'pdf', tagLabel: 'PDF' },
+        { label: 'CPAP Compliance Log',         path: '/docs/cpap-compliance-log.pdf',       note: 'SHC-CPL-2010-14',  tag: 'pdf', tagLabel: 'PDF' },
+        { label: 'Sleep Hygiene Guide',         path: '/docs/sleep-hygiene-guide.pdf',       note: 'SHC-SHG-2009-18',  tag: 'pdf', tagLabel: 'PDF' },
+        { label: 'Insurance Auth Request',      path: '/docs/insurance-auth-request.pdf',    note: 'SHC-IAR-2011-31',  tag: 'pdf', tagLabel: 'PDF' },
+        { label: '7A Internal (HTML)',          path: '/docs/7A_INTERNAL_DO_NOT_DISTRIBUTE.html', note: 'error page / pp 1–2', tag: 'hidden', tagLabel: 'hidden' },
+      ],
+    },
+    {
+      group: 'Portal (login-gated)',
+      pages: [
+        { label: 'PTX-018 Recall Index',        path: '/portal/ptx-018/',                    note: 'post-login', tag: 'hidden', tagLabel: 'hidden' },
+        { label: 'Protocol 7A (puzzle gate)',   path: '/portal/protocol-7a/',               note: 'answer: 15PTX018413', tag: 'puzzle', tagLabel: 'puzzle' },
+      ],
+    },
+    {
+      group: 'Archive (unlisted)',
+      pages: [
+        { label: '7A Supplemental Index',       path: '/archive/7A-SUPP-INDEX/',             note: 'redirect bait',    tag: 'hidden', tagLabel: 'hidden' },
+        { label: 'Correspondence (SUPP-001)',   path: '/archive/correspondence/',            note: '17 emails',        tag: 'archive', tagLabel: 'archive' },
+        { label: 'Termination Reports (SUPP-005)', path: '/archive/7A-SUPP-005/',           note: 'cipher payoff',    tag: 'archive', tagLabel: 'archive' },
+        { label: 'Ellison Report (SUPP-010)',   path: '/archive/7A-SUPP-010/',              note: '14 pages',         tag: 'archive', tagLabel: 'archive' },
+      ],
+    },
+    {
+      group: 'PTX-018 Session Pages',
+      pages: (function () {
+        var pages = [];
+        for (var i = 1; i <= 22; i++) {
+          var n = i < 10 ? '0' + i : '' + i;
+          pages.push({ label: 'Session ' + n, path: '/portal/ptx-018/session-' + n + '.html', note: '' });
+        }
+        return pages;
+      })(),
+    },
+    {
+      group: 'In-World Admin',
+      pages: [
+        { label: 'Admin Portal (in-world)',     path: '/admin/',                             note: 'tier 1/2/3',       tag: 'puzzle', tagLabel: 'puzzle' },
+        { label: 'Admin T1 unlock',             path: '/admin/?tier=1',                      note: 'HARROW-FAC',       tag: 'puzzle', tagLabel: 'puzzle' },
+        { label: 'Admin T2 unlock',             path: '/admin/?tier=2',                      note: '7A-RC-2012',       tag: 'puzzle', tagLabel: 'puzzle' },
+        { label: 'Admin T3 unlock',             path: '/admin/?tier=3',                      note: 'PLEASE WAIT TO BE RECALLED', tag: 'puzzle', tagLabel: 'puzzle' },
+      ],
+    },
+    {
+      group: 'Real Admin',
+      pages: [
+        { label: 'Internal Dashboard (this page)', path: '/site-mgmt/',                     note: 'X-Site-Key required', tag: 'real', tagLabel: 'real' },
+      ],
+    },
+    {
+      group: 'robots.txt / meta',
+      pages: [
+        { label: 'robots.txt',                  path: '/robots.txt',                         note: '' },
+        { label: 'privacy.html',                path: '/privacy.html',                       note: '' },
+      ],
+    },
+  ];
+
+  function renderSitemap() {
+    var grid = document.getElementById('sitemap-grid');
+    var html = '';
+    SITEMAP.forEach(function (section) {
+      html += '<div class="sitemap-group">';
+      html += '<div class="sitemap-group-title">' + esc(section.group) + '</div>';
+      section.pages.forEach(function (page) {
+        var href = SITE_ROOT + page.path;
+        var tagHtml = '';
+        if (page.tag) {
+          tagHtml = ' <span class="sl-tag tag-' + page.tag + '">' + esc(page.tagLabel) + '</span>';
+        }
+        var noteHtml = page.note
+          ? ' <span class="sl-note">' + esc(page.note) + '</span>'
+          : '';
+        html += '<a class="sitemap-link" href="' + esc(href) + '" target="_blank" rel="noopener">' +
+          '<span class="sl-label">' + esc(page.label) + '</span>' +
+          noteHtml +
+          tagHtml +
+          '</a>';
+      });
+      html += '</div>';
+    });
+    grid.innerHTML = html;
+  }
+
+  // Render sitemap immediately — no API call needed
+  renderSitemap();
+
 })();
 </script>
 </body>
