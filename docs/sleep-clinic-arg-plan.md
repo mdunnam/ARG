@@ -3,17 +3,20 @@
 ## Build Status
 
 **Active development started: April 28, 2026**
+**Phase 0 (Foundation) completed: April 30, 2026**
+**Phase 1 (First Puzzle Chain) core complete: April 30, 2026 — PDF generation and images pending**
 
-Current milestone: First Build — Somnatek public site + patient portal puzzle.
+Current milestone: Phase 1 live — portal puzzle, archive pages, admin system, page beacon, email responder all deployed.
 
-Stack:
-- Static HTML/CSS/JS for all in-world sites.
-- Node.js AWS Lambda for puzzle validation and portal state.
-- AWS S3 + CloudFront for hosting.
-- AWS API Gateway for puzzle endpoints.
-- AWS DynamoDB for visitor IDs and solve state.
-- AWS SES for opt-in email transmissions.
-- AWS CDK for infrastructure as code.
+Stack (as deployed):
+- Static HTML/CSS/JS for all in-world sites, served from EC2 + nginx.
+- Node.js AWS Lambda for puzzle validation, visitor tracking, email responses, and admin API.
+- AWS EC2 (t3.micro) + nginx for web hosting (no CloudFront yet — planned upgrade path).
+- AWS API Gateway HTTP API for Lambda endpoints.
+- AWS DynamoDB (`somnatek-visitors`) for visitor IDs, solve state, and milestone tracking.
+- AWS SES + Bedrock (Claude 3 Haiku) for opt-in in-world email responses.
+- Amazon Connect for inbound phone / fax line.
+- AWS CDK (TypeScript) for infrastructure as code.
 - AWS Route 53 for domains.
 
 Project structure:
@@ -98,12 +101,21 @@ Examples:
 
 **Hidden / puzzle pages:**
 
-- Archived study index
-- Redacted intake forms
-- Participant dream recall summaries
-- Staff-only protocol updates
-- Session room assignment table
-- Termination memo
+- Archived study index (`/archive/7A-SUPP-INDEX/`)
+- Correspondence archive (`/archive/correspondence/`) — 17 Ellison–Vale emails
+- Termination reports (`/archive/7A-SUPP-005/`) — five Category 7 participant files; PTX-031 active status
+- Ellison access report (`/archive/7A-SUPP-010/`) — night floor personal account
+- Redacted intake form (`/docs/7A_INTERNAL_DO_NOT_DISTRIBUTE.html`) — pages 3–4 missing
+- PTX-018 recall summaries (`/portal/ptx-018/`) — 22 session forms
+- Protocol 7A full document (`/portal/protocol-7a/`) — SHA-256 gated (answer: `15PTX018413`)
+- In-world admin portal (`/admin/`) — three credential tiers hidden in HTML comments
+
+**Live Lambda integrations:**
+
+- `POST /api/portal-login` — puzzle answer validation, VIS-XXXXX issuance, rate-limiting
+- `POST /api/beacon` — page visit tracking, milestone writes, progress recomputation
+- `GET /api/admin` — operator analytics dashboard (admin token required)
+- SES inbound `records@somnatek.org` — email classification (L1/L2/L3) and Bedrock response generation
 
 ### 2. RestWell Patient Forum
 

@@ -260,6 +260,8 @@ Release:
 
 Do not push sales aggressively during the initial launch.
 
+**Cost note:** The email responder Lambda (`lambda/email-responder`) calls Amazon Bedrock (Claude 3 Haiku) to generate in-world responses. Bedrock inference is not covered by AWS free tier. At typical ARG email volumes (tens to low hundreds of emails/month), expect ~$0.25–1.00/month in Bedrock charges. At higher volumes, model the cost before launching large promotion pushes.
+
 ## Phase 2: First Supporters
 
 Goal: Let invested players support production.
