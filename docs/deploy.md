@@ -114,7 +114,9 @@ sudo chown -R nginx:nginx /var/www/somnatek
 sudo systemctl reload nginx
 ```
 
-### Option B: Direct rsync over SSH (if key pair configured)
+### Option B: Direct rsync over SSH
+
+> **Note:** No SSH key pair is configured on the current deployment (SSM only). Use Option A unless a key pair is explicitly added later.
 
 ```powershell
 rsync -avz --delete G:\APPS\ARG\sites\somnatek\ ec2-user@YOUR_ELASTIC_IP:/var/www/somnatek/
@@ -130,17 +132,17 @@ The instance is pre-configured with four virtual hosts. Point DNS A records at t
 
 | Site | Nginx config | Web root | Intended domain |
 |---|---|---|---|
-| Somnatek | `/etc/nginx/conf.d/somnatek.conf` | `/var/www/somnatek` | `somnatekhealth.com` |
-| RestWell | `/etc/nginx/conf.d/restwell.conf` | `/var/www/restwell` | `restwellonline.net` |
-| Wexler University | `/etc/nginx/conf.d/wexler.conf` | `/var/www/wexler` | `wexler-university.edu` (fictional) |
-| Harrow County | `/etc/nginx/conf.d/harrow-county.conf` | `/var/www/harrow-county` | `harrowcounty.gov` (fictional) |
+| Somnatek | `/etc/nginx/conf.d/somnatek.conf` | `/var/www/somnatek` | `somnatek.org` |
+| RestWell | `/etc/nginx/conf.d/restwell.conf` | `/var/www/restwell` | `restwell.net` |
+| Wexler University | `/etc/nginx/conf.d/wexler.conf` | `/var/www/wexler` | `wexler.org` (fictional) |
+| Harrow County | `/etc/nginx/conf.d/harrow-county.conf` | `/var/www/harrow-county` | `harrow-county.org` (fictional) |
 
 ### Update a server_name (via SSM session)
 
 ```bash
 sudo nano /etc/nginx/conf.d/somnatek.conf
 # Change: server_name _;
-# To:     server_name somnatekhealth.com www.somnatekhealth.com;
+# To:     server_name somnatek.org www.somnatek.org;
 
 sudo nginx -t           # test config
 sudo systemctl reload nginx
@@ -155,7 +157,7 @@ After pointing DNS and verifying HTTP works:
 ```bash
 # Inside SSM session
 sudo dnf install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d somnatekhealth.com -d www.somnatekhealth.com
+sudo certbot --nginx -d somnatek.org -d www.somnatek.org
 ```
 
 Certbot will edit the nginx config and add auto-renew. Verify renewal:
@@ -225,7 +227,7 @@ Key variables used during deploy. Set in the terminal session before running CDK
 |---|---|---|
 | `AWS_PROFILE` | Select the `somnatek-arg` credentials profile | Terminal or `.env` |
 | `AWS_REGION` | Target region | `~/.aws/config` |
-| `EC2_KEY_PAIR_NAME` | Optional SSH key pair name | `.env` |
+| `EC2_KEY_PAIR_NAME` | Optional SSH key pair name — **not used in current deployment** (SSM only) | `.env` |
 | `S3_BUCKET_SOMNATEK` | S3 bucket for Somnatek site | `.env` |
 | `PUZZLE_ANSWER_SALT` | Salt for hashing puzzle answers in Lambda | `.env` (never commit filled value) |
 

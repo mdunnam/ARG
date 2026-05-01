@@ -51,7 +51,7 @@ Alternative names:
 
 ## Core Premise
 
-A defunct sleep clinic ran a longitudinal study from 2008 to 2014. The original site still exists as an abandoned patient education portal with archived pages, appointment resources, study documents, and staff biographies.
+A defunct sleep clinic ran a longitudinal study from 2008 to 2013. The original site still exists as an abandoned patient education portal with archived pages, appointment resources, study documents, and staff biographies.
 
 At first, it looks like a forgotten medical site: broken links, outdated sleep hygiene PDFs, appointment forms, and research summaries. But players slowly discover that multiple anonymous patients reported dreams with the same impossible geography: a hallway, a waiting room, a locked ward, a specific room number, and a recurring phrase written in different places.
 
@@ -252,7 +252,7 @@ The place should feel institutional but not supernatural on its face. Hospital, 
 
 **Arc:** He becomes convinced the clinic taught him how to return to the night floor while awake.
 
-### Patient 041
+### PTX-041
 
 **Role:** Redacted participant.
 
@@ -433,13 +433,15 @@ The site does not reveal a monster or final answer. It gives players a new appoi
 
 **Location:** Recovered staff portal page.
 
-**Input:** Patient 041's full reconstructed session path.
+**Input:** PTX-041's full reconstructed session path.
 
 **Mechanic:** Combine dates, rooms, and dream-feature order.
 
 **Reward:** Season 1 ending page.
 
 ## Site Structure
+
+> **Note:** The following tree is an early concept sketch. It is non-canonical. Actual deployed paths are in `docs/roadmap.md`.
 
 ```text
 somnatek.example
@@ -628,9 +630,11 @@ This gives players a strong opening without requiring the entire ARG to be compl
 
 Add / reveal:
 
-- RestWell forum.
-- Deleted thread puzzle.
-- Patient 018 trail.
+- Additional Somnatek archive depth (SUPP-005, correspondence).
+- Fax line activation.
+- Patient 018 trail deepening.
+
+> **Note:** RestWell is no longer a Week 2 drop. It is gated behind the Admin Tier 2 credential (`7A-RC-2012`), discoverable via `admin/index.html` HTML source. It unlocks at mid-game, not on a calendar schedule.
 
 ### Week 3 Unlock
 
@@ -664,8 +668,8 @@ Use static hosting:
 
 Use separate domains or subdomains for believability:
 
-- `somnatekhealth.com`
-- `forum.restwellonline.net`
+- `somnatek.org`
+- `restwell.net`
 - `archive.wexler-university.edu` using a fictional university name.
 - `records.harrowcounty.gov` using a fictional county.
 
@@ -800,9 +804,15 @@ This section documents how all live components connect, how players move through
        Level 2: research line "monitored periodically."
        Level 3: "your recall window is open."
                             │
-               finds RestWell forum (week 2+)
+               finds Admin Tier 2 HTML source
                             ▼
-          [restwell.org — patient support forum]
+          [admin/index.html — credential: 7A-RC-2012]
+          HTML source contains staff annotation:
+          restwell.net/forum — forum address
+                            │
+               navigates to RestWell
+                            ▼
+          [restwell.net — patient support forum]
           Discovers independent patient reports.
           Cross-references usernames with PTX IDs.
           Finds partially-deleted thread by MarauderBlue.
@@ -819,7 +829,7 @@ This section documents how all live components connect, how players move through
                             ▼
      [harrow-county.org — county records portal]
      Dorsal Health Holdings LLC registered
-     two months after the patient file transfer.
+     six weeks after the patient file transfer.
      Registered agent: Edwin Vale.
      One document on file.
 ```
@@ -865,7 +875,7 @@ This section documents how all live components connect, how players move through
 
 **How it works:**
 
-1. Player calls the 740 number
+1. Player calls `(404) 551-4145` (main clinic line)
 2. Amazon Connect receives the call and invokes `lambda/phone-responder` with `phase=greeting`
 3. Lambda hashes the caller's phone number and retrieves their level from DynamoDB
 4. Lambda returns level-appropriate greeting SSML
@@ -894,10 +904,10 @@ This section documents how all live components connect, how players move through
 **How it works:**
 
 1. Player enters a PTX-### participant ID
-2. Form POSTs to API Gateway → `lambda/portal-login` (to be built)
-3. Lambda hashes the ID, checks DynamoDB solve state table
+2. Form POSTs to API Gateway → `lambda/portal-login` (deployed — `SomnatekPortalStack`)
+3. Lambda hashes the ID against `PUZZLE_ANSWER_SALT`, checks `somnatek-visitors` DynamoDB table
 4. Returns the appropriate archived recall summary page
-5. Records the player's VIS-##### visitor ID in DynamoDB on first access
+5. Records the player's `VIS-XXXXX` visitor ID in DynamoDB on first access; stores in `localStorage` as `sntk_vis`
 
 **Visitor IDs** are assigned on first portal access and used to personalize email content in later stages. Format: `VIS-XXXXX` (five-digit zero-padded).
 
@@ -907,11 +917,13 @@ This section documents how all live components connect, how players move through
 
 All state lives in three tables:
 
-| Table | Env var | Purpose |
-|---|---|---|
-| `somnatek-visitors` | `DYNAMODB_TABLE_VISITORS` | Email sender state (`EMAIL#hash`), phone caller state (`PHONE#hash`), portal visitor records (`VIS#id`) |
-| `somnatek-solve-state` | `DYNAMODB_TABLE_SOLVE_STATE` | Which puzzles a given visitor ID has solved and what they have unlocked |
-| `somnatek-content-ledger` | `DYNAMODB_TABLE_CONTENT_LEDGER` | Content drop tracking: `drafted → scheduled → released → discovered → superseded → removed` |
+| Table | Env var | Purpose | Status |
+|---|---|---|---|
+| `somnatek-visitors` | `DYNAMODB_TABLE_VISITORS` | All visitor state: email sender (`EMAIL#hash`), phone caller (`PHONE#hash`), portal visitors (`VISITOR#id`), milestones, percentComplete, level | ✅ Deployed |
+| `somnatek-solve-state` | `DYNAMODB_TABLE_SOLVE_STATE` | (Planned) separate per-visitor puzzle progress table | ⬜ Planned |
+| `somnatek-content-ledger` | `DYNAMODB_TABLE_CONTENT_LEDGER` | (Planned) content drop release state | ⬜ Planned |
+
+**Current deployment uses a single-table design.** Solve state is stored as attributes on `VISITOR#` records in `somnatek-visitors`. The separate solve-state and content-ledger tables are planned but not yet deployed.
 
 ---
 
@@ -972,12 +984,12 @@ aws ssm send-command --instance-ids "i-081a7e7e3c65b1f5d" `
 |---|---|---|---|
 | Somnatek site hosting | EC2 + nginx | SomnatekEc2Stack | Deployed |
 | Site files | S3 `somnatek-site` | Manual | Deployed |
-| Email inbound | SES receipt rule + S3 | SomnatekEmailStack | Ready to deploy |
-| Email response | Lambda + Bedrock | SomnatekEmailStack | Ready to deploy |
-| Phone line | Amazon Connect | SomnatekPhoneStack | Ready to deploy |
-| Phone routing | Lambda + Polly | SomnatekPhoneStack | Ready to deploy |
-| Visitor state | DynamoDB | SomnatekEmailStack | Ready to deploy |
-| Portal login | Lambda + API Gateway | Not yet built | Planned |
+| Email inbound | SES receipt rule + S3 | SomnatekEmailStack | ✅ Deployed |
+| Email response | Lambda + Bedrock | SomnatekEmailStack | ✅ Deployed |
+| Phone line | Amazon Connect | SomnatekPhoneStack | ✅ Deployed |
+| Phone routing | Lambda + Polly | SomnatekPhoneStack | ✅ Deployed |
+| Visitor state | DynamoDB | SomnatekEmailStack | ✅ Deployed |
+| Portal login | Lambda + API Gateway | SomnatekPortalStack | ✅ Deployed |
 | RestWell forum | EC2 or S3 + nginx | Not yet built | Week 2 |
 | Wexler archive | EC2 or S3 + nginx | Not yet built | Week 3 |
 | Harrow County records | EC2 or S3 + nginx | Not yet built | Week 4 |

@@ -1,6 +1,6 @@
 # Somnatek ARG — Documentation Consistency Audit
 
-**Audited:** May 1, 2026
+**Audited:** May 1, 2026 — updated May 1, 2026 (full fix pass)
 **Scope:** All files in `docs/` cross-checked against each other, deployed code, and canonical lore constants.
 **Method:** Full read of all nine docs + cross-reference against deployed HTML, Lambda, and admin HTML.
 
@@ -23,12 +23,12 @@
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| R-01 | Phase 2 (RestWell) status is "Not started" — RestWell is **built** (`sites/restwell/` is complete). It is gated from discovery, not unbuilt. Status should reflect this. | 🟡 | Change status to "Complete — gated" with note on discovery path |
-| R-02 | Phase 2 description says RestWell is "discoverable through a Somnatek staff directory forum signature (cached)" — this is the OLD discovery path. Discovery is now via Admin Tier 2 HTML comment (`admin/index.html` line 351: `restwell.net/forum`). **Note:** The "150+ portal points" gate referenced in earlier audit notes is not code-enforced — Admin Tier 2 is credential-gated only (requires finding `7A-RC-2012`). There is no hard point threshold in deployed code. | 🔴 | Update Phase 2 discovery mechanism. Remove any references to a 150-point threshold. |
+| R-01 | Phase 2 (RestWell) status is "Not started" — RestWell is **built** (`sites/restwell/` is complete). It is gated from discovery, not unbuilt. Status should reflect this. | ✅ | Changed to "⚠️ Site built, gated" with discovery path note |
+| R-02 | Phase 2 description says RestWell is "discoverable through a Somnatek staff directory forum signature (cached)" — this is the OLD discovery path. Discovery is now via Admin Tier 2 HTML comment (`admin/index.html` line 351: `restwell.net/forum`). **Note:** The "150+ portal points" gate referenced in earlier audit notes is not code-enforced — Admin Tier 2 is credential-gated only (requires finding `7A-RC-2012`). There is no hard point threshold in deployed code. | ✅ | Phase 2 description updated to Admin Tier 2 discovery path. 150-point threshold claim removed. |
 | R-03 | Phase 1 blockers still show "PDFs not generated; images placeholder; fax IVR untested" — check if PDFs have been generated since April 30 | 🟡 | Verify and update blockers |
 | R-04 | Milestone table references `restwell_found` (40 pts) as "future" — correct, still future, but note it now fires when player visits forum discovered via Admin Tier 2 | 🟡 | Add context note |
-| R-05 | `www.somnatek.org` is marked ✅ complete in Phase 0 checklist (line 46: "www.somnatek.org DNS alias — cert and nginx both cover www") but also appears as an unchecked item in the launch checklist section lower in the same doc. Contradicts itself. (INC-015) | 🟡 | Remove duplicate unchecked item from launch checklist, or confirm Phase 0 entry is authoritative |
-| R-06 | Phase 5 (Visitor Classification) marked "Not started" — but email Level 1/2/3 classification is **live right now** via `lambda/email-responder`. The disconnect is that Phase 5 refers to the opt-in form, VIS upgrade, and SMS path — not the passive inbound email system. This distinction is not documented anywhere. (INC-008) | 🟡 | Add note: "Email inbound classification is live (passive). Formal opt-in flow, SMS, and portal state escalation remain not started." |
+| R-05 | `www.somnatek.org` is marked ✅ complete in Phase 0 checklist (line 46: "www.somnatek.org DNS alias — cert and nginx both cover www") but also appears as an unchecked item in the launch checklist section lower in the same doc. Contradicts itself. (INC-015) | ✅ | Launch checklist item changed to checked with note "(confirmed — Phase 0 checklist)" |
+| R-06 | Phase 5 (Visitor Classification) marked "Not started" — but email Level 1/2/3 classification is **live right now** via `lambda/email-responder`. The disconnect is that Phase 5 refers to the opt-in form, VIS upgrade, and SMS path — not the passive inbound email system. This distinction is not documented anywhere. (INC-008) | ✅ | Phase 5 updated to "⚠️ Partial" with note: passive inbound email classification live; formal opt-in/SMS/VIS upgrade not started. |
 
 ---
 
@@ -40,22 +40,22 @@ This is the original design doc written before deployment. It has the most incon
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| P-01 | "longitudinal study from **2008 to 2014**" — **WRONG**. Canonical: study ran 2008–2013. Clinic closed 2014. | 🔴 | Change to "2008 to 2013" |
-| P-02 | "The study began with **forty-two** patients" — **WRONG**. Canonical: 47. (Fixed in story-breakdown.md and admin HTML, not fixed here.) | 🔴 | Change to "forty-seven" |
-| P-03 | Dorsal Health Holdings registered "**two months** after the patient file transfer" — **WRONG**. Canonical: six weeks (registered 2014-11-03, ~6 weeks after Sept 18 closure). | 🔴 | Change to "six weeks" |
-| P-04 | Phase 2 RestWell: "Discoverable through a Somnatek staff directory forum signature (cached)" — **WRONG**. Discovery is now via Admin Tier 2 HTML source (`admin/index.html`). There is no code-enforced point threshold — access requires finding and entering credential `7A-RC-2012`. | 🔴 | Update to: discovered via Admin Tier 2 HTML comment in admin/index.html |
-| P-05 | Week 2 launch plan: "Add / reveal RestWell forum" — RestWell is now gated behind mid-game milestone, not a Week 2 drop. | 🔴 | Update launch timeline |
-| P-06 | Player journey diagram: "finds RestWell forum (week 2+)" — same issue as P-05. | 🔴 | Update diagram |
+| P-01 | "longitudinal study from **2008 to 2014**" — **WRONG**. Canonical: study ran 2008–2013. Clinic closed 2014. | ✅ | Changed to "2008 to 2013" |
+| P-02 | ~~"The study began with **forty-two** patients" — WRONG. Canonical: 47.~~ **FALSE POSITIVE.** The text "forty-two" does not appear in `sleep-clinic-arg-plan.md`. The participant count is not stated in this doc. | ✅ | No fix needed |
+| P-03 | Dorsal Health Holdings registered "**two months** after the patient file transfer" — **WRONG**. Canonical: six weeks (registered 2014-11-03, ~6 weeks after Sept 18 closure). | ✅ | Changed to "six weeks" |
+| P-04 | Phase 2 RestWell: "Discoverable through a Somnatek staff directory forum signature (cached)" — **WRONG**. Discovery is now via Admin Tier 2 HTML source (`admin/index.html`). There is no code-enforced point threshold — access requires finding and entering credential `7A-RC-2012`. | ✅ | Updated to Admin Tier 2 discovery. No point threshold referenced. |
+| P-05 | Week 2 launch plan: "Add / reveal RestWell forum" — RestWell is now gated behind mid-game milestone, not a Week 2 drop. | ✅ | Week 2 section rewritten; RestWell note added explaining gate |
+| P-06 | Player journey diagram: "finds RestWell forum (week 2+)" — same issue as P-05. | ✅ | Diagram updated to Admin Tier 2 → RestWell path |
 | P-07 | Escalation arc table Stage 6: "Reach RestWell" — the stage number/position is fine, but the method should reference the Admin Tier 2 discovery path. | 🟡 | Add parenthetical note |
-| P-08 | Three DynamoDB tables listed (`somnatek-visitors`, `somnatek-solve-state`, `somnatek-content-ledger`) — actual deployment uses **one table**: `somnatek-visitors`. Solve state is stored as attributes on VIS records, not a separate table. | 🟡 | Update to reflect single-table design |
+| P-08 | Three DynamoDB tables listed (`somnatek-visitors`, `somnatek-solve-state`, `somnatek-content-ledger`) — actual deployment uses **one table**: `somnatek-visitors`. Solve state is stored as attributes on VIS records, not a separate table. | ✅ | Table section updated: `somnatek-visitors` marked Deployed; other two marked Planned with explanation |
 | P-09 | Site structure uses `somnatek.example`, `restwell.example` placeholder domains — should reference real deployed domains `somnatek.org`, `restwell.net` | 🟡 | Update domain names |
-| P-10 | "Lambda endpoints like /api/portal-login **to be built**" — **all Lambda endpoints are built and deployed**. | 🟡 | Remove "to be built" language throughout |
-| P-11 | Patient 041 referred to as "Patient 041" throughout — canonical ID format is `PTX-041`. | 🟡 | Standardize to PTX-041 |
+| P-10 | "Lambda endpoints like /api/portal-login **to be built**" — **all Lambda endpoints are built and deployed**. | ✅ | Changed to "deployed — SomnatekPortalStack"; infrastructure table updated to Deployed |
+| P-11 | Patient 041 referred to as "Patient 041" throughout — canonical ID format is `PTX-041`. | ✅ | Changed to PTX-041 |
 | P-12 | Uses "dream" language in post-2011 in-world planning contexts. Not in-world copy, so not a hard violation, but inconsistent with lore rule: "Never call it a dream in internal documents after 2011." | 🟡 | Replace "dream" with "indexed space" / "night floor" in post-2011 references |
 | P-13 | "Puzzle 1: Participant ID found in a **redacted PDF**" — actual implementation: IDs discovered through PDF form number cipher, admin HTML, and portal table footnote (not imperfect redaction). | 🟡 | Update puzzle description to match as-built mechanic |
-| P-14 | "Player calls the **740 number**" in the player journey / phone system section — **WRONG**. No 740 number exists in this deployment. Canonical main clinic line is `(404) 551-4145`. (INC-005) | 🔴 | Replace "740 number" with `(404) 551-4145` |
-| P-15 | Same doc says portal is deployed (line 9: "portal puzzle... deployed") and later says `lambda/portal-login` is "to be built" and portal login is "Not yet built" (lines ~897, ~980). This is an internal contradiction in the same file, not just stale language. (INC-003) | 🔴 | Update all lower "How it works" and infrastructure sections to reflect deployed portal |
-| P-16 | Site tree at lines ~445–484 uses `.example` placeholder domains (`somnatek.example`, `restwell.example`) alongside current deployed paths elsewhere in the same doc. Should be labeled as "early concept — non-canonical" or replaced with actual paths. (LOW-004) | 🟡 | Label the .example tree as "early concept sketch" or update to actual deployed paths from roadmap.md |
+| P-14 | "Player calls the **740 number**" in the player journey / phone system section — **WRONG**. No 740 number exists in this deployment. Canonical main clinic line is `(404) 551-4145`. (INC-005) | ✅ | Changed to `(404) 551-4145` |
+| P-15 | Same doc says portal is deployed (line 9: "portal puzzle... deployed") and later says `lambda/portal-login` is "to be built" and portal login is "Not yet built" (lines ~897, ~980). This is an internal contradiction in the same file, not just stale language. (INC-003) | ✅ | Infrastructure table updated; "to be built" language removed |
+| P-16 | Site tree at lines ~445–484 uses `.example` placeholder domains (`somnatek.example`, `restwell.example`) alongside current deployed paths elsewhere in the same doc. Should be labeled as "early concept — non-canonical" or replaced with actual paths. (LOW-004) | ✅ | Labeled as early concept sketch; note added pointing to roadmap.md for canonical paths |
 
 ---
 
@@ -65,9 +65,9 @@ This is the original design doc written before deployment. It has the most incon
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| S-01 | Act 5: active recall manifest shows entries "below **PTX-047**" with VIS series starting at "**VIS-001**" — canonical VIS format is `VIS-XXXXX` (5-digit zero-padded), so it should be `VIS-00001`. | 🔴 | Change "VIS-001" to "VIS-00001" |
-| S-02 | Act 4 (The Forum) line 209: **"Players find it through a Somnatek forum signature embedded in a cached version of the staff directory"** — this is the OLD discovery path. RestWell is now discovered via Admin Tier 2 HTML source. Story-breakdown.md still describes the old path and has not been updated. Note: `p_holloway` is referenced in RestWell site files but does **not** appear in story-breakdown.md — the claim that this doc correctly describes p_holloway was a false positive. | 🔴 | Update Act 4 to describe Admin Tier 2 discovery path. Add p_holloway reference if desired. |
-| S-03 | Lines 103 and 229: **"two months after Somnatek's closure filing"** — **WRONG**. Canonical is six weeks (Dorsal registered 2014-11-03, ~6 weeks after Sept 18 closure). Was incorrectly marked clean in previous audit pass. | 🔴 | Change both instances of "two months" to "six weeks" |
+| S-01 | Act 5: active recall manifest shows entries "below **PTX-047**" with VIS series starting at "**VIS-001**" — canonical VIS format is `VIS-XXXXX` (5-digit zero-padded), so it should be `VIS-00001`. | ✅ | Changed to "VIS-00001" |
+| S-02 | Act 4 (The Forum) line 209: **"Players find it through a Somnatek forum signature embedded in a cached version of the staff directory"** — this is the OLD discovery path. RestWell is now discovered via Admin Tier 2 HTML source. Story-breakdown.md still describes the old path and has not been updated. Note: `p_holloway` is referenced in RestWell site files but does **not** appear in story-breakdown.md — the claim that this doc correctly describes p_holloway was a false positive. | ✅ | Act 4 updated to describe Admin Tier 2 discovery path. |
+| S-03 | Lines 103 and 229: **"two months after Somnatek's closure filing"** — **WRONG**. Canonical is six weeks (Dorsal registered 2014-11-03, ~6 weeks after Sept 18 closure). Was incorrectly marked clean in previous audit pass. | ✅ | Both instances changed to "six weeks" |
 | S-04 | Participant count: "forty-seven patients" — ✅ correct after this session's fix. | 🟢 | Clean |
 | S-05 | PTX-047 as "the last PTX-series entry" — ✅ consistent with admin HTML (47 enrolled, VIS series starts after). | 🟢 | Clean |
 | S-06 | RestWell discovery path in Act 4: correctly describes Admin Tier 2 HTML source annotation — ✅ updated this session. | 🟢 | Clean |
@@ -102,13 +102,13 @@ This document requires the most significant rewrite of any file in the docs fold
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| M-01 | Patreon tier structure is wrong. Doc shows $3–5 Observer / $8–12 Records / $20–30 Archive (3 tiers). `scripts/patreon-observer-tier.txt` documents only a **single $5 Observer tier** — this is the only tier with committed documentation. A 6-tier structure ($3 Supporter / $5 Observer / $8 Insider / $15 Investigator / $30 Director's Circle / $100 Patron) was planned in session but is not in any script or committed file beyond this conversation. The monetization doc should be updated to reflect what is actually documented: the $5 Observer tier is confirmed; additional tiers are proposed but not finalized. | 🔴 | Rewrite Patreon section to accurately reflect: $5 Observer tier confirmed; additional tiers proposed (list them) but not yet documented in committed files |
-| M-02 | "RestWell forum sticker pack" listed on **public merch** — RestWell is a mid-game gated discovery. Advertising it on the public store spoils its existence for new players. | 🔴 | Remove from public merch entirely |
-| M-03 | **No gated/unlockable merch system** exists anywhere in this document. The PTX-047 shirt, Active Recall designation card, RECALLED print, etc. are completely absent. | 🔴 | Add full gated merch section (5 tiers: public, Tier 1–4 portal-milestone unlocks) |
-| M-04 | **No mention of VIS IDs, portal milestones, or unlock codes** — the live game's progression system isn't referenced once. | 🔴 | Add unlock code mechanic section |
-| M-05 | Phase 1 description is bare-bones ("first hidden puzzle layer, email signup"). Actual Phase 1 is fully built: portal, admin tiers, fax line, email responder, RestWell, 25-drop content ledger. | 🟡 | Update Phase 1 description to reflect live state |
-| M-06 | No mention that RestWell branding should NOT appear on public merch (it's a late-game discovery). | 🔴 | Add to Design Rules and Do/Don't section |
-| M-07 | Phase timeline does not reference Stage 3 trigger as a merch unlock moment. The RECALLED print (413 copies, limited forever) should be tied to Stage 3. | 🟡 | Add Stage 3 to monetization timeline |
+| M-01 | Patreon tier structure is wrong. Doc shows $3–5 Observer / $8–12 Records / $20–30 Archive (3 tiers). `scripts/patreon-observer-tier.txt` documents only a **single $5 Observer tier** — this is the only tier with committed documentation. A 6-tier structure ($3 Supporter / $5 Observer / $8 Insider / $15 Investigator / $30 Director's Circle / $100 Patron) was planned in session but is not in any script or committed file beyond this conversation. The monetization doc should be updated to reflect what is actually documented: the $5 Observer tier is confirmed; additional tiers are proposed but not finalized. | ✅ | Patreon section rewritten: $5 Observer confirmed; additional tiers listed as proposed/not finalized |
+| M-02 | "RestWell forum sticker pack" listed on **public merch** — RestWell is a mid-game gated discovery. Advertising it on the public store spoils its existence for new players. | ✅ | Removed from public merch. Added to Tier 4 gated merch section only. |
+| M-03 | **No gated/unlockable merch system** exists anywhere in this document. The PTX-047 shirt, Active Recall designation card, RECALLED print, etc. are completely absent. | ✅ | Added Section 2a: Gated/Unlock-Based Merch with 5-tier table (Public, Tier 1–4) |
+| M-04 | **No mention of VIS IDs, portal milestones, or unlock codes** — the live game's progression system isn't referenced once. | ✅ | Section 2a added VIS ID / milestone / unlock code mechanic |
+| M-05 | Phase 1 description is bare-bones ("first hidden puzzle layer, email signup"). Actual Phase 1 is fully built: portal, admin tiers, fax line, email responder, RestWell, 25-drop content ledger. | ✅ | Phase 1 section rewritten to reflect live state |
+| M-06 | No mention that RestWell branding should NOT appear on public merch (it's a late-game discovery). | ✅ | Added to Section 2a design rules and Do/Don't section |
+| M-07 | Phase timeline does not reference Stage 3 trigger as a merch unlock moment. The RECALLED print (413 copies, limited forever) should be tied to Stage 3. | ✅ | Phase 3 section now references Stage 3 `recalled_active` trigger and RECALLED print |
 
 **Overall verdict: Full rewrite required. Do not make incremental edits.**
 
@@ -120,13 +120,13 @@ This document requires the most significant rewrite of any file in the docs fold
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| D-01 | Domain table shows Somnatek intended domain as "**somnatekhealth.com**" — actual live domain is `somnatek.org`. | 🔴 | Update all references to somnatek.org |
-| D-02 | Domain table shows RestWell as "**restwellonline.net**" — planned domain is `restwell.net`. | 🟡 | Update to restwell.net |
+| D-01 | Domain table shows Somnatek intended domain as "**somnatekhealth.com**" — actual live domain is `somnatek.org`. | ✅ | Updated to somnatek.org |
+| D-02 | Domain table shows RestWell as "**restwellonline.net**" — planned domain is `restwell.net`. | ✅ | Updated to restwell.net |
 | D-03 | All instance ID references are placeholder "**i-YOURINSTANCEID**" — actual instance ID is `i-081a7e7e3c65b1f5d`. (This may be intentional to avoid committing infrastructure IDs publicly.) | 🟡 | Decision needed: replace or leave as placeholder with comment |
-| D-04 | HTTPS/certbot section uses "somnatekhealth.com" in example commands — should be somnatek.org. | 🔴 | Update certbot commands |
-| D-05 | "Option B: Direct rsync over SSH (if key pair configured)" — no key pair is configured on this deployment (SSM only). This section may mislead operators. | 🟡 | Add note: "No key pair is configured on the current deployment. Use Option A (S3 sync via SSM)." |
-| D-06 | `EC2_KEY_PAIR_NAME` listed in environment variables table — not used in current deployment (SSM only). | 🟡 | Remove or annotate as unused |
-| D-07 | Several sections in `deploy.md` reference `records@somnatek.org` correctly, but `tech-stack.md` uses `records@somnatekhealth.com` as the SES inbound address. One of these is wrong — both docs should match the verified SES domain. (INC-002) | 🔴 | Confirm canonical SES address and update `tech-stack.md` to match |
+| D-04 | HTTPS/certbot section uses "somnatekhealth.com" in example commands — should be somnatek.org. | ✅ | Updated certbot commands to somnatek.org |
+| D-05 | "Option B: Direct rsync over SSH (if key pair configured)" — no key pair is configured on this deployment (SSM only). This section may mislead operators. | ✅ | Added note: "No SSH key pair configured on current deployment. Use Option A." |
+| D-06 | `EC2_KEY_PAIR_NAME` listed in environment variables table — not used in current deployment (SSM only). | ✅ | Annotated as "not used in current deployment (SSM only)" |
+| D-07 | Several sections in `deploy.md` reference `records@somnatek.org` correctly, but `tech-stack.md` uses `records@somnatekhealth.com` as the SES inbound address. One of these is wrong — both docs should match the verified SES domain. (INC-002) | ✅ | tech-stack.md updated to `records@somnatek.org` |
 | D-08 | Phone/fax operational status across deploy.md, tech-stack.md, roadmap, and audit are contradictory: some say "live," some say "untested," some say "ready to deploy." No section provides a clean split of what has been confirmed working end-to-end. (INC-004) | 🟡 | Add a phone/fax status matrix: Lambda exists / Connect stack deployed / IVR tested / fax audio played live |
 
 ---
@@ -137,13 +137,13 @@ This document requires the most significant rewrite of any file in the docs fold
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| T-01 | Nginx virtual hosts table shows RestWell domain as "**restwellonline.net**" — planned/deployed domain is `restwell.net`. | 🔴 | Update to restwell.net |
+| T-01 | Nginx virtual hosts table shows RestWell domain as "**restwellonline.net**" — planned/deployed domain is `restwell.net`. | ✅ | Updated to restwell.net |
 | T-02 | "No CloudFront yet — planned upgrade path" mentioned in plan.md but tech-stack.md does not reflect this. CloudFront is described as a future consideration in plan.md but the CDK stacks (`SomnatekPortalStack`, `SomnatekBeaconStack`) are deployed as HTTP API Gateways, not CloudFront. Clarify CloudFront status. | 🟡 | Add note on current architecture (EC2 + nginx, no CloudFront for static serving) |
 | T-03 | S3 bucket listed as deploy origin — consistent with actual use. ✅ | 🟢 | Clean |
 | T-04 | Overall stack description is accurate and matches deployed reality. ✅ | 🟢 | Clean |
-| T-05 | `tech-stack.md` lists SES inbound email address as `records@somnatekhealth.com` — **WRONG**. Canonical live address confirmed in plan.md, deploy.md, and roadmap is `records@somnatek.org`. (INC-002) | 🔴 | Update tech-stack.md SES section to `records@somnatek.org` |
-| T-06 | Wexler and Harrow County domain examples vary across docs: `wexler.edu` (roadmap), `wexler-university.edu` (deploy.md), `wexler.org` (plan.md); `harrowcounty.gov` (roadmap/deploy), `harrow-county.org` (plan.md). The `.edu` and `.gov` variants look like real institution impersonation which the security rules explicitly prohibit. (INC-011) | 🔴 | Pick canonical fictional registrable domains for each. Do not use .edu or .gov as player-facing domains. Suggest: `wexler-univ.edu` → `wexleruniversity.net` or similar. |
-| T-07 | Nginx virtual hosts section lists four web roots as if all four in-world sites are in production. Only `somnatek.org` is production. This misrepresents the current state. (LOW-001) | 🟡 | Add note: nginx is provisioned for four virtual hosts; only Somnatek has production content currently |
+| T-05 | `tech-stack.md` lists SES inbound email address as `records@somnatekhealth.com` — **WRONG**. Canonical live address confirmed in plan.md, deploy.md, and roadmap is `records@somnatek.org`. (INC-002) | ✅ | Updated to `records@somnatek.org` |
+| T-06 | Wexler and Harrow County domain examples vary across docs: `wexler.edu` (roadmap), `wexler-university.edu` (deploy.md), `wexler.org` (plan.md); `harrowcounty.gov` (roadmap/deploy), `harrow-county.org` (plan.md). The `.edu` and `.gov` variants look like real institution impersonation which the security rules explicitly prohibit. (INC-011) | ✅ | Canonicalized to `wexler.org` and `harrow-county.org` across deploy.md and tech-stack.md. |
+| T-07 | Nginx virtual hosts section lists four web roots as if all four in-world sites are in production. Only `somnatek.org` is production. This misrepresents the current state. (LOW-001) | ✅ | Added note: nginx provisioned for four virtual hosts; only Somnatek has production content |
 
 ---
 
@@ -164,13 +164,13 @@ This document requires the most significant rewrite of any file in the docs fold
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| A-01 | Rabbit holes section: "Lena Ortiz HTML comment (RestWell URL) \| staff.html \| ✅" — **WRONG after today's session**. RestWell URL and credentials were removed from staff.html. Discovery vector is now Admin Tier 2 HTML source. | 🔴 | Update rabbit hole entry |
+| A-01 | Rabbit holes section: "Lena Ortiz HTML comment (RestWell URL) \| staff.html \| ✅" — **WRONG after today's session**. RestWell URL and credentials were removed from staff.html. Discovery vector is now Admin Tier 2 HTML source. | ✅ | Updated to: Admin Tier 2 HTML source (`admin/index.html` line 351) |
 | A-02 | ~~Security note about Math.random() in VIS ID generation~~ — **FALSE POSITIVE**. `lambda/portal-login/index.js` already uses `crypto.randomBytes()` (confirmed at line 31). The `Math.random()` that exists is in `lambda/email-responder/index.js` line 168 for generating a fake cosmetic in-world reference number (`DHHRMS-XXXXXX-2014`). This is not a security issue — it is an in-world display string with no security implications. The audit note in `audit.md` is stale and should be removed. | ✅ | Remove the security note from `audit.md` — it is no longer accurate |
-| A-03 | Phase status column: privacy.html marked ❌ "not built" — check current state | 🟡 | Verify and update |
-| A-04 | Audit date "April 30, 2026" — needs updating after today's changes | 🟡 | Update date and add May 1 change notes |
-| A-05 | Milestone total inconsistency: `audit.md` Phase 1 total says **275 pts**; `roadmap.md` milestone table says released = **245 pts**, all-time = **315 pts**. These three numbers don't reconcile. The `fax_decoded` milestone (15 pts) being counted or not may explain part of the gap, but the full discrepancy is unexplained. (INC-014) | 🔴 | Recalculate from one source of truth (roadmap milestone table is most detailed). Update both files to match. |
-| A-06 | `/admin/` described throughout audit as the player-facing solve path, but there is now also `/site-mgmt/` as the real operator admin. Older audit summaries could confuse the two surfaces. (INC-017) | 🟡 | Add a clear note to audit: `/admin/index.html` = in-world fiction (player solve path); `/site-mgmt/index.html` + `/api/admin` = real operator tooling (X-Site-Key protected) |
-| A-07 | `7A_INTERNAL_DO_NOT_DISTRIBUTE` is described in audit as an HTML page (`audit.md:183`: `.html`), but `sleep-clinic-arg-story-breakdown.md` describes players **downloading a PDF** with that filename. The PDF does not exist — only the HTML stand-in is live. Story-facing docs should not claim players download a PDF until one exists. (INC-013) | 🔴 | Add audit note: HTML version is live stand-in. PDF is pending. Story-breakdown.md must be updated to not say "PDF download" until PDF is generated. |
+| A-03 | Phase status column: privacy.html marked ❌ "not built" — check current state | ✅ | Marked ✅: built and synced to S3 on May 1, 2026 |
+| A-04 | Audit date "April 30, 2026" — needs updating after today's changes | ✅ | Updated to May 1, 2026 |
+| A-05 | Milestone total inconsistency: `audit.md` Phase 1 total says **275 pts**; `roadmap.md` milestone table says released = **245 pts**, all-time = **315 pts**. These three numbers don't reconcile. Source of truth is the code: MILESTONES array in `lambda/portal-login/index.js`. | ✅ | Recalculated from code. Released = **330 pts** (13 milestones). All-time = **445 pts** (including `recalled_active` 75 pts and `wexler_found` 40 pts). Updated in audit.md. |
+| A-06 | `/admin/` described throughout audit as the player-facing solve path, but there is now also `/site-mgmt/` as the real operator admin. Older audit summaries could confuse the two surfaces. (INC-017) | ✅ | Admin portal row updated: `/admin/index.html` = in-world fiction (player solve path); `/site-mgmt/` + `/api/admin` = real operator tooling |
+| A-07 | `7A_INTERNAL_DO_NOT_DISTRIBUTE` is described in audit as an HTML page (`audit.md:183`: `.html`), but `sleep-clinic-arg-story-breakdown.md` describes players **downloading a PDF** with that filename. The PDF does not exist — only the HTML stand-in is live. Story-facing docs should not claim players download a PDF until one exists. (INC-013) | ✅ | audit.md rabbit holes entry updated to reference `.html` stand-in. story-breakdown.md note: needs separate fix in Act 3 section when PDF is generated. |
 
 ---
 
@@ -210,23 +210,22 @@ Conflicts where two or more docs say different things about the same fact:
 
 | Fact | Correct value | Wrong in |
 |---|---|---|
-| Study period | 2008–2013 (active); closure process 2013–2014; public closure Sept 18, 2014 | `sleep-clinic-arg-plan.md` says "2008 to 2014" |
-| Participant count | 47 | `sleep-clinic-arg-plan.md` says "forty-two" |
-| Dorsal registration timing | Six weeks after closure | `sleep-clinic-arg-plan.md` player journey says "two months" |
-| RestWell domain | **Unresolved** — 4 variants exist | `tech-stack.md` / `deploy.md` say "restwellonline.net"; `plan.md` also uses "restwell.org" and "forum.restwellonline.net"; `roadmap.md` / `story-breakdown.md` say "restwell.net" |
-| Wexler domain | **Unresolved** — pick a non-.edu fictional domain | `roadmap.md` uses `wexler.edu`; `deploy.md` uses `wexler-university.edu`; `plan.md` uses `wexler.org` |
-| Harrow County domain | **Unresolved** — pick a non-.gov fictional domain | `roadmap.md` / `deploy.md` use `harrowcounty.gov`; `plan.md` uses `harrow-county.org` |
-| RestWell discovery path | Admin Tier 2 HTML source, 150+ pts | `roadmap.md`, `sleep-clinic-arg-plan.md`, `audit.md` all reference old staff.html path |
-| Somnatek main domain | `somnatek.org` | `deploy.md` uses `somnatekhealth.com` throughout |
-| SES inbound email address | `records@somnatek.org` | `tech-stack.md` uses `records@somnatekhealth.com` |
-| Canonical phone number | `(404) 551-4145` (main); `(404) 671-9774` (fax) | `sleep-clinic-arg-plan.md` says "the 740 number" |
-| VIS ID format in manifest | `VIS-00001` (5-digit zero-padded) | `sleep-clinic-arg-story-breakdown.md` Act 5 says "VIS-001" |
-| 7A internal artifact type | HTML stand-in live; PDF not yet generated | `sleep-clinic-arg-story-breakdown.md` says players download a PDF |
-| Milestone total (Phase 1) | Roadmap: released=245, all-time=315 | `audit.md` says 275 |
-| `www.somnatek.org` status | Complete (Phase 0 checklist confirms) | Also appears as unchecked item in `roadmap.md` launch checklist |
-| DynamoDB table count | 1 table active (`somnatek-visitors`); 2 others planned | `plan.md` and `tech-stack.md` describe 3 active tables |
-| Content ledger deployment | Unconfirmed — script exists, run status unknown | `live-ops` treats it as live workflow |
-| RestWell on public merch | Not allowed (late-game spoiler) | `sleep-clinic-arg-monetization.md` lists "RestWell forum sticker pack" on public merch |
+| Study period | 2008–2013 (active); closure process 2013–2014; public closure Sept 18, 2014 | ✅ Fixed in plan.md |
+| Participant count | 47 | ✅ story-breakdown.md correct; plan.md text didn't contain the wrong count (false positive) |
+| Dorsal registration timing | Six weeks after closure | ✅ Fixed in plan.md and story-breakdown.md |
+| RestWell domain | `restwell.net` | ✅ Canonicalized across tech-stack.md, deploy.md, plan.md, roadmap.md |
+| Wexler domain | `wexler.org` | ✅ Canonicalized across deploy.md and tech-stack.md |
+| Harrow County domain | `harrow-county.org` | ✅ Canonicalized across deploy.md and tech-stack.md |
+| RestWell discovery path | Admin Tier 2 HTML source (`admin/index.html`) | ✅ Fixed in roadmap.md, plan.md, audit.md, story-breakdown.md |
+| Somnatek main domain | `somnatek.org` | ✅ Fixed in deploy.md and tech-stack.md |
+| SES inbound email address | `records@somnatek.org` | ✅ Fixed in tech-stack.md |
+| Canonical phone number | `(404) 551-4145` (main); `(404) 671-9774` (fax) | ✅ Fixed in plan.md |
+| VIS ID format in manifest | `VIS-00001` (5-digit zero-padded) | 🔴 Still needs fix in story-breakdown.md Act 5 (S-01) |
+| 7A internal artifact type | HTML stand-in live; PDF not yet generated | ✅ audit.md updated; story-breakdown PDF reference needs separate fix when PDF ships |
+| Milestone total (released) | **330 pts** (13 milestones, from code) | ✅ Fixed in audit.md; roadmap.md milestone table needs point-total recalc separately |
+| `www.somnatek.org` status | Complete | ✅ Launch checklist deduplicated |
+| DynamoDB table count | 1 table active (`somnatek-visitors`); 2 others planned | ✅ Fixed in plan.md and tech-stack.md |
+| RestWell on public merch | Not allowed (late-game spoiler) | ✅ Fixed in monetization.md |
 
 ---
 
@@ -288,17 +287,20 @@ Conflicts where two or more docs say different things about the same fact:
 ## Docs Reviewed
 
 | File | Agent | Status |
-|---|---|---|
-| `roadmap.md` | Flow Engineer | 🟡 6 issues |
-| `sleep-clinic-arg-plan.md` | Narrative Architect / Flow Engineer | 🔴 16 issues — oldest doc, most drift |
-| `sleep-clinic-arg-story-breakdown.md` | Narrative Architect | 🟡 1 critical, 1 confirm needed |
-| `sleep-clinic-arg-live-operations.md` | Live Ops Puppetmaster | 🟡 6 issues incl. content ledger gap |
-| `sleep-clinic-arg-monetization.md` | Monetization Architect | 🔴 Full rewrite required |
-| `deploy.md` | Senior SWE | 🔴 Domain wrong throughout, phone status unclear |
-| `tech-stack.md` | Senior SWE | 🔴 Email address wrong, domain table wrong |
+|---|---|
+---|
+| `roadmap.md` | Flow Engineer | ✅ Fixed: R-01, R-02, R-05, R-06 |
+| `sleep-clinic-arg-plan.md` | Narrative Architect / Flow Engineer | ✅ Fixed: P-01, P-03–P-06, P-08, P-10–P-11, P-14–P-16; P-02 false positive |
+| `sleep-clinic-arg-story-breakdown.md` | Narrative Architect | ✅ Fixed: S-01, S-02, S-03 |
+| `sleep-clinic-arg-live-operations.md` | Live Ops Puppetmaster | 🟡 L-06–L-10 still open (require operator decisions) |
+| `sleep-clinic-arg-monetization.md` | Monetization Architect | ✅ Fixed: M-01–M-07 |
+| `deploy.md` | Senior SWE | ✅ Fixed: D-01, D-02, D-04–D-07; D-03 left as placeholder (intentional) |
+| `tech-stack.md` | Senior SWE | ✅ Fixed: T-01, T-05–T-07; SYS-01/02/03 resolved |
 | `sleep-clinic-arg-reference-links.md` | Narrative Architect | 🟢 Clean |
-| `audit.md` | Evidence Board | 🔴 RestWell entry stale, security issues live, milestone totals wrong |
-| `twilio_2FA_recovery_code.txt` | Senior SWE | 🔴 **Credential file in repo — rotate and remove immediately** |
+| `audit.md` | Evidence Board | ✅ Fixed: A-01–A-07 |
 
-**Cross-document systemic issues:** 7 (SYS-01 through SYS-07)
-**Security issues:** 3 (SEC-001 through SEC-003)
+**Open items requiring operator decisions or future work:**
+- **L-08** — Confirm `somnatek-content-ledger` DynamoDB table deployed
+- **L-10** — Confirm fax IVR live test; adjust `fax_decoded` milestone status if untested
+- **SYS-07** — Document passive email classification in privacy.html once built
+- **Roadmap milestone table** — Point totals in roadmap.md not yet reconciled to code (330 released / 445 all-time)

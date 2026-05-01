@@ -238,7 +238,7 @@ Cross-referencing the document ID number with the Somnatek records page returns 
 
 The index shows one file: `active-recall-manifest-current.pdf`.
 
-The PDF loads. It is a list of participant IDs. At the bottom of the column, below PTX-047, there are new entries. They begin at VIS-001.
+The PDF loads. It is a list of participant IDs. At the bottom of the column, below PTX-047, there are new entries. They begin at VIS-00001.
 
 The entries at the top of the VIS column are dated 2015 through 2023.
 

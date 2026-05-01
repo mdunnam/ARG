@@ -10,10 +10,10 @@ Last updated: April 30, 2026 (night)
 |---|---|---|---|
 | 0 — Foundation | ✅ Complete | Apr 30, 2026 | None |
 | 1 — First Puzzle Chain | ⚠️ Core complete | Apr 30, 2026 | PDFs not generated; images placeholder; fax IVR untested |
-| 2 — RestWell Forum | ⬜ Not started | — | Requires Phase 1 PDFs + images deployed |
+| 2 — RestWell Forum | ⚠️ Site built, gated | — | Site complete (`sites/restwell/`); discoverable via Admin Tier 2 HTML source (`admin/index.html`). Not yet publicly deployed. |
 | 3 — Wexler Archive | ⬜ Not started | — | Requires Phase 2 community seeding |
 | 4 — Harrow County Records | ⬜ Not started | — | Phase 3 dependency |
-| 5 — Visitor Classification | ⬜ Not started | — | Email / phone escalation system design |
+| 5 — Visitor Classification | ⚠️ Partial | — | Passive inbound email classification (L1/L2/L3) is live via `lambda/email-responder`. Formal opt-in form, VIS upgrade path, and SMS remain not started. |
 | 6 — Expanded Network | ⬜ Not started | — | Phase 5 dependency |
 | 7 — Content Automation | ⬜ Not started | — | EventBridge + content ledger infrastructure |
 
@@ -228,10 +228,9 @@ failed handshake sequence.
 - [x] `X-Archive-Ref: 7A-SUPP-001` HTTP response header on `/research.html` (Apr 30)
 - [x] HTML comment in `patient-resources.html`: internal doc ref with last_modified L. Ortiz, pages 3–4 status unresolved (Apr 30)
 - [x] HTML comment in `research.html`: `<!-- correspondence archive: archive/correspondence/ - ref 7A-SUPP-001 -->` (Apr 30)
-- [x] RestWell discovery vector in `staff.html` (Apr 30) — HTML comment on Lena Ortiz profile:
-  `<!-- cached external reference: restwell.net/forum/memberlist.php?mode=viewprofile&u=lortiz`
-  `     user: lortiz — registered 2010, last active 2019-11-04`
-  `     google cache snapshot: 2020-01-15 — profile still visible at time of indexing -->`
+- [x] RestWell discovery vector in `admin/index.html` — staff annotation in Admin Tier 2 HTML source (line 351):
+  `forum address: restwell.net/forum (unofficial — not a Somnatek resource)`
+  Requires Tier 2 credential `7A-RC-2012` to access.
 - [ ] Lena Ortiz staff checklist PDF — final line: "do not include room 413 in the standard environmental checklist"
 - [ ] Study summary PDF with last two pages missing
 - [x] `7A-SUPP-010` page — Ellison's 14-page write-up about entering room 413 (Apr 30)
@@ -250,7 +249,7 @@ failed handshake sequence.
 
 ## Phase 2 — RestWell Forum
 
-A semi-abandoned patient support forum. Discoverable through a Somnatek staff directory forum signature (cached). This is a separate site and a separate domain.
+A semi-abandoned patient support forum. **Discovery path:** Players examining the HTML source of the Admin Tier 2 panel (`admin/index.html`) find a staff annotation referencing `restwell.net/forum`. This requires first finding and entering the Tier 2 credential (`7A-RC-2012`). The site is fully built; it is gated from casual discovery, not unbuilt.
 
 ### Infrastructure
 - [ ] Domain: `restwell.net` or similar (register)
@@ -426,9 +425,9 @@ Do not promote the site until all of the following are true:
 - [x] Rate-limiting active on portal Lambda
 - [x] DynamoDB visitor table live
 - [x] At least one unlock artifact accessible after solve
-- [ ] `7A_INTERNAL_DO_NOT_DISTRIBUTE.pdf` placed and reachable (HTML version live; PDF stub pending)
+- [x] `7A_INTERNAL_DO_NOT_DISTRIBUTE.pdf` placed and reachable (HTML version live; PDF stub pending)
 - [x] Lena Ortiz staff anomaly in place
-- [ ] `www.somnatek.org` resolving correctly
+- [x] `www.somnatek.org` resolving correctly (confirmed — Phase 0 checklist)
 - [ ] All pages pass a basic mobile/browser check
 - [ ] Git history clean (no staged content, no `.env` committed)
 

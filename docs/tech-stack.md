@@ -63,6 +63,8 @@ Cheapest always-on option outside free tier. Handles static file serving for a l
 
 nginx serves all four in-world sites as separate virtual hosts on the same instance. Each site has its own `server_name` and web root. A single Elastic IP is shared, with DNS routing traffic to the right virtual host by domain name.
 
+**Current production status:** Only `somnatek.org` has live content. The RestWell, Wexler, and Harrow County virtual hosts are provisioned and configured but their sites are not yet production-ready.
+
 ### Elastic IP
 
 A static Elastic IP is allocated and attached. DNS A records point here. The IP survives instance stop/start cycles.
@@ -181,7 +183,7 @@ SES sends opt-in in-world email transmissions: appointment confirmations, record
 
 ### From address
 
-`records@somnatekhealth.com` (once domain is verified in SES)
+`records@somnatek.org`
 
 ### Opt-in only
 
@@ -238,10 +240,10 @@ Route 53 manages DNS for all in-world domains. A records point to the EC2 Elasti
 
 | Domain | Site |
 |---|---|
-| `somnatekhealth.com` | Main clinic site |
-| `restwellonline.net` | Patient forum |
-| Fictional `.edu` equivalent | Wexler University archive |
-| Fictional `.gov` equivalent | Harrow County records |
+| `somnatek.org` | Main clinic site |
+| `restwell.net` | Patient forum |
+| `wexler.org` | Wexler University archive (fictional) |
+| `harrow-county.org` | Harrow County records (fictional) |
 
 Domains must be fictional and must not impersonate real institutions, universities, counties, or government entities.
 

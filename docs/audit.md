@@ -1,5 +1,5 @@
 # Somnatek ARG — Master Audit
-**Last Updated:** April 30, 2026  
+**Last Updated:** May 1, 2026  
 **Audited by:** Full codebase read (all sites, lambda, infra, scripts, docs)
 
 ---
@@ -24,12 +24,12 @@
 | Secondary pages | ✅ | sleep-disorders.html, insurance.html |
 | Archive pages (5) | ✅ | 7A-SUPP-INDEX, 7A-SUPP-010, 7A-SUPP-005, correspondence, 7A_INTERNAL_DO_NOT_DISTRIBUTE |
 | Portal pages | ✅ | portal/ptx-018/, portal/protocol-7a/ |
-| Admin portal | ✅ | admin/index.html — three tiers |
+| Admin portal | ✅ | `admin/index.html` — three player-facing tiers (in-world fiction). **Operator tooling is separate:** `/site-mgmt/index.html` + `GET /api/admin` (requires `X-Admin-Token` header). Do not confuse the two. |
 | Era aesthetic | ✅ | XHTML Transitional, floats, system fonts, no frameworks |
 | Navigation | ✅ | Left sidebar + horizontal tab bar |
 | Beacon JS | ✅ | All pages fire POST /api/beacon |
 | Image files | ❌ | All referenced, none confirmed present in img/ |
-| privacy.html | ❌ | Linked in footer, not built |
+| privacy.html | ✅ | Built and synced to S3 (May 1, 2026) |
 
 ---
 
@@ -79,7 +79,7 @@
 | Metadata Subject cipher | scripts/generate-pdfs.js | ⚠️ | Code complete, PDFs not confirmed |
 | Acrostic ciphers (5 PDFs) | scripts/generate-pdfs.js | ⚠️ | Code complete, PDFs not confirmed |
 
-**SECURITY NOTE:** `Math.random()` used for VIS ID generation in portal-login — should be `crypto.randomBytes()` before production public launch.
+**Note:** `Math.random()` in `lambda/email-responder/index.js` line 168 generates a cosmetic in-world reference number (`DHHRMS-XXXXXX-2014`) for display only. This is intentional and not a security issue. `portal-login` uses `crypto.randomBytes()` for all VIS ID generation.
 
 ---
 
@@ -91,11 +91,11 @@
 | Vector | Location | Status | Notes |
 |---|---|---|---|
 | robots.txt Disallows | robots.txt | ✅ | /portal/, /admin/, /archive/7A-SUPP-*, /docs/internal/ |
-| Lena Ortiz HTML comment (RestWell URL) | staff.html | ✅ | restwell.net/forum/memberlist.php?mode=viewprofile&u=lortiz |
+| RestWell discovery vector | admin/index.html | ✅ | Staff annotation in Admin Tier 2 HTML source (line 351): `restwell.net/forum` — requires finding credential `7A-RC-2012` first |
 | Dr. Ellison photo removed comment | staff.html | ✅ | 2014-02-11 removal date |
 | Room 413 / blue door / left hallway image comment | research.html | ✅ | Explicit lore anchor |
 | 7A-SUPP-INDEX hint comment | research.html | ✅ | "index ref: 7A-SUPP-INDEX" |
-| Internal doc comment | patient-resources.html | ✅ | docs/7A_INTERNAL_DO_NOT_DISTRIBUTE.pdf |
+| Internal doc comment | patient-resources.html | ✅ | `docs/7A_INTERNAL_DO_NOT_DISTRIBUTE.html` (HTML stand-in; PDF pending) |
 | Admin portal credential (Tier 1) | closure-notice.html | ✅ | HARROW-FAC in HTML comment |
 | Fax number on all pages | All pages footer | ✅ | (404) 671-9774 |
 | Phone number on all pages | All pages header | ✅ | (404) 551-4145 |
@@ -187,20 +187,28 @@ index.html
 ```
 
 ### Milestone Points
+
+Source of truth: `lambda/portal-login/index.js` MILESTONES array.
+
 | Milestone | Points | Status |
 |---|---|---|
 | portal_solved | 20 | ✅ Live |
-| recall_accessed | 25 | ✅ Live |
-| protocol_7a | 30 | ✅ Live |
-| correspondence_found | 25 | ✅ Live |
-| doc_7a_found | 15 | ✅ Live |
+| fax_decoded | 15 | ✅ Live |
+| restwell_found | 40 | ✅ Live (gated behind Admin Tier 2) |
 | supp_index_found | 20 | ✅ Live |
-| supp_010_found | 35 | ✅ Live |
-| supp_005_found | 40 | ✅ Live |
+| doc_7a_found | 15 | ✅ Live |
+| correspondence_found | 25 | ✅ Live |
 | admin_t1 | 10 | ✅ Live |
 | admin_t2 | 20 | ✅ Live |
 | admin_t3 | 35 | ✅ Live |
-| **Total (Phase 1)** | **275** | |
+| recall_accessed | 25 | ✅ Live |
+| protocol_7a | 30 | ✅ Live |
+| supp_010_found | 35 | ✅ Live |
+| supp_005_found | 40 | ✅ Live |
+| recalled_active | 75 | ⏳ Unreleased — Stage 3 trigger |
+| wexler_found | 40 | ⏳ Unreleased — Stage 4 |
+| **Total (released)** | **330** | |
+| **Total (all-time)** | **445** | |
 
 ### Known Flow Bottlenecks
 | Bottleneck | Severity | Notes |
@@ -251,7 +259,7 @@ index.html
 **Security findings:**
 | Issue | Severity | Action |
 |---|---|---|
-| `Math.random()` for VIS ID generation | Low | Replace with `crypto.randomBytes()` before public launch |
+| `Math.random()` for VIS ID generation | ✅ Resolved | `portal-login` uses `crypto.randomBytes()`. `email-responder` `Math.random()` is a cosmetic display string only. |
 | KNOWN_PAGES hardcoded in beacon | Low | Adding new pages requires redeployment |
 | Full table scan in admin-api | Low | Acceptable for admin tool; paginate when >10k visitors |
 | LEVEL_3_PATTERNS case-insensitive regex could be more robust | Low | Monitor for false positives |

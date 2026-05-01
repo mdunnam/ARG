@@ -30,35 +30,35 @@ This is the cleanest early monetization path.
 
 Position it as out-of-world project support rather than part of the fictional clinic.
 
-### Possible Tiers
+### Confirmed Tier
 
-### $3-$5/month: Observer Tier
+### $5/month: Observer Tier
 
-- Early access to public chapter drops.
-- Monthly production updates.
-- Post-solve notes after the community completes a puzzle.
-- Access to supporter-only Discord channels if a community server exists.
+Documented in `scripts/patreon-observer-tier.txt`. This is the only fully specified tier.
 
-### $8-$12/month: Records Tier
+- Monthly administrative transmission from the Dorsal Health Holdings records archive. Formatted as automated system correspondence and may contain materials not accessible through the public investigation path.
+- Access to the `#observer-transmissions` channel in the Somnatek Research Archive Discord server.
+- Priority position in the active recall scheduling queue. When a recall window is assigned, Observer participants will be notified in advance of general participants.
+- Physical evidence kit (shipped quarterly, beginning when production is confirmed).
 
-- Everything in Observer.
-- Bonus non-essential lore documents.
-- Digital artifact drops.
-- Behind-the-scenes puzzle design notes after puzzle completion.
-- Polls for future cosmetic details, such as document types or artifact themes.
+### Proposed Additional Tiers (not yet finalized)
 
-### $20-$30/month: Archive Tier
+The following tiers are planned but not documented in committed files. Do not publish until content for each tier is confirmed.
 
-- Everything in Records.
-- Name, initials, or alias placed in non-critical background material.
-- Early access to season archive drafts.
-- Occasional printable evidence files.
+| Tier | Price | Proposed benefits |
+|---|---|---|
+| Supporter | $3/mo | Discord access, production updates |
+| Observer | $5/mo | See above (confirmed) |
+| Insider | $8/mo | Bonus lore documents, digital artifact drops |
+| Investigator | $15/mo | Named in background material, early chapter access |
+| Director's Circle | $30/mo | Physical evidence kit, post-solve design notes |
+| Patron | $100/mo | One of (limit: 10); named in permanent record, direct operator contact |
 
 ### Important Limits
 
-Supporter content should not contain required answers for the main ARG.
+Supporter content must not contain required answers for the main ARG.
 
-Supporter-only lore can expand the world, but the public community should still be able to solve the main story without it.
+Supporter-only lore can expand the world, but the public community must still be able to solve the main story without it.
 
 ## 2. Physical Evidence Kits
 
@@ -99,9 +99,32 @@ Deluxe case file:
 - If a clue appears in a kit, provide a free digital equivalent somewhere in the main ARG.
 - Make the kit feel like an in-world artifact, not branded fan merchandise.
 
-## 3. Digital Case Files
+## 2a. Gated / Unlock-Based Merch
 
-Digital case files are low-cost and easy to fulfill.
+The live game tracks player progress through VIS IDs and portal milestones. This system enables a gated merch layer — items that are only discoverable or purchasable after a player reaches a specific milestone.
+
+### How It Works
+
+When a player's VIS ID reaches a milestone threshold, the admin API can issue a single-use unlock code. Players redeem this code on the merch storefront to access a gated item. Codes are VIS-ID-bound and single-use.
+
+### Gated Merch Tiers
+
+| Tier | Unlock condition | Items |
+|---|---|---|
+| Public | No login required | Somnatek mug, appointment card notebook, "Please wait to be recalled" shirt, Dorsal Holdings pen, Room 413 key tag |
+| Tier 1 — Portal Solved | `portal_solved` milestone (20 pts) | Somnatek patient file folder, sleep study chart print |
+| Tier 2 — Archive Access | 100+ released pts | Printable recall summary bundle (digital), staff memo set (digital) |
+| Tier 3 — Protocol Clearance | `protocol_7a` milestone | Protocol 7A exhibit print (A3, clinical style), staff lanyard |
+| Tier 4 — RECALLED | Stage 3 trigger (`recalled_active` milestone) | **RECALLED print** — 413 copies, numbered, never reprinted. Room 413 door placard replica. |
+
+### Design Rules
+
+- Gated items must never contain required puzzle answers.
+- Physical items ship only within 60 days of solve confirmation to prevent stale orders.
+- If a gated item is later made public, grandfather in existing holders with a "First Issue" designation.
+- **RestWell branding must not appear on any public merch.** RestWell is a late-game gated discovery. Advertising it on a public storefront spoils its existence for new players. Any RestWell merch (if ever produced) is Tier 4 only.
+
+## 3. Digital Case Files
 
 ### Product Ideas
 
@@ -135,10 +158,11 @@ Merch should look like objects from the world, not generic ARG branding.
 - "Please wait to be recalled" shirt.
 - Clinic logo tote bag.
 - Patient file folder.
-- RestWell forum sticker pack.
 - Appointment card notebook.
 - Staff lanyard.
 - Dorsal Health Holdings pen.
+
+> **Note:** RestWell branding is excluded from public merch. See Section 2a (Gated Merch) for RestWell item placement.
 
 ### Design Rules
 
@@ -251,16 +275,27 @@ If collecting emails in-world, include appropriate real-world privacy and consen
 
 Goal: Build trust and audience.
 
-Release:
+Current state: Phase 1 is fully built and live as of May 1, 2026.
 
-- Somnatek public site.
-- First hidden puzzle layer.
-- Email signup.
-- Optional Ko-fi / Patreon linked from an out-of-world creator page.
+Live as of launch:
 
-Do not push sales aggressively during the initial launch.
+- Somnatek public site (8 public pages, archive, admin tiers, portal).
+- PTX-018 portal puzzle (deployed — `SomnatekPortalStack`).
+- VIS ID assignment on first portal solve.
+- 13 released milestone triggers (330 pts released).
+- Email responder live (`records@somnatek.org` — L1/L2/L3 classification via `lambda/email-responder`).
+- Fax line active (`(404) 671-9774`).
+- Admin tier puzzle chain (Tier 1–3 credentials buried in HTML source).
+- RestWell forum built and gated (Admin Tier 2 discovery, `restwell.net`).
+- 25-item content ledger seeded.
+- Email list via `records@somnatek.org` inbound classification (passive — no opt-in required).
 
-**Cost note:** The email responder Lambda (`lambda/email-responder`) calls Amazon Bedrock (Claude 3 Haiku) to generate in-world responses. Bedrock inference is not covered by AWS free tier. At typical ARG email volumes (tens to low hundreds of emails/month), expect ~$0.25–1.00/month in Bedrock charges. At higher volumes, model the cost before launching large promotion pushes.
+Monetization during Phase 1:
+
+- Optional Ko-fi / Patreon linked from an out-of-world creator page only.
+- No promoted sales during initial launch.
+
+**Cost note:** The email responder Lambda calls Amazon Bedrock (Claude 3 Haiku). At typical ARG volumes (tens to low hundreds of emails/month), expect ~$0.25–1.00/month in Bedrock charges. Model costs before large promotion pushes.
 
 ## Phase 2: First Supporters
 
@@ -279,6 +314,8 @@ Keep required puzzles public.
 ## Phase 3: Digital Evidence Drop
 
 Goal: Offer low-cost collectibles.
+
+**Unlock trigger:** After Stage 3 fires (`recalled_active` milestone released, Day 25+ in roadmap). The RECALLED print (413 copies, numbered, never reprinted) is the anchor product for this phase.
 
 Release:
 
@@ -339,6 +376,7 @@ Suggested price: $20-$30 digital, higher for print.
 - Reward supporters after puzzles are solved.
 - Be transparent out-of-world when money is involved.
 - Preserve player trust.
+- Keep RestWell branding off public-facing storefronts (late-game discovery).
 
 ### Don't
 
@@ -347,6 +385,7 @@ Suggested price: $20-$30 digital, higher for print.
 - Add obvious ads to in-world sites.
 - Break immersion with aggressive popups.
 - Make the fake clinic site feel like a storefront.
+- Put RestWell branding on public merch (spoils the discovery).
 - Use real medical claims or imply real clinical services.
 - Collect sensitive personal data from players.
 
