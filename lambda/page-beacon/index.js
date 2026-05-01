@@ -26,7 +26,7 @@ const KNOWN_PAGES = new Set([
   'closure-notice', 'portal', '404', 'sleep-disorders', 'insurance',
   'ptx-018', '7a-internal', 'correspondence', 'admin',
   'supp-index', 'admin-t1', 'admin-t2', 'admin-t3',
-  'protocol-7a', 'supp-010', 'supp-005',
+  'protocol-7a', 'supp-010', 'supp-005', 'fax-log',
 ]);
 
 /**
@@ -44,6 +44,7 @@ const MILESTONE_SLUGS = {
   'protocol-7a':    'protocol_7a',
   'supp-010':       'supp_010_found',
   'supp-005':       'supp_005_found',
+  'fax-log':        'fax_decoded',
 };
 
 const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: REGION }));
@@ -51,7 +52,7 @@ const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: REGION }));
 // Milestone registry — must mirror portal-login/index.js. Keep in sync.
 const MILESTONES = [
   { id: 'portal_solved',        points: 20, released: true  },
-  { id: 'fax_decoded',          points: 15, released: false },
+  { id: 'fax_decoded',          points: 15, released: true  },
   { id: 'supp_index_found',     points: 20, released: true  },
   { id: 'doc_7a_found',         points: 15, released: true  },
   { id: 'correspondence_found', points: 25, released: true  },

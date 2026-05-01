@@ -4,6 +4,8 @@ Disallow: /admin/
 Disallow: /docs/internal/
 Disallow: /archive/7A-SUPP-INDEX/
 Disallow: /archive/7A-SUPP-010/
+Disallow: /archive/7A-SUPP-005/
+Disallow: /archive/7A-FAX-001/
 Disallow: /archive/participant-records/
 
 # This site is maintained for archival purposes only.
