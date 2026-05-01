@@ -27,6 +27,8 @@
 | R-02 | Phase 2 description says RestWell is "discoverable through a Somnatek staff directory forum signature (cached)" — this is the OLD discovery path. **Changed today**: credentials now buried in Admin Tier 2 HTML comment, requiring 150+ portal points. | 🔴 | Update Phase 2 discovery mechanism |
 | R-03 | Phase 1 blockers still show "PDFs not generated; images placeholder; fax IVR untested" — check if PDFs have been generated since April 30 | 🟡 | Verify and update blockers |
 | R-04 | Milestone table references `restwell_found` (40 pts) as "future" — correct, still future, but note it now fires when player visits forum discovered via Admin Tier 2 | 🟡 | Add context note |
+| R-05 | `www.somnatek.org` is marked ✅ complete in Phase 0 checklist (line 46: "www.somnatek.org DNS alias — cert and nginx both cover www") but also appears as an unchecked item in the launch checklist section lower in the same doc. Contradicts itself. (INC-015) | 🟡 | Remove duplicate unchecked item from launch checklist, or confirm Phase 0 entry is authoritative |
+| R-06 | Phase 5 (Visitor Classification) marked "Not started" — but email Level 1/2/3 classification is **live right now** via `lambda/email-responder`. The disconnect is that Phase 5 refers to the opt-in form, VIS upgrade, and SMS path — not the passive inbound email system. This distinction is not documented anywhere. (INC-008) | 🟡 | Add note: "Email inbound classification is live (passive). Formal opt-in flow, SMS, and portal state escalation remain not started." |
 
 ---
 
@@ -51,6 +53,9 @@ This is the original design doc written before deployment. It has the most incon
 | P-11 | Patient 041 referred to as "Patient 041" throughout — canonical ID format is `PTX-041`. | 🟡 | Standardize to PTX-041 |
 | P-12 | Uses "dream" language in post-2011 in-world planning contexts. Not in-world copy, so not a hard violation, but inconsistent with lore rule: "Never call it a dream in internal documents after 2011." | 🟡 | Replace "dream" with "indexed space" / "night floor" in post-2011 references |
 | P-13 | "Puzzle 1: Participant ID found in a **redacted PDF**" — actual implementation: IDs discovered through PDF form number cipher, admin HTML, and portal table footnote (not imperfect redaction). | 🟡 | Update puzzle description to match as-built mechanic |
+| P-14 | "Player calls the **740 number**" in the player journey / phone system section — **WRONG**. No 740 number exists in this deployment. Canonical main clinic line is `(404) 551-4145`. (INC-005) | 🔴 | Replace "740 number" with `(404) 551-4145` |
+| P-15 | Same doc says portal is deployed (line 9: "portal puzzle... deployed") and later says `lambda/portal-login` is "to be built" and portal login is "Not yet built" (lines ~897, ~980). This is an internal contradiction in the same file, not just stale language. (INC-003) | 🔴 | Update all lower "How it works" and infrastructure sections to reflect deployed portal |
+| P-16 | Site tree at lines ~445–484 uses `.example` placeholder domains (`somnatek.example`, `restwell.example`) alongside current deployed paths elsewhere in the same doc. Should be labeled as "early concept — non-canonical" or replaced with actual paths. (LOW-004) | 🟡 | Label the .example tree as "early concept sketch" or update to actual deployed paths from roadmap.md |
 
 ---
 
@@ -83,6 +88,9 @@ This is the original design doc written before deployment. It has the most incon
 | L-05 | Content cadence (daily micro-drops, weekly major drops, monthly events) — doc references "EventBridge Scheduler... not yet implemented." Confirmed not yet built. ✅ accurate. | 🟢 | Clean |
 | L-06 | "Stage 3: The Archive Responds — not yet built." Trigger conditions (100 Discord members, 30 days, 10+ Level 3 emails) are in `scripts/discord-channel-pins.txt` and `scripts/seed-content-ledger.js`. Doc does not reference these scripts. | 🟡 | Add cross-reference to scripts/ for Stage 3 trigger implementation |
 | L-07 | "Unusual access pattern detected" reactive copy example — live Stage 3 copy should exist in a staged content plan. Currently only described in narrative here and in live-ops. No staged file yet. | 🟡 | Track as a staged content item to create |
+| L-08 | Doc instructs operators to update `somnatek-content-ledger` during manual drops. But `audit.md` notes the content ledger table is not confirmed deployed. If the table doesn't exist, this workflow is broken with no fallback described. (INC-007) | 🔴 | Confirm whether `somnatek-content-ledger` DynamoDB table is deployed. If not, add manual placeholder instructions or mark as future workflow. |
+| L-09 | Email responder operational status described as "live" but no record of all three classification levels being tested. Should split into: code built / deployed / L1 live-tested / L2 live-tested / L3 live-tested. (LOW-002) | 🟡 | Add three-state status tracking for email responder in live ops runbook |
+| L-10 | `fax_decoded` milestone is listed in roadmap as "released" but fax IVR is noted as untested in multiple docs. If the milestone can't actually be triggered (because the IVR is untested), it should not be marked released. (LOW-003) | 🟡 | Confirm fax IVR live test result. If untested, change `fax_decoded` to unreleased and document as passive signal with no milestone credit until confirmed. |
 
 ---
 
@@ -118,6 +126,8 @@ This document requires the most significant rewrite of any file in the docs fold
 | D-04 | HTTPS/certbot section uses "somnatekhealth.com" in example commands — should be somnatek.org. | 🔴 | Update certbot commands |
 | D-05 | "Option B: Direct rsync over SSH (if key pair configured)" — no key pair is configured on this deployment (SSM only). This section may mislead operators. | 🟡 | Add note: "No key pair is configured on the current deployment. Use Option A (S3 sync via SSM)." |
 | D-06 | `EC2_KEY_PAIR_NAME` listed in environment variables table — not used in current deployment (SSM only). | 🟡 | Remove or annotate as unused |
+| D-07 | Several sections in `deploy.md` reference `records@somnatek.org` correctly, but `tech-stack.md` uses `records@somnatekhealth.com` as the SES inbound address. One of these is wrong — both docs should match the verified SES domain. (INC-002) | 🔴 | Confirm canonical SES address and update `tech-stack.md` to match |
+| D-08 | Phone/fax operational status across deploy.md, tech-stack.md, roadmap, and audit are contradictory: some say "live," some say "untested," some say "ready to deploy." No section provides a clean split of what has been confirmed working end-to-end. (INC-004) | 🟡 | Add a phone/fax status matrix: Lambda exists / Connect stack deployed / IVR tested / fax audio played live |
 
 ---
 
@@ -131,6 +141,9 @@ This document requires the most significant rewrite of any file in the docs fold
 | T-02 | "No CloudFront yet — planned upgrade path" mentioned in plan.md but tech-stack.md does not reflect this. CloudFront is described as a future consideration in plan.md but the CDK stacks (`SomnatekPortalStack`, `SomnatekBeaconStack`) are deployed as HTTP API Gateways, not CloudFront. Clarify CloudFront status. | 🟡 | Add note on current architecture (EC2 + nginx, no CloudFront for static serving) |
 | T-03 | S3 bucket listed as deploy origin — consistent with actual use. ✅ | 🟢 | Clean |
 | T-04 | Overall stack description is accurate and matches deployed reality. ✅ | 🟢 | Clean |
+| T-05 | `tech-stack.md` lists SES inbound email address as `records@somnatekhealth.com` — **WRONG**. Canonical live address confirmed in plan.md, deploy.md, and roadmap is `records@somnatek.org`. (INC-002) | 🔴 | Update tech-stack.md SES section to `records@somnatek.org` |
+| T-06 | Wexler and Harrow County domain examples vary across docs: `wexler.edu` (roadmap), `wexler-university.edu` (deploy.md), `wexler.org` (plan.md); `harrowcounty.gov` (roadmap/deploy), `harrow-county.org` (plan.md). The `.edu` and `.gov` variants look like real institution impersonation which the security rules explicitly prohibit. (INC-011) | 🔴 | Pick canonical fictional registrable domains for each. Do not use .edu or .gov as player-facing domains. Suggest: `wexler-univ.edu` → `wexleruniversity.net` or similar. |
+| T-07 | Nginx virtual hosts section lists four web roots as if all four in-world sites are in production. Only `somnatek.org` is production. This misrepresents the current state. (LOW-001) | 🟡 | Add note: nginx is provisioned for four virtual hosts; only Somnatek has production content currently |
 
 ---
 
@@ -155,58 +168,118 @@ This document requires the most significant rewrite of any file in the docs fold
 | A-02 | Security note: "Math.random() used for VIS ID generation — should be crypto.randomBytes() before production public launch." — This is a **security issue that is live right now** (public launch happened). | 🔴 | Fix in code immediately, then mark resolved |
 | A-03 | Phase status column: privacy.html marked ❌ "not built" — check current state | 🟡 | Verify and update |
 | A-04 | Audit date "April 30, 2026" — needs updating after today's changes | 🟡 | Update date and add May 1 change notes |
+| A-05 | Milestone total inconsistency: `audit.md` Phase 1 total says **275 pts**; `roadmap.md` milestone table says released = **245 pts**, all-time = **315 pts**. These three numbers don't reconcile. The `fax_decoded` milestone (15 pts) being counted or not may explain part of the gap, but the full discrepancy is unexplained. (INC-014) | 🔴 | Recalculate from one source of truth (roadmap milestone table is most detailed). Update both files to match. |
+| A-06 | `/admin/` described throughout audit as the player-facing solve path, but there is now also `/site-mgmt/` as the real operator admin. Older audit summaries could confuse the two surfaces. (INC-017) | 🟡 | Add a clear note to audit: `/admin/index.html` = in-world fiction (player solve path); `/site-mgmt/index.html` + `/api/admin` = real operator tooling (X-Site-Key protected) |
+| A-07 | `7A_INTERNAL_DO_NOT_DISTRIBUTE` is described in audit as an HTML page (`audit.md:183`: `.html`), but `sleep-clinic-arg-story-breakdown.md` describes players **downloading a PDF** with that filename. The PDF does not exist — only the HTML stand-in is live. Story-facing docs should not claim players download a PDF until one exists. (INC-013) | 🔴 | Add audit note: HTML version is live stand-in. PDF is pending. Story-breakdown.md must be updated to not say "PDF download" until PDF is generated. |
+
+---
+
+## 10. Security & Compliance
+
+**Reviewing agent: Senior SWE**
+
+These issues were not surfaced in the initial audit pass. Added from `inconsistency-audit.md`.
+
+| # | Issue | Severity | Fix needed |
+|---|---|---|---|
+| SEC-001 | **`docs/twilio_2FA_recovery_code.txt` exists in the repository.** A Twilio 2FA recovery code is a real credential. If this file has ever been pushed to a public or shared branch, the code may be compromised. Storing credentials in `docs/` violates the project's own security rules ("never commit credentials"). | 🔴 **URGENT** | Move file out of repo immediately. If it has been in any pushed commit, rotate the Twilio 2FA recovery codes now. Add `twilio_2FA_recovery_code.txt` (and `*recovery_code*`) to `.gitignore`. |
+| SEC-002 | Multiple docs state "no real PII" as an absolute. But `tech-stack.md` explicitly documents storing: email address, visitor ID, consent timestamp, preferences, and unsubscribe status. These are PII under most privacy frameworks. The correct statement is "no sensitive medical PII; minimal opt-in contact PII only, handled per privacy policy." | 🟡 | Align PII language across all docs to: "no medical PII; minimal opt-in contact data only" |
+| SEC-003 | `sleep-clinic-arg-monetization.md` and `sleep-clinic-arg-live-operations.md` both require privacy language for email collection before promotion. `audit.md` marks `privacy.html` as not built. `roadmap.md` marks opt-in/unsubscribe path as not started. The email responder is **already live** and responding to all inbound emails. This is a consent gap: players email a system that classifies and stores their interaction state before any privacy notice exists. | 🔴 | Confirm `privacy.html` current state. If not live, pause any promotion that drives inbound email until it is. Add privacy notice link to email footer responses from `lambda/email-responder`. |
+
+---
+
+## 11. Cross-Document Systemic Issues
+
+These issues span multiple documents and can't be resolved by editing any single file.
+
+| ID | Issue | Docs affected | Fix needed |
+|---|---|---|---|
+| SYS-01 | **Email address has two variants.** `records@somnatek.org` (plan.md, deploy.md, roadmap) vs `records@somnatekhealth.com` (tech-stack.md). Only one can be the verified SES domain. | tech-stack.md, plan.md, deploy.md | Confirm canonical SES verified domain. Update tech-stack.md. |
+| SYS-02 | **RestWell has four different domain variants** across docs: `restwell.net` (roadmap, story-breakdown), `restwellonline.net` (tech-stack, deploy), `forum.restwellonline.net` (plan.md player journey), `restwell.org` (plan.md site structure). Every discovery clue, DNS table, and nginx config must use one domain. | roadmap, tech-stack, deploy, plan, story-breakdown | Pick canonical domain. Update all occurrences. Lena Ortiz HTML comment in Admin Tier 2 must use the chosen domain. |
+| SYS-03 | **Wexler and Harrow County domains vary and some are `.edu`/`.gov`.** Wexler: `wexler.edu` (roadmap), `wexler-university.edu` (deploy), `wexler.org` (plan). Harrow: `harrowcounty.gov` (roadmap/deploy), `harrow-county.org` (plan). Using real TLD patterns (`.edu`, `.gov`) for player-facing fictional sites risks impersonation issues. | roadmap, tech-stack, deploy, plan | Choose fictional registrable domains. Suggested: `wexleruniversity.net`, `harrowcountyrecords.com` or similar. |
+| SYS-04 | **Phone/fax status is contradictory across four docs.** tech-stack.md says phone stack deployed/live. audit.md says IVR unconfirmed and phone-responder missing. roadmap says fax flow created but untested. plan.md says phone ready to deploy. | roadmap, tech-stack, audit, plan, deploy | Create a single phone/fax status matrix. Fields: Lambda built / Lambda deployed / Connect stack deployed / IVR end-to-end tested / Fax audio confirmed playing live. |
+| SYS-05 | **Study date canonical split not documented uniformly.** Some docs say "2008–2013." Some say "2008 to 2014." The correct split is: active study 2008–2013; termination/closure process 2013–2014; public closure date September 18, 2014. This three-part split is not stated clearly in any single document. | plan.md, story-breakdown.md, roadmap.md | Add canonical date note to AGENTS.md shared rules and update plan.md. |
+| SYS-06 | **Content ledger described as active workflow but deployment unconfirmed.** live-ops instructs operators to update `somnatek-content-ledger` DynamoDB table during manual drops. audit.md says this table is not confirmed deployed. `scripts/seed-content-ledger.js` exists but its run status is unknown. | live-ops, audit, roadmap, plan | Confirm table exists: `aws dynamodb describe-table --table-name somnatek-content-ledger`. If not deployed, seed script needs to be run or CDK updated. |
+| SYS-07 | **Email opt-in vs direct inbound classification creates a consent gap.** live-ops and monetization describe email as opt-in only. But the email responder responds to any email sent to `records@somnatek.org` — no opt-in required. Players are being classified and tracked (SHA-256 hashed sender, level stored in DynamoDB) before any opt-in form exists. This is by design for immersion but needs privacy/consent documentation. | live-ops, monetization, deploy, plan | Document explicitly: "records@somnatek.org inbound classification is passive — any email triggers it." Add to privacy.html when built. Separate from formal subscriber opt-in system. |
 
 ---
 
 ## Cross-Document Inconsistency Matrix
 
-Conflicts where two docs say different things about the same fact:
+Conflicts where two or more docs say different things about the same fact:
 
 | Fact | Correct value | Wrong in |
 |---|---|---|
-| Study period | 2008–2013 | `sleep-clinic-arg-plan.md` says "2008 to 2014" |
+| Study period | 2008–2013 (active); closure process 2013–2014; public closure Sept 18, 2014 | `sleep-clinic-arg-plan.md` says "2008 to 2014" |
 | Participant count | 47 | `sleep-clinic-arg-plan.md` says "forty-two" |
 | Dorsal registration timing | Six weeks after closure | `sleep-clinic-arg-plan.md` player journey says "two months" |
-| RestWell domain | restwell.net | `tech-stack.md` and `deploy.md` say "restwellonline.net" |
+| RestWell domain | **Unresolved** — 4 variants exist | `tech-stack.md` / `deploy.md` say "restwellonline.net"; `plan.md` also uses "restwell.org" and "forum.restwellonline.net"; `roadmap.md` / `story-breakdown.md` say "restwell.net" |
+| Wexler domain | **Unresolved** — pick a non-.edu fictional domain | `roadmap.md` uses `wexler.edu`; `deploy.md` uses `wexler-university.edu`; `plan.md` uses `wexler.org` |
+| Harrow County domain | **Unresolved** — pick a non-.gov fictional domain | `roadmap.md` / `deploy.md` use `harrowcounty.gov`; `plan.md` uses `harrow-county.org` |
 | RestWell discovery path | Admin Tier 2 HTML source, 150+ pts | `roadmap.md`, `sleep-clinic-arg-plan.md`, `audit.md` all reference old staff.html path |
-| Somnatek domain | somnatek.org | `deploy.md` says "somnatekhealth.com" |
-| VIS ID format in manifest | VIS-00001 (5-digit) | `sleep-clinic-arg-story-breakdown.md` Act 5 says "VIS-001" |
+| Somnatek main domain | `somnatek.org` | `deploy.md` uses `somnatekhealth.com` throughout |
+| SES inbound email address | `records@somnatek.org` | `tech-stack.md` uses `records@somnatekhealth.com` |
+| Canonical phone number | `(404) 551-4145` (main); `(404) 671-9774` (fax) | `sleep-clinic-arg-plan.md` says "the 740 number" |
+| VIS ID format in manifest | `VIS-00001` (5-digit zero-padded) | `sleep-clinic-arg-story-breakdown.md` Act 5 says "VIS-001" |
+| 7A internal artifact type | HTML stand-in live; PDF not yet generated | `sleep-clinic-arg-story-breakdown.md` says players download a PDF |
+| Milestone total (Phase 1) | Roadmap: released=245, all-time=315 | `audit.md` says 275 |
+| `www.somnatek.org` status | Complete (Phase 0 checklist confirms) | Also appears as unchecked item in `roadmap.md` launch checklist |
+| DynamoDB table count | 1 table active (`somnatek-visitors`); 2 others planned | `plan.md` and `tech-stack.md` describe 3 active tables |
+| Content ledger deployment | Unconfirmed — script exists, run status unknown | `live-ops` treats it as live workflow |
 | RestWell on public merch | Not allowed (late-game spoiler) | `sleep-clinic-arg-monetization.md` lists "RestWell forum sticker pack" on public merch |
 
 ---
 
 ## Priority Fix Order
 
-### Immediate (lore-breaking or security)
+### Urgent (security / credentials)
+
+0. **SEC-001** — Rotate Twilio 2FA recovery codes if `docs/twilio_2FA_recovery_code.txt` has ever been pushed. Move out of repo. Add to `.gitignore`. **Do this before anything else.**
+
+### Immediate (lore-breaking, security, or consent gap)
 
 1. **A-02** — Fix `Math.random()` → `crypto.randomBytes()` in `lambda/portal-login/index.js` (security issue, live)
-2. **P-01** — `sleep-clinic-arg-plan.md`: study period "2008 to 2014" → "2008 to 2013"
-3. **P-02** — `sleep-clinic-arg-plan.md`: "forty-two" → "forty-seven"
-4. **P-03** — `sleep-clinic-arg-plan.md`: "two months" → "six weeks" (Dorsal registration)
-5. **P-04/P-05/P-06** — `sleep-clinic-arg-plan.md`: RestWell discovery path updated throughout
-6. **S-01** — `sleep-clinic-arg-story-breakdown.md`: "VIS-001" → "VIS-00001"
-7. **A-01** — `audit.md`: RestWell rabbit hole entry updated
-8. **M-01 through M-07** — `sleep-clinic-arg-monetization.md`: full rewrite
+2. **SEC-003** — Confirm `privacy.html` is live before any promotion push drives inbound email volume
+3. **T-05** — `tech-stack.md`: `records@somnatekhealth.com` → `records@somnatek.org`
+4. **P-14** — `sleep-clinic-arg-plan.md`: "740 number" → `(404) 551-4145`
+5. **P-01** — `sleep-clinic-arg-plan.md`: study period "2008 to 2014" → "2008 to 2013"
+6. **P-02** — `sleep-clinic-arg-plan.md`: "forty-two" → "forty-seven"
+7. **P-03** — `sleep-clinic-arg-plan.md`: "two months" → "six weeks" (Dorsal registration)
+8. **P-04/P-05/P-06/P-15** — `sleep-clinic-arg-plan.md`: RestWell discovery path + portal "to be built" contradiction updated throughout
+9. **S-01** — `sleep-clinic-arg-story-breakdown.md`: "VIS-001" → "VIS-00001"
+10. **A-07** — `audit.md`: 7A artifact HTML vs PDF distinction — story-breakdown.md must not say "PDF download" until PDF exists
+11. **A-01** — `audit.md`: RestWell rabbit hole entry updated
+12. **A-05** — `audit.md` / `roadmap.md`: milestone total reconciliation
+13. **M-01 through M-07** — `sleep-clinic-arg-monetization.md`: full rewrite
+14. **SYS-02** — Choose canonical RestWell domain and update all occurrences across all docs + deployed HTML comment
+15. **SYS-03** — Choose canonical Wexler/Harrow domains (non-.edu/.gov)
 
 ### Next (outdated but not broken)
 
-9. **D-01 / D-04** — `deploy.md`: somnatekhealth.com → somnatek.org
-10. **T-01** — `tech-stack.md`: restwellonline.net → restwell.net
-11. **D-02** — `deploy.md`: restwell domain corrected
-12. **R-01 / R-02** — `roadmap.md`: Phase 2 status and discovery path
-13. **P-08** — `sleep-clinic-arg-plan.md`: three DynamoDB tables → single table
-14. **P-10** — `sleep-clinic-arg-plan.md`: remove "to be built" language for deployed Lambdas
-15. **P-11** — `sleep-clinic-arg-plan.md`: "Patient 041" → "PTX-041"
+16. **D-01 / D-04** — `deploy.md`: `somnatekhealth.com` → `somnatek.org`
+17. **T-06** — `tech-stack.md`: Wexler/Harrow domain table updated
+18. **T-07** — `tech-stack.md`: nginx 4-host note added
+19. **R-01 / R-02** — `roadmap.md`: Phase 2 status and discovery path
+20. **R-05** — `roadmap.md`: www.somnatek.org duplicate checklist item
+21. **R-06** — `roadmap.md`: Phase 5 distinction (passive email live vs opt-in not started)
+22. **L-08** — `live-ops`: content ledger deployment confirmation / fallback
+23. **L-10** — `live-ops` / `roadmap`: fax_decoded milestone status
+24. **P-08** — `sleep-clinic-arg-plan.md`: three DynamoDB tables → single active table
+25. **P-10** — `sleep-clinic-arg-plan.md`: remove "to be built" language for deployed Lambdas
+26. **P-11** — `sleep-clinic-arg-plan.md`: "Patient 041" → "PTX-041"
+27. **SYS-06** — Confirm content ledger table deployed (`aws dynamodb describe-table`)
 
 ### Low priority / optional
 
-16. **P-09** — `sleep-clinic-arg-plan.md`: placeholder domains
-17. **P-12** — `sleep-clinic-arg-plan.md`: "dream" language post-2011
-18. **S-07** — `sleep-clinic-arg-story-breakdown.md`: confirm "Caleb R." is intentional
-19. **Ref-02** — `sleep-clinic-arg-reference-links.md`: Twitter → X
-20. **D-03** — `deploy.md`: instance ID placeholder decision
-21. **D-05/D-06** — `deploy.md`: SSH/key pair notes
-22. **L-06/L-07** — `sleep-clinic-arg-live-operations.md`: Stage 3 script cross-references
+28. **P-09** — `sleep-clinic-arg-plan.md`: `.example` placeholder domain tree labeled as non-canonical (P-16)
+29. **P-12** — `sleep-clinic-arg-plan.md`: "dream" language post-2011
+30. **S-07** — `sleep-clinic-arg-story-breakdown.md`: confirm "Caleb R." is intentional
+31. **Ref-02** — `sleep-clinic-arg-reference-links.md`: Twitter → X
+32. **D-03** — `deploy.md`: instance ID placeholder decision
+33. **D-05/D-06/D-07/D-08** — `deploy.md`: SSH/key pair notes, email address, phone status matrix
+34. **A-06** — `audit.md`: /admin vs /site-mgmt distinction
+35. **L-06/L-07/L-09** — `live-ops`: Stage 3 cross-refs, email 3-state status
+36. **SEC-002** — Align "no PII" language across docs to "no medical PII; minimal opt-in contact data"
 
 ---
 
@@ -214,12 +287,16 @@ Conflicts where two docs say different things about the same fact:
 
 | File | Agent | Status |
 |---|---|---|
-| `roadmap.md` | Flow Engineer | 🟡 4 issues |
-| `sleep-clinic-arg-plan.md` | Narrative Architect / Flow Engineer | 🔴 13 issues — oldest doc, most drift |
+| `roadmap.md` | Flow Engineer | 🟡 6 issues |
+| `sleep-clinic-arg-plan.md` | Narrative Architect / Flow Engineer | 🔴 16 issues — oldest doc, most drift |
 | `sleep-clinic-arg-story-breakdown.md` | Narrative Architect | 🟡 1 critical, 1 confirm needed |
-| `sleep-clinic-arg-live-operations.md` | Live Ops Puppetmaster | 🟢 2 minor |
+| `sleep-clinic-arg-live-operations.md` | Live Ops Puppetmaster | 🟡 6 issues incl. content ledger gap |
 | `sleep-clinic-arg-monetization.md` | Monetization Architect | 🔴 Full rewrite required |
-| `deploy.md` | Senior SWE | 🔴 Domain wrong throughout |
-| `tech-stack.md` | Senior SWE | 🔴 RestWell domain wrong |
+| `deploy.md` | Senior SWE | 🔴 Domain wrong throughout, phone status unclear |
+| `tech-stack.md` | Senior SWE | 🔴 Email address wrong, domain table wrong |
 | `sleep-clinic-arg-reference-links.md` | Narrative Architect | 🟢 Clean |
-| `audit.md` | Evidence Board | 🔴 RestWell entry stale, security issue live |
+| `audit.md` | Evidence Board | 🔴 RestWell entry stale, security issues live, milestone totals wrong |
+| `twilio_2FA_recovery_code.txt` | Senior SWE | 🔴 **Credential file in repo — rotate and remove immediately** |
+
+**Cross-document systemic issues:** 7 (SYS-01 through SYS-07)
+**Security issues:** 3 (SEC-001 through SEC-003)
