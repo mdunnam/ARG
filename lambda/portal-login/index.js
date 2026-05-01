@@ -178,7 +178,7 @@ async function getOrCreateVisitor(ipHash) {
  */
 const MILESTONES = [
   { id: 'portal_solved',        points: 20, released: true  },
-  { id: 'fax_decoded',          points: 15, released: true  },
+  { id: 'fax_decoded',          points: 15, released: false },
   { id: 'supp_index_found',     points: 20, released: true  },
   { id: 'doc_7a_found',         points: 15, released: true  },
   { id: 'correspondence_found', points: 25, released: true  },
