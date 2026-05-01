@@ -10,11 +10,10 @@ All text is Discord markdown formatted.
 **Somnatek Research Archive**
 Unofficial community for former Somnatek Sleep Health Center patients and researchers.
 
-The Somnatek Sleep Health Center closed on September 18, 2014. Their records, patient portal, and affiliated forum are still online.
+The Somnatek Sleep Health Center closed on September 18, 2014. Their records and patient portal are still online.
 
 **Start here:**
 → https://somnatek.org
-→ https://restwell.net
 
 Read #rules before posting. Read #onboarding before asking questions that may already be answered.
 
@@ -52,7 +51,6 @@ Read #rules before posting. Read #onboarding before asking questions that may al
 → **https://somnatek.org** — Main site. Explore everything. View source on every page.
 → **(404) 671-9774** — The fax number in the footer. Call it.
 → **records@somnatek.org** — The records management contact address. Email them anything.
-→ **https://restwell.net** — Patient support forum. Requires login. Credentials have been found. (Hint: check the source of `closure-notice.html`.)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 **CONFIRMED DISCOVERIES (summary)**
@@ -63,20 +61,18 @@ Full detail in #evidence. Summary:
 :white_check_mark: Five PDF documents in `/docs/` contain hidden text and a cipher across form numbers.
 :white_check_mark: The fax line plays a signal. It has been decoded.
 :white_check_mark: The patient portal at `/portal/` accepts patient IDs (format: PTX-###).
-:white_check_mark: The RestWell forum is accessible. The login credentials are findable in the main site source.
-:white_check_mark: A forum member named `lortiz` posted in November 2019 — five years after the clinic closed. Her account was suspended the next day.
-:white_check_mark: Multiple Protocol 7A study participants independently describe the same environment during the study.
+:white_check_mark: The admin area at `/admin/` is accessible. Credentials are findable in the main site source.
+:white_check_mark: The admin area contains internal staff records, room status logs, and Protocol 7A participant data. Deeper tiers require more portal points.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 **OPEN QUESTIONS**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-:question: What are EEC scores? (Forum thread t=42)
-:question: What is the "indexed space" / "night floor"?
+:question: What is the "indexed space" / "night floor"? (Referenced in admin Tier 3)
 :question: Where is Dr. Edwin Vale now?
 :question: What happened in room 413?
 :question: Why does the fax line still answer?
-:question: Who updated the active recall manifest most recently?
+:question: Lena Ortiz's position was eliminated August 2014. Her badge was still active September 18, 2014 at 09:31. What did she do?
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 **ROLE UNLOCKS**
@@ -119,12 +115,12 @@ Do not post unverified claims as confirmed. If you have a strong theory, post it
 *Updated: May 1, 2026*
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-:green_circle: **E-001 — RestWell Login Credentials**
+:green_circle: **E-001 — Admin Portal Access**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 **Source:** somnatek.org/closure-notice.html — HTML source
-**Finding:** An HTML comment in the page source contains the RestWell forum archive login credentials.
-**How to reproduce:** View source on the closure notice page. Search for "archive account".
-**Notes:** Login at restwell.net/forum. Archive mode — read only. Forum has 7 active threads.
+**Finding:** An HTML comment in the page source reveals the admin portal access code and URL.
+**How to reproduce:** View source on the closure notice page. Search for "portal".
+**Notes:** Navigate to /admin/ and enter the code. Tier 1 shows facility management records, room status, and the room 413 inspection log.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 :green_circle: **E-002 — Fax Line Signal**
@@ -141,7 +137,7 @@ Do not post unverified claims as confirmed. If you have a strong theory, post it
 **Finding:** Each PDF has a form reference number in the format `SHC-[TYPE]-[YEAR]-[ID]`. The trailing ID digits encode Protocol 7A participant IDs.
 **How to reproduce:** Download all five PDFs. Note the form reference numbers. Extract the trailing two-digit ID from each.
 **IDs:** ||PTX-007, PTX-011, PTX-014, PTX-018, PTX-031||
-**Cross-reference:** RestWell member profiles contain matching study reference numbers confirming the decode.
+**Cross-reference:** PTX IDs are confirmed in Admin Tier 2 participant roster.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 :green_circle: **E-004 — PDF Ghost Text Layer**
@@ -168,53 +164,24 @@ Do not post unverified claims as confirmed. If you have a strong theory, post it
 **Notes:** The portal tracks milestone points. Points unlock admin tiers. Check /admin/ after accumulating enough points.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-:green_circle: **E-007 — Lena Ortiz Forum Post (2019)**
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-**Source:** restwell.net/forum — Thread t=14 "Is anyone else still getting the alerts?"
-**Finding:** `lortiz` (Lena Ortiz, former Somnatek sleep technician) posted on November 4, 2019 — five years after the clinic closed. The post is cut mid-sentence. Her account was suspended the following day.
-**Her last post:** *"I'm still monitoring participant accounts. If any of you receive a formal recall notice, please respond to it through the portal. The study has not —"*
-**Notes:** Account suspension metadata in the memberlist HTML source: `account_suspended: true | suspension_date: 2019-11-05 | reason: protocol_review`. A new account `L.O.2019` was registered on the same day.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-:green_circle: **E-008 — Shared Environment (The Hallway)**
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-**Source:** restwell.net/forum — Thread t=23 "The same hallway"
-**Finding:** Multiple Protocol 7A participants independently describe the same environment during the active study period. The environment is consistent across participants who have not communicated.
-**Description:** A hallway that bends left. A blue door on the left side of the hallway.
-**Notes:** Lena Ortiz refers to this as the "indexed space." EEC scores (E-009) are associated with participant familiarity with this environment.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-:green_circle: **E-009 — EEC Scores**
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-**Source:** restwell.net/forum — Thread t=42 "EEC scores — does anyone know what these mean?"
-**Finding:** An internal assessment metric called "EEC" appeared on participant session summaries. Scored 1–5. All confirmed Protocol 7A participants eventually reached 5/5. Ortiz's only explanation: *"The scores indicate successful environmental familiarization."*
-**Notes:** Theorized expansion: Environmental Entry Confirmation. The metric is not referenced in any publicly available sleep study literature. Not in standard PSG scoring.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-:green_circle: **E-010 — Admin Tier Correspondence**
+:green_circle: **E-007 — Admin Tier Correspondence**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 **Source:** somnatek.org/admin/ — Tier 2 (150+ portal points required)
-**Finding:** Internal correspondence between Dr. Ellison and Dr. Vale references "Dorsal site indexing" and discusses participant retention after the study close date.
-**How to access:** Accumulate 150+ points in the portal. Access /admin/. Credentials via hint in closure-notice.html source (`HARROW-FAC`).
+**Finding:** Staff records, participant roster, and a system audit log. The audit log shows Dr. Ellison and Lena Ortiz accessed three PTX records simultaneously on 2014-09-18 at 09:31 from an unregistered terminal — the same timestamp as Ortiz's last badge swipe at Room 413. The staff table contains additional unexplained annotations.
+**How to access:** Accumulate 150+ points in the portal. Access /admin/. Admin credentials findable in closure-notice.html source.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 :yellow_circle: **T-001 — WORKING THEORY: The study has not ended**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-**Basis:** Ortiz's 2019 forum post ("The study has not —"), p_holloway's 2015 description of ongoing identical sleep experiences, the fax line still active in 2026, `L.O.2019` account registered day of Ortiz's suspension.
-**Status:** Strongly supported. Not yet confirmed by in-game artifact.
-**Prediction:** An active recall manifest exists somewhere in the archive. It lists current participants including VIS-series players.
+**Basis:** Admin Tier 3 shows Protocol 7A administrative status as ACTIVE. The recall system is marked ACTIVE. The fax line still answers in 2026. Ortiz's badge swipe on 2014-09-18 09:31 — the last day of clinic operations — has no documentation.
+**Status:** Confirmed by Admin Tier 3 content. The mechanism is not yet understood.
+**Prediction:** Something is maintaining active files on visitors who access the protocol records.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-:yellow_circle: **T-002 — WORKING THEORY: L.O.2019 is Lena Ortiz**
+:yellow_circle: **T-002 — WORKING THEORY: PTX-031 is anomalous**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-**Basis:** Registered Nov 5, 2019 — same day `lortiz` was suspended. Username follows her initials and year. 0 posts. The timing is not coincidental.
-**Status:** Not yet confirmed. L.O.2019 has not posted.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-:yellow_circle: **T-003 — WORKING THEORY: PTX-031 is anomalous**
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-**Basis:** r_castello (Profile: `SHC-IAR-2011-31` → PTX-031) enrolled June 2012, which is *after* the official 2008-2013 study end, suggesting 031 was added outside the standard intake cycle. Ortiz's SUPP-005 termination report reportedly has flagged margin notes about PTX-031 that were not acted on.
-**Status:** Speculative. The SUPP-005 document has not yet been accessed.
+**Basis:** Admin Tier 2 shows PTX-031 enrolled 2009-01-07, but the insurance authorization form (SHC-IAR-2011-31) is dated 2011 — two years after enrollment. Why was an insurance form filed in 2011 for a 2009 enrollment? The standard participant intake sequence doesn't match.
+**Status:** Speculative. A supplemental archive document is referenced but not yet accessed.
 
 ─────────────────────────────────────────────────────────────────────
 #verification  (first pin)
@@ -273,13 +240,10 @@ This channel is not visible to general server visitors.
 
 **Active questions in this tier:**
 
-:question: What is the full PTX participant list? Five IDs confirmed (PTX-007, 011, 014, 018, 031). Are there others?
-:question: What happened to PTX-031? Enrolled outside the stated study window. Flagged but not closed.
-:question: What is the EEC scoring methodology? "Environmental familiarization" is the only description given.
-:question: Why was lortiz's account suspended? Reason: `protocol_review`. Authorized by: `sys_admin`.
-:question: What does L.O.2019 know?
-
-**Cross-reference to forum:** restwell.net/forum — threads t=14, t=23, t=42 contain the primary participant testimony.
+:question: What is the full PTX participant list? Five IDs confirmed (PTX-007, 011, 014, 018, 031). Admin Tier 2 implies 42 participants total.
+:question: What happened to PTX-031? Insurance form dated two years after enrollment.
+:question: What is EMP-247? Not in the standard personnel file. Appears in facility room assignments.
+:question: Admin Tier 3 references "post-study observers (VIS series)" with a recall queue listed as open. What does that mean for us?
 
 ─────────────────────────────────────────────────────────────────────
 #indexed-space  (first pin)

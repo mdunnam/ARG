@@ -83,13 +83,13 @@ const DROPS = [
   },
   {
     slug:          'launch-restwell',
-    title:         'RestWell forum opens (read-only archive)',
+    title:         'RestWell forum — discoverable via Admin Tier 2',
     type:          'site-edit',
-    state:         'released',
-    scheduledDate: d(0),
-    releasedDate:  d(0),
+    state:         'scheduled',
+    scheduledDate: d(18),
+    releasedDate:  null,
     s3Dest:        null,
-    notes:         'restwell.net/forum — login gated. Credential hint in closure-notice.html source.',
+    notes:         'restwell.net/forum site is deployed but NOT advertised. URL and credentials buried in Admin Tier 2 HTML comment (requires 150+ portal points). Milestone restwell_found fires naturally when players visit the forum. No external hint planted until after Tier 2 content is accessible.',
   },
   {
     slug:          'social-reddit-week1',
