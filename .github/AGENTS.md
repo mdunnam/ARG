@@ -21,6 +21,7 @@ All agents are stored in the user profile at `%APPDATA%\Code\User\prompts\*.agen
 - **Live drops, NPC events, solve-triggered unlocks:** use **Live Ops Puppetmaster**.
 - **Viral moments, Reddit/TikTok/YouTube strategy:** use **Viral Growth Architect**.
 - **Clue tracking, evidence timelines, theory boards:** use **Evidence Board**.
+- **Doc consistency audits, changelog, stale doc detection, post-deploy doc sync:** use **Documentation Steward**.
 
 When in doubt, use **Senior SWE** for anything touching deployed code, and **Narrative Architect** for anything touching lore or docs.
 
@@ -140,6 +141,14 @@ When in doubt, use **Senior SWE** for anything touching deployed code, and **Nar
 **Tools:** read, search, edit, todo
 **Use for:** organizing ARG clue tracking, building evidence timelines, mapping contradictions, tracking solve status, managing community theory boards, creating player onboarding recaps, or building the intelligence structure that keeps the Somnatek ARG community oriented. Use when scattered information needs to become structured intelligence.
 **File scope:** `docs/**`
+
+---
+
+### Documentation Steward
+**Tools:** read, search, edit, todo
+**Use for:** auditing documentation for consistency, synchronizing docs with code changes, finding stale or contradictory information across docs, updating changelogs, detecting false positives in audit files, reconciling docs after deployments or architectural changes. Use any time documentation may be lying to the project.
+**Do NOT use for:** narrative lore design (use Narrative Architect), puzzle mechanics (use Puzzle Architect), or general coding (use Senior SWE).
+**File scope:** `docs/**`, `*.md`
 
 ---
 
