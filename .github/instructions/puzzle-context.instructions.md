@@ -1,5 +1,5 @@
 ---
-applyTo: "docs/**,sites/somnatek/archive/**,sites/somnatek/portal/**,scripts/generate-pdfs.js,assets/**"
+applyTo: "docs/**,sites/somnatek/archive/**,sites/somnatek/portal/**,scripts/generate-pdfs.js,assets/**,docs/roadmap.md"
 ---
 
 # Puzzle Architect Context — Auto-loaded
