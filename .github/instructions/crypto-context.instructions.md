@@ -42,3 +42,11 @@ When editing files in these paths you are working on a layer that may carry or a
 - Never require obscure trivia with no clue path
 - Avoid brute-force-faster-than-thinking designs
 - New ciphers must feel different from all existing layers
+
+## Example Prompts
+
+- "Design a Vigenère cipher using PLEASE WAIT TO BE RECALLED as the key — where does the ciphertext live and where is the key breadcrumb hidden"
+- "Add a new cipher layer to `sleep-study-consent.pdf` that doesn't collide with the existing NIGHTFLR acrostic"
+- "PTX-031 is the only Active status participant — design a cipher where the five PTX IDs together form the key material"
+- "Write a book cipher using Protocol 7A EC-004 as the source — what does it decode to and where do we plant the index"
+- "Embed a Morse code breadcrumb into the CPAP log sample data that doesn't conflict with the 4.13 row cipher already there"

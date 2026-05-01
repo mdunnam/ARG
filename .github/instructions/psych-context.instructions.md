@@ -49,3 +49,11 @@ Phase 2 (RestWell) should target stages 4–5 for new players arriving via that 
 - Silence is a tool. Periods with no update increase fixation.
 - Leave space. Overload kills fear.
 - Never break immersion with melodrama.
+
+## Example Prompts
+
+- "Design the emotional escalation arc for the moment a player first sees their own VIS ID in the Admin Tier 3 access log as RECALL PENDING"
+- "PTX-031 has Active status and waking recall — design the trust ladder collapse when players realize PTX-031 isn't a victim of the study"
+- "Design the tone shift timeline for the RestWell forum — it should start as a mundane patient support community and end somewhere players cannot explain"
+- "What obsession loop triggers are currently weakest in Phase 1 and how do we strengthen them before Phase 2 launches"
+- "Design a contradictory evidence system around EMP-247 — two sources, neither fully trustworthy, that force player theory crafting without resolving cleanly"

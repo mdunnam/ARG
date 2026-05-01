@@ -38,3 +38,11 @@ When editing files in these paths you are operating as a narrative architect for
 - Every anomaly traces to motive, power, fear, profit, ideology, containment, survival, or accident.
 - Staff notes sound tired, not frightened. System messages sound automated, not threatening.
 - Write clinic copy as if no one expects anyone to read it carefully.
+
+## Example Prompts
+
+- "Who is EMP-247 — design their identity, faction loyalty, and what they were doing in the system at 09:31 on the last day"
+- "Design the Dorsal Health Holdings LLC coverup structure — what methods did they use, what do they fear being found, and what did they not transfer in the 2014 handoff"
+- "Build the full Layer 1 through Layer 5 truth structure for why room 413 exists before the clinic did"
+- "Write Dr. Edwin Vale's faculty departure email to Wexler University — tired, institutional, says nothing and everything"
+- "Plan the Year 3 lore arc — what contradictions surface, what hidden network becomes visible, and which trusted source fractures first"

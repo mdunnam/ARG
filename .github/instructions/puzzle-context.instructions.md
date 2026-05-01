@@ -32,3 +32,11 @@ When editing files in these paths you are operating as a puzzle architect for th
 - Confusion is not difficulty.
 - New puzzle elements must be consistent with existing planted clues.
 - Hidden elements go inside boring text, not beside it.
+
+## Example Prompts
+
+- "The five PDFs are live — design the next cipher layer that builds on the existing cross-form and acrostic systems without duplicating them"
+- "Design a Tier 3 puzzle for the RestWell forum that leads back to PTX-031 and only resolves when cross-referenced with SUPP-005"
+- "What cipher should we embed into the Wexler University abstract that's invisible to casual readers but obvious to someone who has read Protocol 7A"
+- "Design a meta-puzzle spanning all three sites (Somnatek, RestWell, Wexler) that has a single convergence point at room 413"
+- "Design the Lena Ortiz staff checklist PDF — it needs a Tier 2 hidden clue and a Tier 4 expansion hook pointing toward something not yet built"

@@ -39,3 +39,11 @@ When adding content to public pages:
 - System fonts only: Georgia, Times New Roman, Verdana, Arial, Tahoma, Courier New
 - Navigation: left sidebars, horizontal tab bars, plain anchor links
 - All copy: clinical, restrained, bureaucratic, emotionally flat
+
+## Example Prompts
+
+- "Add a new HTML comment to `staff.html` that extends the Lena Ortiz RestWell discovery vector — something a player would find when reading her profile source carefully"
+- "Design a `robots.txt` entry that implies a path exists without naming it directly"
+- "Write alt text for a staff photo that reads institutionally normal but contains a breadcrumb for players who check source"
+- "Add a `data-` attribute to the closure notice that looks like a CMS artifact but encodes a lore date"
+- "The fax number is live — add a line to `patient-resources.html` that would make a careful reader think to call it without being told to"

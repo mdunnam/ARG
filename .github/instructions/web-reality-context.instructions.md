@@ -50,3 +50,11 @@ Players arrive after the 2014 collapse. The site should feel:
 - Modern font imports (Google Fonts)
 - Responsive breakpoints that look contemporary
 - Any active service language ("book now," "call today," "we're open")
+
+## Example Prompts
+
+- "Build the RestWell forum homepage — phpBB 2009 era, mostly mundane sleep advice categories, one thread title that shouldn't be there"
+- "Write the Wexler University faculty page for Dr. Edwin Vale — what's present, what's conspicuously missing, what does the employment timeline imply"
+- "Create a 2011 cached snapshot version of the Somnatek homepage showing what it looked like before the collapse-era changes"
+- "Write a Harrow County Gazette blotter item from October 2014 that mentions the Somnatek closure in three unremarkable sentences"
+- "Design the Harrow County business license record for Somnatek — what anomalies would a careful player find in the filing dates or registered agent history"

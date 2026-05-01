@@ -48,3 +48,11 @@ These rules apply whenever you are editing files under `sites/` or `lambda/`.
 - DynamoDB table names come from environment variables, not hardcoded strings.
 - Rate-limit all puzzle submission endpoints.
 - Do not log visitor emails or IDs in CloudWatch in an exposable way.
+
+## Example Prompts
+
+- "Add a hidden HTML comment to `closure-notice.html` that looks like an internal CMS note but contains the Tier 1 admin credential"
+- "Write the body copy for a new `sleep-lab.html` page — institutional tone, 2010 era, mention Protocol 7A only by study number"
+- "Add a new Lambda endpoint `/api/verify-id` — hash the input against `PUZZLE_ANSWER_SALT`, rate-limit to 5 attempts per IP per 10 minutes, return only `{valid: true/false}`"
+- "Audit `lambda/portal-login/index.js` for any plaintext answer storage or missing CORS headers"
+- "Write the footer for `restwell.net` — forum era copyright notice, contact link, no active service language"
