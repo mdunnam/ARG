@@ -1,5 +1,8 @@
 # Somnatek ARG — GitHub Copilot Instructions
 
+> **Agent roster and routing rules:** see [`.github/AGENTS.md`](.github/AGENTS.md).
+> All custom agents are defined there with their tool permissions, file scopes, and usage guidelines.
+
 ## Project Overview
 
 This is an ongoing interactive horror ARG (alternate reality game) website project called the Somnatek ARG.
