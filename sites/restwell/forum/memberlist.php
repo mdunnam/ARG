@@ -86,6 +86,13 @@
         <td>Sep 20, 2014</td>
         <td>&mdash;</td>
       </tr>
+      <tr class="row1">
+        <td><a href="memberlist.php?mode=viewprofile&amp;u=L.O.2019">L.O.2019</a></td>
+        <td>Nov 05, 2019</td>
+        <td style="text-align:center;">0</td>
+        <td>Nov 05, 2019</td>
+        <td>&mdash;</td>
+      </tr>
       <tr class="row2">
         <td><a href="memberlist.php?mode=viewprofile&amp;u=david_n">david_n</a></td>
         <td>Nov 05, 2009</td>
@@ -140,6 +147,27 @@
         <td style="padding:12px;">The requested member profile could not be found. <a href="memberlist.php">Return to member list.</a></td>
       </tr>
     </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Profile: L.O.2019
+       registered same day lortiz was suspended
+  ════════════════════════════════════════════════════════════ -->
+  <div id="profile-L.O.2019" class="profile-wrap" data-username="L.O.2019" style="display:none;">
+    <div class="profile-head">Member Profile: L.O.2019</div>
+    <div class="profile-body">
+      <div class="profile-field"><span class="profile-label">Username:</span> <span class="profile-value">L.O.2019</span></div>
+      <div class="profile-field"><span class="profile-label">Registered:</span> <span class="profile-value">November 5, 2019</span></div>
+      <div class="profile-field"><span class="profile-label">Total posts:</span> <span class="profile-value">0</span></div>
+      <div class="profile-field"><span class="profile-label">Last visit:</span> <span class="profile-value">November 5, 2019</span></div>
+      <div class="profile-field"><span class="profile-label">Location:</span> <span class="profile-value">&mdash;</span></div>
+      <div class="profile-field"><span class="profile-label">About:</span>
+        <span class="profile-value">&mdash;</span>
+      </div>
+      <div style="margin-top:12px; text-align:right;">
+        <a href="memberlist.php">&laquo; Back to member list</a>
+      </div>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════

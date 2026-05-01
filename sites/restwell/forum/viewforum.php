@@ -131,6 +131,16 @@
         <th class="topic-stats">Views</th>
         <th class="topic-lastpost">Last Post</th>
       </tr>
+      <tr class="row2">
+        <td class="topic-icon"><span class="topic-locked">&#128274;</span></td>
+        <td>
+          <div class="topic-title"><span class="muted">Re: active recall &mdash; for anyone with a VIS number</span></div>
+          <div class="topic-meta">by <a href="memberlist.php?mode=viewprofile&amp;u=L.O.2019">L.O.2019</a> &mdash; <em>Thread archived pending review</em></div>
+        </td>
+        <td class="topic-stats">0</td>
+        <td class="topic-stats">&mdash;</td>
+        <td class="topic-lastpost">&mdash;</td>
+      </tr>
       <tr class="row1">
         <td class="topic-icon">&#9654;</td>
         <td>

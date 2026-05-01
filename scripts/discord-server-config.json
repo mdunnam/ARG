@@ -1,0 +1,319 @@
+{
+  "server": {
+    "name": "Somnatek Research Archive",
+    "description": "Unofficial archive for former Somnatek Sleep Health Center patients and researchers.",
+    "icon": "use a low-resolution scan of the Somnatek logo or a generic medical cross",
+    "verification_level": "medium",
+    "explicit_content_filter": "all_members",
+    "default_notifications": "only_mentions"
+  },
+
+  "roles": [
+    {
+      "name": "Visitor",
+      "color": "#7A9AAA",
+      "hoist": false,
+      "mentionable": false,
+      "description": "Default role for all new members.",
+      "auto_assign": true
+    },
+    {
+      "name": "Protocol 7A",
+      "color": "#4C789B",
+      "hoist": true,
+      "mentionable": true,
+      "description": "Awarded manually when a member solves the cross-form PTX cipher and posts their five PTX IDs in #verification.",
+      "auto_assign": false,
+      "puzzle_requirement": "Post all five PTX IDs (PTX-007, PTX-011, PTX-014, PTX-018, PTX-031) in #verification to receive this role."
+    },
+    {
+      "name": "Active Recall",
+      "color": "#DD6900",
+      "hoist": true,
+      "mentionable": true,
+      "description": "Awarded to members who have triggered a Level 3 email response and posted the response text in #verification.",
+      "auto_assign": false,
+      "puzzle_requirement": "Post the DHHRMS reference number ending in -413 from your Level 3 email response in #verification."
+    },
+    {
+      "name": "Observer",
+      "color": "#C8A000",
+      "hoist": true,
+      "mentionable": false,
+      "description": "Patreon Observer tier members. Access to #observer-transmissions.",
+      "auto_assign": false,
+      "patreon_linked": true
+    },
+    {
+      "name": "Moderator",
+      "color": "#FFFFFF",
+      "hoist": true,
+      "mentionable": true,
+      "description": "Community moderators.",
+      "auto_assign": false
+    }
+  ],
+
+  "categories": [
+    {
+      "name": "INFORMATION",
+      "position": 0,
+      "channels": [
+        {
+          "name": "welcome",
+          "type": "text",
+          "topic": "This server is an unofficial archive for former Somnatek Sleep Health Center patients and researchers. Read #rules before posting.",
+          "pin": [
+            "Welcome to the Somnatek Research Archive. This is an unofficial community for people investigating the Somnatek Sleep Health Center and its research programs. Start at somnatek.org. The forum is at restwell.net. Read the rules before posting. If you have been a participant in Protocol 7A or have received any communications from records@somnatek.org, you are in the right place.",
+            "RULES: No harassment. No speculation presented as confirmed fact — label theories as theories. No spoilers in general channels. Tag solved/unsolved in evidence posts. Do not share personal information."
+          ]
+        },
+        {
+          "name": "rules",
+          "type": "text",
+          "topic": "Server rules.",
+          "readonly": true,
+          "pin": [
+            "1. Label theories as theories. Confirmed discoveries go in #evidence. Unconfirmed theories go in #theories.\n2. No spoilers in general channels. Use spoiler tags ||like this|| for puzzle solutions.\n3. Respect other investigators. No personal attacks.\n4. Do not contact any real institutions based on in-game information. The clinic, university, and county in this ARG are fictional.\n5. Do not post personal information about other members.\n6. The Somnatek ARG is a work of fiction. No real medical advice is given or sought here."
+          ]
+        },
+        {
+          "name": "announcements",
+          "type": "text",
+          "topic": "Game updates and content drops. Moderator-only posting.",
+          "readonly_for": "Visitor",
+          "pin": []
+        },
+        {
+          "name": "onboarding",
+          "type": "text",
+          "topic": "Start here if you are new to the investigation.",
+          "pin": [
+            "NEW INVESTIGATOR BRIEF — Somnatek Research Archive\n\nCURRENT STATUS: Active investigation. Protocol 7A study status: unresolved.\n\nKNOWN ENTRY POINTS:\n- somnatek.org — main site. Explore everything. View source on every page.\n- (404) 671-9774 — the fax number in the footer. Call it.\n- records@somnatek.org — the records management contact address. Email them.\n\nCONFIRMED DISCOVERIES (see #evidence for full detail):\n- Five institutional PDF documents in /docs/ contain hidden text layers and a cipher across form numbers.\n- A patient portal exists at /portal/. Requires a patient ID in the format PTX-###.\n- The fax line plays an audio signal. Players have decoded it.\n- A patient support forum at restwell.net requires login credentials. Credentials have been found.\n- A forum member (lortiz) posted on November 4, 2019, five years after the clinic closed. Her account was suspended the next day.\n\nOPEN QUESTIONS:\n- What are EEC scores? (Referenced in forum thread t=42)\n- What is the indexed space / night floor?\n- Where is Dr. Edwin Vale now?\n- What happened in room 413?\n\nRole unlock: Post your PTX IDs in #verification to receive Protocol 7A access."
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "INVESTIGATION",
+      "position": 1,
+      "channels": [
+        {
+          "name": "general",
+          "type": "text",
+          "topic": "General investigation discussion. Label theories as theories.",
+          "pin": []
+        },
+        {
+          "name": "evidence",
+          "type": "text",
+          "topic": "Confirmed discoveries only. Format: [CONFIRMED] Source: ... Finding: ... Thread: ...",
+          "pin": [
+            "EVIDENCE BOARD — Post format:\n[CONFIRMED] Source: <URL or artifact name>\nFinding: <what was found>\nNotes: <how to reproduce / what it means>\n\nTag threads as CONFIRMED, WORKING THEORY, or DEBUNKED. Do not post unverified claims as confirmed."
+          ]
+        },
+        {
+          "name": "theories",
+          "type": "text",
+          "topic": "Unconfirmed theories and speculation. Must be labeled [THEORY].",
+          "pin": []
+        },
+        {
+          "name": "ciphers",
+          "type": "text",
+          "topic": "Cryptography, steganography, and encoded content work.",
+          "pin": []
+        },
+        {
+          "name": "sites",
+          "type": "text",
+          "topic": "Discussion of the in-world websites: somnatek.org, restwell.net, wexler.edu, harrow-county.gov.",
+          "pin": []
+        },
+        {
+          "name": "email-log",
+          "type": "text",
+          "topic": "Share redacted responses from records@somnatek.org here. Include your DHHRMS reference number.",
+          "pin": [
+            "Share your email responses from records@somnatek.org here. REDACT your personal email address before posting. Include the DHHRMS reference number at the bottom of the response. Note which level response you received (standard / research-aware / active recall)."
+          ]
+        },
+        {
+          "name": "verification",
+          "type": "text",
+          "topic": "Post puzzle solutions here to unlock roles. See #onboarding for requirements.",
+          "pin": [
+            "ROLE UNLOCK REQUIREMENTS:\n\nProtocol 7A role: Post all five PTX IDs from the cross-form PDF cipher. Format: PTX-007 / PTX-011 / PTX-014 / PTX-018 / PTX-031. Explain how you found them.\n\nActive Recall role: Post the DHHRMS reference number from a Level 3 email response (the reference number ends in -413). Moderator will verify and assign the role."
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "PROTOCOL 7A",
+      "position": 2,
+      "restricted_to": ["Protocol 7A", "Active Recall", "Observer", "Moderator"],
+      "channels": [
+        {
+          "name": "7a-general",
+          "type": "text",
+          "topic": "Protocol 7A participant access only. Unlocked after solving the PTX cipher.",
+          "pin": [
+            "You have confirmed access to Protocol 7A archive materials. This channel is for members who have demonstrated knowledge of the study participant ID system.\n\nThis channel is not visible to general visitors. Discoveries shared here should also be added to #evidence when ready to publish.\n\nActive questions in this tier:\n- What is the full PTX participant list? (Only five IDs confirmed so far.)\n- What is the EEC scoring methodology?\n- What does 'environmental familiarization' mean in the study context?\n- Why was lortiz's account suspended?"
+          ]
+        },
+        {
+          "name": "indexed-space",
+          "type": "text",
+          "topic": "Thread for sharing experiences with the indexed space / night floor / Dorsal site.",
+          "pin": [
+            "This channel is for people who want to document their own experiences consistent with what the Protocol 7A forum participants described: a consistent environment, a hallway that bends left, a blue door on the left side.\n\nThis is an in-game channel. You are not required to have real experiences to participate. Treat all reports as potentially significant lore."
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "ACTIVE RECALL",
+      "position": 3,
+      "restricted_to": ["Active Recall", "Observer", "Moderator"],
+      "channels": [
+        {
+          "name": "recall-transmissions",
+          "type": "text",
+          "topic": "Active Recall tier. For members who have received Level 3 DHHRMS responses.",
+          "pin": [
+            "You have received an active recall flag in the Dorsal Health Holdings records system.\n\nThis channel is for members who have triggered a Level 3 automated response — specifically, any response that includes the phrase PLEASE WAIT TO BE RECALLED.\n\nShare your full redacted responses here. Cross-reference DHHRMS reference numbers. We are tracking whether the system generates consistent room 413 references across separate accounts.\n\nOpen question: Is this a scripted response or is something else generating these?"
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "OBSERVER TIER",
+      "position": 4,
+      "restricted_to": ["Observer", "Moderator"],
+      "channels": [
+        {
+          "name": "observer-transmissions",
+          "type": "text",
+          "topic": "Monthly in-world transmissions for Patreon Observer tier members.",
+          "pin": [
+            "Observer tier members receive monthly in-world transmissions from the Dorsal Health Holdings records management system. These transmissions are sent to the email address associated with your Patreon account.\n\nTransmissions contain content not available through the public investigation path. Post your transmissions (redacted or full) here for collective analysis."
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "META",
+      "position": 5,
+      "channels": [
+        {
+          "name": "off-topic",
+          "type": "text",
+          "topic": "Non-investigation chat.",
+          "pin": []
+        },
+        {
+          "name": "bot-commands",
+          "type": "text",
+          "topic": "Bot commands. Keep this out of investigation channels.",
+          "pin": []
+        }
+      ]
+    }
+  ],
+
+  "pinned_evidence_board": {
+    "title": "Master Evidence Board — Somnatek ARG",
+    "last_updated": "May 1, 2026",
+    "entries": [
+      {
+        "id": "E-001",
+        "status": "CONFIRMED",
+        "source": "somnatek.org — page source",
+        "finding": "HTML comment in closure-notice.html reveals forum credentials: archive / SHC-RWL-2014",
+        "notes": "Login at restwell.net/forum. Read-only archive access."
+      },
+      {
+        "id": "E-002",
+        "status": "CONFIRMED",
+        "source": "somnatek.org footer — (404) 671-9774",
+        "finding": "Fax number plays morse code. Decoded: 413. Cross-references room 413.",
+        "notes": "Call the number. Morse audio plays on connect. Standard International Morse."
+      },
+      {
+        "id": "E-003",
+        "status": "CONFIRMED",
+        "source": "somnatek.org/docs/ — five PDF documents",
+        "finding": "PDF form numbers encode PTX participant IDs: SHC-INT-2009-07 (PTX-007), SHC-CST-2008-11 (PTX-011), SHC-CPL-2010-14 (PTX-014), SHC-SHG-2009-18 (PTX-018), SHC-IAR-2011-31 (PTX-031)",
+        "notes": "Trailing numbers in each form code = PTX ID. Cross-reference restwell.net member profiles for confirmation."
+      },
+      {
+        "id": "E-004",
+        "status": "CONFIRMED",
+        "source": "PDF ghost text (invisible text layer)",
+        "finding": "Each PDF contains invisible text readable with pdftotext or copy-all. Text references Protocol 7A, room 413, and participant cross-references.",
+        "notes": "Use pdftotext -raw or select-all in reader. Ghost text uses PDF rendering mode 3 (invisible)."
+      },
+      {
+        "id": "E-005",
+        "status": "CONFIRMED",
+        "source": "PDF metadata — Subject field",
+        "finding": "The Subject metadata field across all five PDFs reads in sequence: When / you / find / this / room 413 is waiting",
+        "notes": "Check PDF properties. File order: intake, consent, CPAP, hygiene, insurance."
+      },
+      {
+        "id": "E-006",
+        "status": "CONFIRMED",
+        "source": "somnatek.org/portal/",
+        "finding": "Patient portal accepts PTX-018 as a valid patient ID. Unlocks research tier content.",
+        "notes": "Other PTX IDs unlock additional session records. PTX-007 unlocks first participant records."
+      },
+      {
+        "id": "E-007",
+        "status": "CONFIRMED",
+        "source": "restwell.net/forum — viewtopic.php?t=14",
+        "finding": "lortiz (Lena Ortiz, former Somnatek sleep technician) posted on November 4, 2019 — five years after the clinic closed. Post is cut mid-sentence. Account suspended November 5, 2019.",
+        "notes": "Her last post: 'I'm still monitoring participant accounts. If any of you receive a formal recall notice, please respond to it through the portal. The study has not —'. Account suspension reason: protocol_review (visible in profile HTML source)."
+      },
+      {
+        "id": "E-008",
+        "status": "CONFIRMED",
+        "source": "restwell.net/forum — viewtopic.php?t=23",
+        "finding": "Multiple Protocol 7A participants independently report the same environment: a hallway that bends left, a blue door on the left side. Described during active study sessions (2012-2013).",
+        "notes": "Participants: margaret_h, david_n, p_holloway, r_castello. Lena Ortiz uses the term 'indexed space' to describe it."
+      },
+      {
+        "id": "E-009",
+        "status": "CONFIRMED",
+        "source": "restwell.net/forum — viewtopic.php?t=42",
+        "finding": "EEC score: an internal assessment metric that increased to 5/5 for all active Protocol 7A participants. Ortiz's only explanation: 'The scores indicate successful environmental familiarization.'",
+        "notes": "EEC = Environmental Entry Confirmation (unconfirmed expansion — working theory). All confirmed participants reached 5/5 by session 12-15."
+      },
+      {
+        "id": "E-010",
+        "status": "CONFIRMED",
+        "source": "somnatek.org/admin/ — Tier 2",
+        "finding": "Internal correspondence between Dr. Ellison and Dr. Vale references 'Dorsal site indexing' and discusses participant retention post-study-close.",
+        "notes": "Requires 150+ portal points to access. Admin tier credentials: HARROW-FAC (hint in closure-notice.html source)."
+      },
+      {
+        "id": "E-011",
+        "status": "WORKING THEORY",
+        "source": "Multiple sources",
+        "finding": "The study did not actually end in 2013. The 'indexed space' is still active. Ortiz was monitoring participants as recently as 2019.",
+        "notes": "Supported by: Ortiz's 2019 forum post, p_holloway's 2015 post about ongoing experiences, the fax line active in 2026."
+      },
+      {
+        "id": "E-012",
+        "status": "OPEN",
+        "source": "restwell.net — viewtopic.php?t=31",
+        "finding": "r_castello received records from Dorsal with pages 3-4 of an internal document missing. Document had a 'block read error' note. Document appears to be 7A_INTERNAL_DO_NOT_DISTRIBUTE.",
+        "notes": "The same document is referenced in the fax archive log. The 0x1A3F read error offset matches the corrupted pages."
+      }
+    ]
+  }
+}
