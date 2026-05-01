@@ -25,7 +25,10 @@ When docs and code disagree, this order wins:
 | Email | `records@somnatek.org` |
 | Fax number | `(404) 671-9774` |
 | Main clinic line | `(404) 551-4145` |
-| RestWell domain | `restwell.net` |
+| Somnatek main domain | `somnatek.org` — **registered and live** |
+| RestWell domain | `restwell.net` — planned, **not yet registered** |
+| Wexler domain | `wexler.org` — planned, **not yet registered** |
+| Harrow County domain | `harrow-county.org` — planned, **not yet registered** |
 | Active study period | 2008–2013 |
 | Closure process | 2013–2014 |
 | Public closure date | September 18, 2014 |
@@ -52,7 +55,7 @@ Do not flag these as issues without first reading the source code:
 When reviewing any doc, search for these patterns:
 
 - `somnatekhealth.com` → should be `somnatek.org`
-- `restwellonline.net` → should be `restwell.net`
+- `restwellonline.net` → should be `restwell.net` (planned domain — not yet registered)
 - `records@somnatekhealth.com` → should be `records@somnatek.org`
 - `"740 number"` → should be `(404) 551-4145`
 - `"two months"` near Dorsal registration → should be "six weeks"

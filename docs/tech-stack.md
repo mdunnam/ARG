@@ -240,10 +240,10 @@ Route 53 manages DNS for all in-world domains. A records point to the EC2 Elasti
 
 | Domain | Site |
 |---|---|
-| `somnatek.org` | Main clinic site |
-| `restwell.net` | Patient forum |
-| `wexler.org` | Wexler University archive (fictional) |
-| `harrow-county.org` | Harrow County records (fictional) |
+| `somnatek.org` | Main clinic site | ✅ Registered |
+| `restwell.net` | Patient forum | ⬜ Planned — not yet registered |
+| `wexler.org` | Wexler University archive (fictional) | ⬜ Planned — not yet registered |
+| `harrow-county.org` | Harrow County records (fictional) | ⬜ Planned — not yet registered |
 
 Domains must be fictional and must not impersonate real institutions, universities, counties, or government entities.
 

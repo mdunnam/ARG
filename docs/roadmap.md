@@ -252,7 +252,7 @@ failed handshake sequence.
 A semi-abandoned patient support forum. **Discovery path:** Players examining the HTML source of the Admin Tier 2 panel (`admin/index.html`) find a staff annotation referencing `restwell.net/forum`. This requires first finding and entering the Tier 2 credential (`7A-RC-2012`). The site is fully built; it is gated from casual discovery, not unbuilt.
 
 ### Infrastructure
-- [ ] Domain: `restwell.net` or similar (register)
+- [ ] Domain: `restwell.net` (planned — not yet registered)
 - [ ] S3 bucket + CloudFront or EC2 vhost
 - [ ] CDK stack: `RestWellStack`
 

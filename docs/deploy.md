@@ -132,10 +132,10 @@ The instance is pre-configured with four virtual hosts. Point DNS A records at t
 
 | Site | Nginx config | Web root | Intended domain |
 |---|---|---|---|
-| Somnatek | `/etc/nginx/conf.d/somnatek.conf` | `/var/www/somnatek` | `somnatek.org` |
-| RestWell | `/etc/nginx/conf.d/restwell.conf` | `/var/www/restwell` | `restwell.net` |
-| Wexler University | `/etc/nginx/conf.d/wexler.conf` | `/var/www/wexler` | `wexler.org` (fictional) |
-| Harrow County | `/etc/nginx/conf.d/harrow-county.conf` | `/var/www/harrow-county` | `harrow-county.org` (fictional) |
+| Somnatek | `/etc/nginx/conf.d/somnatek.conf` | `/var/www/somnatek` | `somnatek.org` ✅ registered |
+| RestWell | `/etc/nginx/conf.d/restwell.conf` | `/var/www/restwell` | `restwell.net` ⬜ planned |
+| Wexler University | `/etc/nginx/conf.d/wexler.conf` | `/var/www/wexler` | `wexler.org` ⬜ planned (fictional) |
+| Harrow County | `/etc/nginx/conf.d/harrow-county.conf` | `/var/www/harrow-county` | `harrow-county.org` ⬜ planned (fictional) |
 
 ### Update a server_name (via SSM session)
 
