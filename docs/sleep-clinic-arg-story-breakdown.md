@@ -100,7 +100,7 @@ The clinical study was formally terminated in early 2014.
 
 The closure process involved patient notification letters, records transfer notices, and filing with the county business registry.
 
-Patient files were transferred to **Dorsal Health Holdings**, a company registered two months after Somnatek's closure filing.
+Patient files were transferred to **Dorsal Health Holdings**, a company registered six weeks after Somnatek's closure filing.
 
 The registered agent for Dorsal Health Holdings was Edwin Vale.
 
@@ -206,7 +206,7 @@ The final section, titled Recall Termination Criteria, includes this line:
 
 ### Act 4: The Forum
 
-The RestWell forum is a separate site. Players find it through a Somnatek forum signature embedded in a cached version of the staff directory.
+The RestWell forum is a separate site. Players find it by examining the HTML source of the Admin Tier 2 panel. A staff annotation in the page source references an external URL: `restwell.net/forum`. The comment is formatted as routine cached infrastructure data, not a deliberate pointer.
 
 The forum looks genuinely old. Most threads are irrelevant to the ARG.
 
@@ -226,7 +226,7 @@ The edit timestamp is three minutes after publication. The post history shows an
 
 County business records show Somnatek Sleep Health Center registered in 2006, operating under its legal name until October 2013, then reregistered under the name Somnatek Sleep Health Center LLC in November 2013.
 
-Two months after the closure filing, Dorsal Health Holdings LLC was registered. The registered agent: Edwin Vale.
+Six weeks after the closure filing, Dorsal Health Holdings LLC was registered. The registered agent: Edwin Vale.
 
 The patient file transfer agreement is a county-recorded document. Its text is mostly standard. One section reads:
 

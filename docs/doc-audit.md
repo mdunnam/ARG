@@ -24,7 +24,7 @@
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
 | R-01 | Phase 2 (RestWell) status is "Not started" — RestWell is **built** (`sites/restwell/` is complete). It is gated from discovery, not unbuilt. Status should reflect this. | 🟡 | Change status to "Complete — gated" with note on discovery path |
-| R-02 | Phase 2 description says RestWell is "discoverable through a Somnatek staff directory forum signature (cached)" — this is the OLD discovery path. **Changed today**: credentials now buried in Admin Tier 2 HTML comment, requiring 150+ portal points. | 🔴 | Update Phase 2 discovery mechanism |
+| R-02 | Phase 2 description says RestWell is "discoverable through a Somnatek staff directory forum signature (cached)" — this is the OLD discovery path. Discovery is now via Admin Tier 2 HTML comment (`admin/index.html` line 351: `restwell.net/forum`). **Note:** The "150+ portal points" gate referenced in earlier audit notes is not code-enforced — Admin Tier 2 is credential-gated only (requires finding `7A-RC-2012`). There is no hard point threshold in deployed code. | 🔴 | Update Phase 2 discovery mechanism. Remove any references to a 150-point threshold. |
 | R-03 | Phase 1 blockers still show "PDFs not generated; images placeholder; fax IVR untested" — check if PDFs have been generated since April 30 | 🟡 | Verify and update blockers |
 | R-04 | Milestone table references `restwell_found` (40 pts) as "future" — correct, still future, but note it now fires when player visits forum discovered via Admin Tier 2 | 🟡 | Add context note |
 | R-05 | `www.somnatek.org` is marked ✅ complete in Phase 0 checklist (line 46: "www.somnatek.org DNS alias — cert and nginx both cover www") but also appears as an unchecked item in the launch checklist section lower in the same doc. Contradicts itself. (INC-015) | 🟡 | Remove duplicate unchecked item from launch checklist, or confirm Phase 0 entry is authoritative |
@@ -43,7 +43,7 @@ This is the original design doc written before deployment. It has the most incon
 | P-01 | "longitudinal study from **2008 to 2014**" — **WRONG**. Canonical: study ran 2008–2013. Clinic closed 2014. | 🔴 | Change to "2008 to 2013" |
 | P-02 | "The study began with **forty-two** patients" — **WRONG**. Canonical: 47. (Fixed in story-breakdown.md and admin HTML, not fixed here.) | 🔴 | Change to "forty-seven" |
 | P-03 | Dorsal Health Holdings registered "**two months** after the patient file transfer" — **WRONG**. Canonical: six weeks (registered 2014-11-03, ~6 weeks after Sept 18 closure). | 🔴 | Change to "six weeks" |
-| P-04 | Phase 2 RestWell: "Discoverable through a Somnatek staff directory forum signature (cached)" — **WRONG** after today's gating change. | 🔴 | Update to: discovered via Admin Tier 2 HTML comment (EMP-024 staff annotation), requires 150+ portal points |
+| P-04 | Phase 2 RestWell: "Discoverable through a Somnatek staff directory forum signature (cached)" — **WRONG**. Discovery is now via Admin Tier 2 HTML source (`admin/index.html`). There is no code-enforced point threshold — access requires finding and entering credential `7A-RC-2012`. | 🔴 | Update to: discovered via Admin Tier 2 HTML comment in admin/index.html |
 | P-05 | Week 2 launch plan: "Add / reveal RestWell forum" — RestWell is now gated behind mid-game milestone, not a Week 2 drop. | 🔴 | Update launch timeline |
 | P-06 | Player journey diagram: "finds RestWell forum (week 2+)" — same issue as P-05. | 🔴 | Update diagram |
 | P-07 | Escalation arc table Stage 6: "Reach RestWell" — the stage number/position is fine, but the method should reference the Admin Tier 2 discovery path. | 🟡 | Add parenthetical note |
@@ -66,8 +66,8 @@ This is the original design doc written before deployment. It has the most incon
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
 | S-01 | Act 5: active recall manifest shows entries "below **PTX-047**" with VIS series starting at "**VIS-001**" — canonical VIS format is `VIS-XXXXX` (5-digit zero-padded), so it should be `VIS-00001`. | 🔴 | Change "VIS-001" to "VIS-00001" |
-| S-02 | Act 4 (The Forum): story correctly describes p_holloway (RestWell) and MarauderBlue (deleted external forum) as the same person — ✅ correct after today's update. | 🟢 | Clean |
-| S-03 | Part 1 "The Closure": "six weeks after Somnatek's closure filing" — ✅ correct (matches admin HTML date 2014-11-03). | 🟢 | Clean |
+| S-02 | Act 4 (The Forum) line 209: **"Players find it through a Somnatek forum signature embedded in a cached version of the staff directory"** — this is the OLD discovery path. RestWell is now discovered via Admin Tier 2 HTML source. Story-breakdown.md still describes the old path and has not been updated. Note: `p_holloway` is referenced in RestWell site files but does **not** appear in story-breakdown.md — the claim that this doc correctly describes p_holloway was a false positive. | 🔴 | Update Act 4 to describe Admin Tier 2 discovery path. Add p_holloway reference if desired. |
+| S-03 | Lines 103 and 229: **"two months after Somnatek's closure filing"** — **WRONG**. Canonical is six weeks (Dorsal registered 2014-11-03, ~6 weeks after Sept 18 closure). Was incorrectly marked clean in previous audit pass. | 🔴 | Change both instances of "two months" to "six weeks" |
 | S-04 | Participant count: "forty-seven patients" — ✅ correct after this session's fix. | 🟢 | Clean |
 | S-05 | PTX-047 as "the last PTX-series entry" — ✅ consistent with admin HTML (47 enrolled, VIS series starts after). | 🟢 | Clean |
 | S-06 | RestWell discovery path in Act 4: correctly describes Admin Tier 2 HTML source annotation — ✅ updated this session. | 🟢 | Clean |
@@ -102,7 +102,7 @@ This document requires the most significant rewrite of any file in the docs fold
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| M-01 | Patreon tier structure is **wrong**. Doc shows $3–5 Observer / $8–12 Records / $20–30 Archive (3 tiers). Deployed `scripts/patreon-observer-tier.txt` and `copilot-instructions.md` have a **6-tier** structure ($3 Supporter / $5 Observer / $8 Insider / $15 Investigator / $30 Director's Circle / $100 Patron). | 🔴 | Full tier rewrite |
+| M-01 | Patreon tier structure is wrong. Doc shows $3–5 Observer / $8–12 Records / $20–30 Archive (3 tiers). `scripts/patreon-observer-tier.txt` documents only a **single $5 Observer tier** — this is the only tier with committed documentation. A 6-tier structure ($3 Supporter / $5 Observer / $8 Insider / $15 Investigator / $30 Director's Circle / $100 Patron) was planned in session but is not in any script or committed file beyond this conversation. The monetization doc should be updated to reflect what is actually documented: the $5 Observer tier is confirmed; additional tiers are proposed but not finalized. | 🔴 | Rewrite Patreon section to accurately reflect: $5 Observer tier confirmed; additional tiers proposed (list them) but not yet documented in committed files |
 | M-02 | "RestWell forum sticker pack" listed on **public merch** — RestWell is a mid-game gated discovery. Advertising it on the public store spoils its existence for new players. | 🔴 | Remove from public merch entirely |
 | M-03 | **No gated/unlockable merch system** exists anywhere in this document. The PTX-047 shirt, Active Recall designation card, RECALLED print, etc. are completely absent. | 🔴 | Add full gated merch section (5 tiers: public, Tier 1–4 portal-milestone unlocks) |
 | M-04 | **No mention of VIS IDs, portal milestones, or unlock codes** — the live game's progression system isn't referenced once. | 🔴 | Add unlock code mechanic section |
@@ -165,7 +165,7 @@ This document requires the most significant rewrite of any file in the docs fold
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
 | A-01 | Rabbit holes section: "Lena Ortiz HTML comment (RestWell URL) \| staff.html \| ✅" — **WRONG after today's session**. RestWell URL and credentials were removed from staff.html. Discovery vector is now Admin Tier 2 HTML source. | 🔴 | Update rabbit hole entry |
-| A-02 | Security note: "Math.random() used for VIS ID generation — should be crypto.randomBytes() before production public launch." — This is a **security issue that is live right now** (public launch happened). | 🔴 | Fix in code immediately, then mark resolved |
+| A-02 | ~~Security note about Math.random() in VIS ID generation~~ — **FALSE POSITIVE**. `lambda/portal-login/index.js` already uses `crypto.randomBytes()` (confirmed at line 31). The `Math.random()` that exists is in `lambda/email-responder/index.js` line 168 for generating a fake cosmetic in-world reference number (`DHHRMS-XXXXXX-2014`). This is not a security issue — it is an in-world display string with no security implications. The audit note in `audit.md` is stale and should be removed. | ✅ | Remove the security note from `audit.md` — it is no longer accurate |
 | A-03 | Phase status column: privacy.html marked ❌ "not built" — check current state | 🟡 | Verify and update |
 | A-04 | Audit date "April 30, 2026" — needs updating after today's changes | 🟡 | Update date and add May 1 change notes |
 | A-05 | Milestone total inconsistency: `audit.md` Phase 1 total says **275 pts**; `roadmap.md` milestone table says released = **245 pts**, all-time = **315 pts**. These three numbers don't reconcile. The `fax_decoded` milestone (15 pts) being counted or not may explain part of the gap, but the full discrepancy is unexplained. (INC-014) | 🔴 | Recalculate from one source of truth (roadmap milestone table is most detailed). Update both files to match. |
@@ -182,7 +182,7 @@ These issues were not surfaced in the initial audit pass. Added from `inconsiste
 
 | # | Issue | Severity | Fix needed |
 |---|---|---|---|
-| SEC-001 | **`docs/twilio_2FA_recovery_code.txt` exists in the repository.** A Twilio 2FA recovery code is a real credential. If this file has ever been pushed to a public or shared branch, the code may be compromised. Storing credentials in `docs/` violates the project's own security rules ("never commit credentials"). | 🔴 **URGENT** | Move file out of repo immediately. If it has been in any pushed commit, rotate the Twilio 2FA recovery codes now. Add `twilio_2FA_recovery_code.txt` (and `*recovery_code*`) to `.gitignore`. |
+| SEC-001 | ~~`docs/twilio_2FA_recovery_code.txt` in repo~~ — **RESOLVED**. File was never committed (`git log` returned no history for it). File is already deleted locally. `docs/twilio_2FA_recovery_code.txt` is already in `.gitignore`. No rotation required — the file was never in any pushed commit. | ✅ | No further action needed |
 | SEC-002 | Multiple docs state "no real PII" as an absolute. But `tech-stack.md` explicitly documents storing: email address, visitor ID, consent timestamp, preferences, and unsubscribe status. These are PII under most privacy frameworks. The correct statement is "no sensitive medical PII; minimal opt-in contact PII only, handled per privacy policy." | 🟡 | Align PII language across all docs to: "no medical PII; minimal opt-in contact data only" |
 | SEC-003 | `sleep-clinic-arg-monetization.md` and `sleep-clinic-arg-live-operations.md` both require privacy language for email collection before promotion. `audit.md` marks `privacy.html` as not built. `roadmap.md` marks opt-in/unsubscribe path as not started. The email responder is **already live** and responding to all inbound emails. This is a consent gap: players email a system that classifies and stores their interaction state before any privacy notice exists. | 🔴 | Confirm `privacy.html` current state. If not live, pause any promotion that drives inbound email until it is. Add privacy notice link to email footer responses from `lambda/email-responder`. |
 
@@ -234,25 +234,27 @@ Conflicts where two or more docs say different things about the same fact:
 
 ### Urgent (security / credentials)
 
-0. **SEC-001** — Rotate Twilio 2FA recovery codes if `docs/twilio_2FA_recovery_code.txt` has ever been pushed. Move out of repo. Add to `.gitignore`. **Do this before anything else.**
+0. ~~**SEC-001**~~ — **RESOLVED.** Twilio recovery code was never committed. Already in `.gitignore`.
 
-### Immediate (lore-breaking, security, or consent gap)
+### Immediate (lore-breaking or consent gap)
 
-1. **A-02** — Fix `Math.random()` → `crypto.randomBytes()` in `lambda/portal-login/index.js` (security issue, live)
+1. ~~**A-02**~~ — **FALSE POSITIVE.** `portal-login` already uses `crypto.randomBytes()`. `Math.random()` in `email-responder` is a cosmetic in-world reference string, not a security issue. Remove stale note from `audit.md`.
 2. **SEC-003** — Confirm `privacy.html` is live before any promotion push drives inbound email volume
-3. **T-05** — `tech-stack.md`: `records@somnatekhealth.com` → `records@somnatek.org`
-4. **P-14** — `sleep-clinic-arg-plan.md`: "740 number" → `(404) 551-4145`
-5. **P-01** — `sleep-clinic-arg-plan.md`: study period "2008 to 2014" → "2008 to 2013"
-6. **P-02** — `sleep-clinic-arg-plan.md`: "forty-two" → "forty-seven"
-7. **P-03** — `sleep-clinic-arg-plan.md`: "two months" → "six weeks" (Dorsal registration)
-8. **P-04/P-05/P-06/P-15** — `sleep-clinic-arg-plan.md`: RestWell discovery path + portal "to be built" contradiction updated throughout
-9. **S-01** — `sleep-clinic-arg-story-breakdown.md`: "VIS-001" → "VIS-00001"
-10. **A-07** — `audit.md`: 7A artifact HTML vs PDF distinction — story-breakdown.md must not say "PDF download" until PDF exists
-11. **A-01** — `audit.md`: RestWell rabbit hole entry updated
-12. **A-05** — `audit.md` / `roadmap.md`: milestone total reconciliation
-13. **M-01 through M-07** — `sleep-clinic-arg-monetization.md`: full rewrite
-14. **SYS-02** — Choose canonical RestWell domain and update all occurrences across all docs + deployed HTML comment
-15. **SYS-03** — Choose canonical Wexler/Harrow domains (non-.edu/.gov)
+3. **S-02** — `sleep-clinic-arg-story-breakdown.md` line 209: RestWell discovery path still describes old staff directory path
+4. **S-03** — `sleep-clinic-arg-story-breakdown.md` lines 103 + 229: "two months" → "six weeks" (Dorsal registration)
+5. **T-05** — `tech-stack.md`: `records@somnatekhealth.com` → `records@somnatek.org`
+6. **P-14** — `sleep-clinic-arg-plan.md`: "740 number" → `(404) 551-4145`
+7. **P-01** — `sleep-clinic-arg-plan.md`: study period "2008 to 2014" → "2008 to 2013"
+8. **P-02** — `sleep-clinic-arg-plan.md`: "forty-two" → "forty-seven"
+9. **P-03** — `sleep-clinic-arg-plan.md`: "two months" → "six weeks" (Dorsal registration)
+10. **P-04/P-05/P-06/P-15** — `sleep-clinic-arg-plan.md`: RestWell discovery path + portal "to be built" contradiction updated throughout
+11. **S-01** — `sleep-clinic-arg-story-breakdown.md`: "VIS-001" → "VIS-00001"
+12. **A-07** — `audit.md` / `story-breakdown.md`: 7A artifact HTML vs PDF — story must not say "PDF download" until PDF exists
+13. **A-01** — `audit.md`: RestWell rabbit hole entry updated
+14. **A-05** — `audit.md` / `roadmap.md`: milestone total reconciliation
+15. **M-01 through M-07** — `sleep-clinic-arg-monetization.md`: full rewrite
+16. **SYS-02** — Choose canonical RestWell domain and update all occurrences across all docs + deployed HTML comment
+17. **SYS-03** — Choose canonical Wexler/Harrow domains (non-.edu/.gov)
 
 ### Next (outdated but not broken)
 
