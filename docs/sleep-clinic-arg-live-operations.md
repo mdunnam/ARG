@@ -53,14 +53,22 @@ This loop can continue indefinitely because each new drop can recontextualize ol
 Unreleased content is never committed to the public repository branch.
 
 - **Staged assets** live in a private S3 prefix (`s3://somnatek-site/staged/`) or in the local `staged/` directory (gitignored).
-- **Content ledger** — a DynamoDB table (`somnatek-content-ledger`) is planned to track release state for each artifact: `drafted` → `scheduled` → `released` → `discovered` → `superseded` → `removed`. **This table is not yet deployed.** (`aws dynamodb describe-table --table-name somnatek-content-ledger` returns ResourceNotFoundException.) Run `scripts/seed-content-ledger.js` to deploy it, or add it to CDK before using the ledger workflow.
+- **Content ledger** — 25 `DROP#` entries seeded into `somnatek-visitors` on May 1, 2026 via `scripts/seed-content-ledger.js`. The separate `somnatek-content-ledger` table is not needed — ledger entries use the `DROP#` pk prefix in the existing visitors table.
 - **Release scripts** live in `scripts/`. They copy staged artifacts to the public S3 or EC2 path and update the ledger.
 - **Automation (planned):** EventBridge Scheduler will trigger release Lambdas on a schedule for daily micro-drops. This is not yet implemented — current releases are manual (admin runs deploy script).
 
 For daily micro-drops before automation is built, the operational workflow is:
 1. Author artifact locally.
 2. Run `scripts/deploy-and-nginx.ps1` (or equivalent) to sync the file to EC2.
-3. Update `somnatek-content-ledger` record to `released`. **NOTE: table not yet deployed — skip step 3 until `somnatek-content-ledger` is provisioned. Track releases manually in `docs/roadmap.md` changelog section.**
+3. Update the `DROP#<slug>` record in `somnatek-visitors` to `released`:
+```powershell
+aws dynamodb update-item --table-name somnatek-visitors `
+  --key '{"pk":{"S":"DROP#your-slug"}}' `
+  --update-expression 'SET #s = :r, releasedDate = :d' `
+  --expression-attribute-names '{"#s":"state"}' `
+  --expression-attribute-values '{":r":{"S":"released"},":d":{"S":"2026-05-01"}}' `
+  --profile somnatek-arg
+```
 
 ## Content Cadence
 
@@ -240,8 +248,8 @@ The phone line `(404) 551-4145` routes through Amazon Connect. The inbound fax `
 | `lambda/phone-responder` built | ✅ |
 | `SomnatekPhoneStack` deployed (Connect + Lambda) | ✅ |
 | IVR contact flow end-to-end tested | ⚠️ Unconfirmed |
-| Fax audio `(404) 671-9774` confirmed playing live | ⚠️ Unconfirmed |
-| `fax_decoded` milestone achievable by players | ⚠️ Blocked — depends on fax IVR live test |
+| Fax audio `(404) 671-9774` confirmed playing live | ✅ |
+| `fax_decoded` milestone achievable by players | ✅ Fax confirmed; milestone is live |
 
 Do not count `fax_decoded` (15 pts) as achievable until the fax IVR is confirmed operational.
 

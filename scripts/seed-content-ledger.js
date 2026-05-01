@@ -26,10 +26,11 @@ const { DynamoDBDocumentClient, PutCommand, GetCommand } = require('@aws-sdk/lib
 const REGION = process.env.AWS_REGION || 'us-east-1';
 const TABLE  = process.env.DYNAMODB_TABLE || 'somnatek-visitors';
 
-const args      = process.argv.slice(2);
-const dryRun    = args.includes('--dry-run');
-const launchArg = args[args.indexOf('--launch') + 1];
-const LAUNCH    = launchArg ? new Date(launchArg) : new Date();
+const args        = process.argv.slice(2);
+const dryRun      = args.includes('--dry-run');
+const launchIdx   = args.indexOf('--launch');
+const launchArg   = launchIdx !== -1 ? args[launchIdx + 1] : null;
+const LAUNCH      = launchArg ? new Date(launchArg) : new Date();
 
 const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: REGION }));
 

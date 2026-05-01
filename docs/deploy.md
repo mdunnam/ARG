@@ -322,8 +322,8 @@ The phone stack provisions an Amazon Connect instance and routes inbound calls t
 | `SomnatekPhoneStack` deployed (Connect + Lambda) | ✅ |
 | Phone number claimed in Connect | ⚠️ Unconfirmed — verify `PhoneNumberClaimed` output matches (404) 551-4145 |
 | IVR contact flow end-to-end tested (live call) | ⚠️ Unconfirmed |
-| Fax line `(404) 671-9774` confirmed playing morse audio live | ⚠️ Unconfirmed |
-| `fax_decoded` milestone achievable by players | ⚠️ Blocked until fax IVR confirmed live |
+| Fax line `(404) 671-9774` confirmed playing morse audio live | ✅ |
+| `fax_decoded` milestone achievable by players | ✅ Fax confirmed; milestone is live |
 
 ### Cost
 

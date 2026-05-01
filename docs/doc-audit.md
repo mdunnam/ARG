@@ -310,6 +310,6 @@ Conflicts where two or more docs say different things about the same fact:
 - **S-07** — Confirm "Caleb R." is intentional; assign canonical last name if not
 - **Ref-02** — Update twitter.com → x.com links (optional)
 - **D-03** — Decide whether to replace placeholder instance ID in deploy.md
-- **Fax IVR** — Run a live test call to `(404) 671-9774` and confirm morse audio plays; update status tables in deploy.md and live-ops.md
+- **Fax IVR** — ✅ Confirmed live (May 1, 2026)
 - **Email L1/L2/L3** — Send test emails and confirm classification; update status table in live-ops.md
-- **Content ledger** — Run `scripts/seed-content-ledger.js` to provision `somnatek-content-ledger` DynamoDB table
+- **Content ledger** — ✅ Seeded May 1, 2026 (25 drops, launch 2026-05-01)
