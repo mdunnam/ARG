@@ -36,7 +36,7 @@ Neither of them expected anything unusual.
 
 ### The First Study: 2008-2010
 
-The study began with forty-two patients, all presenting with sleep disorders of various severity.
+The study began with forty-seven patients, all presenting with sleep disorders of various severity.
 
 The protocol was simple: a short survey on waking, asking patients to describe what they remembered from sleep. No prompting, no imagery, no environment suggestions.
 

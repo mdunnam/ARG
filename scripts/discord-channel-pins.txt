@@ -240,7 +240,7 @@ This channel is not visible to general server visitors.
 
 **Active questions in this tier:**
 
-:question: What is the full PTX participant list? Five IDs confirmed (PTX-007, 011, 014, 018, 031). Admin Tier 2 implies 42 participants total.
+:question: What is the full PTX participant list? Five IDs confirmed (PTX-007, 011, 014, 018, 031). Admin Tier 2 shows 47 enrolled total — only 5 are visible at this access level.
 :question: What happened to PTX-031? Insurance form dated two years after enrollment.
 :question: What is EMP-247? Not in the standard personnel file. Appears in facility room assignments.
 :question: Admin Tier 3 references "post-study observers (VIS series)" with a recall queue listed as open. What does that mean for us?
