@@ -84,18 +84,21 @@ CDK stacks live in `infra/`. TypeScript is used for type safety and IDE support.
 
 ### Stacks
 
-| Stack | File | Purpose |
-|---|---|---|
-| `SomnatekEc2Stack` | `infra/lib/somnatek-ec2-stack.ts` | EC2 instance, security group, IAM role, Elastic IP |
+| Stack | File | Purpose | Status |
+|---|---|---|---|
+| `SomnatekEc2Stack` | `infra/lib/somnatek-ec2-stack.ts` | EC2 instance, security group, IAM role, Elastic IP | ✅ Deployed |
+| `SomnatekEmailStack` | `infra/lib/somnatek-email-stack.ts` | SES inbound rule, email-responder Lambda, DynamoDB table | ✅ Deployed |
+| `SomnatekPhoneStack` | `infra/lib/somnatek-phone-stack.ts` | Amazon Connect instance, IVR contact flow, phone-responder Lambda | ✅ Deployed |
+| `SomnatekPortalStack` | `infra/lib/somnatek-portal-stack.ts` | Portal-login Lambda + HTTP API Gateway (`/api/portal-login`) | ✅ Deployed |
+| `SomnatekBeaconStack` | `infra/lib/somnatek-beacon-stack.ts` | Page-beacon Lambda + HTTP API Gateway (`/api/beacon`) | ✅ Deployed |
+| `SomnatekAdminStack` | `infra/lib/somnatek-admin-stack.ts` | Admin-api Lambda + HTTP API Gateway (`/api/admin`) | ✅ Deployed |
 
-Future stacks (planned):
+Planned (not yet built):
 
 | Stack | Purpose |
 |---|---|
-| `SomnatekLambdaStack` | Puzzle validation Lambda functions + API Gateway |
-| `SomnatekDatabaseStack` | DynamoDB tables for visitor state and content ledger |
-| `SomnatekEmailStack` | SES configuration for opt-in in-world email transmissions |
 | `SomnatekSchedulerStack` | EventBridge rules for timed content drops |
+| `SomnatekContentLedgerStack` | DynamoDB content ledger + release Lambda |
 
 ---
 
@@ -103,7 +106,17 @@ Future stacks (planned):
 
 ### Service: AWS Lambda (Node.js) + AWS API Gateway
 
-Lambda functions live in `lambda/`. Each puzzle has its own folder with an `index.js` entry point.
+Lambda functions live in `lambda/`. Each function has its own folder with an `index.js` entry point.
+
+### Deployed Lambda Functions
+
+| Function | Endpoint / Trigger | Purpose | Status |
+|---|---|---|---|
+| `portal-login` | `POST /api/portal-login` | Puzzle answer validation, rate-limiting, VIS-XXXXX issuance | ✅ Live |
+| `page-beacon` | `POST /api/beacon` | Anonymous visitor tracking, milestone writes, progress recompute | ✅ Live |
+| `admin-api` | `GET /api/admin` | Operator dashboard — visitor counts, milestone distribution, Lambda metrics | ✅ Live |
+| `email-responder` | SES receipt rule (`records@somnatek.org`) | Inbound email classification (L1/L2/L3), Bedrock-powered response generation | ✅ Live |
+| `phone-responder` | Amazon Connect contact flow | Inbound call routing, level-based Polly SSML response | ✅ Live |
 
 ### Why Lambda
 
@@ -267,17 +280,19 @@ Credentials for GitHub Actions use a separate least-privilege IAM role with OIDC
 
 ## Cost Summary
 
-| Service | Estimated monthly cost |
-|---|---|
-| EC2 t3.micro (on-demand) | ~$7.50 |
-| Elastic IP (attached, in use) | $0.00 |
-| EBS 20GB GP3 | ~$1.60 |
-| Route 53 hosted zone | ~$0.50/zone |
-| DynamoDB (low traffic) | Free tier / <$1.00 |
-| Lambda (low traffic) | Free tier |
-| SES (low volume) | Free tier / <$1.00 |
-| S3 (low volume) | Free tier / <$1.00 |
-| **Total estimate** | **~$12–15/month** |
+| Service | Estimated monthly cost | Notes |
+|---|---|---|
+| EC2 t3.micro (on-demand) | ~$7.50 | Single AZ; no failover |
+| Elastic IP (attached, in use) | $0.00 | |
+| EBS 20GB GP3 | ~$1.60 | |
+| Route 53 hosted zone | ~$0.50/zone | |
+| DynamoDB (low traffic) | Free tier / <$1.00 | |
+| Lambda (low traffic) | Free tier | |
+| SES (low volume) | Free tier / <$1.00 | |
+| S3 (low volume) | Free tier / <$1.00 | |
+| Amazon Connect (phone line) | ~$1.00/month + $0.018/min | DID number + inbound call minutes |
+| Bedrock Claude 3 Haiku | ~$0.25–1.00/month | email-responder inference; varies with email volume |
+| **Total estimate** | **~$13–18/month** | Bedrock/Connect new since initial estimate |
 
 Upgrade path: if traffic grows, move static sites to S3 + CloudFront for better performance and lower EC2 load. The CDK stack is structured to support that migration.
 

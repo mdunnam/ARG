@@ -4,6 +4,21 @@ Last updated: April 30, 2026 (night)
 
 ---
 
+## Phase Status
+
+| Phase | Status | Verified | Blocker |
+|---|---|---|---|
+| 0 — Foundation | ✅ Complete | Apr 30, 2026 | None |
+| 1 — First Puzzle Chain | ⚠️ Core complete | Apr 30, 2026 | PDFs not generated; images placeholder; fax IVR untested |
+| 2 — RestWell Forum | ⬜ Not started | — | Requires Phase 1 PDFs + images deployed |
+| 3 — Wexler Archive | ⬜ Not started | — | Requires Phase 2 community seeding |
+| 4 — Harrow County Records | ⬜ Not started | — | Phase 3 dependency |
+| 5 — Visitor Classification | ⬜ Not started | — | Email / phone escalation system design |
+| 6 — Expanded Network | ⬜ Not started | — | Phase 5 dependency |
+| 7 — Content Automation | ⬜ Not started | — | EventBridge + content ledger infrastructure |
+
+---
+
 ## Legend
 
 - `[x]` Done

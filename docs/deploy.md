@@ -306,7 +306,11 @@ aws logs tail /aws/lambda/SomnatekEmailStack-EmailResponder --follow --profile s
 
 ## Deploying the Phone Line (Amazon Connect)
 
-The phone stack provisions an Amazon Connect instance, claims a US 740-area-code phone number, and routes inbound calls through a contact flow that invokes a Lambda to determine caller level and plays a level-appropriate Polly SSML message.
+The phone stack provisions an Amazon Connect instance and routes inbound calls through a contact flow that invokes a Lambda to determine caller level and plays a level-appropriate Polly SSML message.
+
+**Deployed numbers (404 area code):**
+- Main line: (404) 551-4145
+- Fax line: (404) 671-9774
 
 ### Cost
 
@@ -329,7 +333,7 @@ CDK will provision the Connect instance, contact flow, Lambda, and phone number 
 
 | Output | Description |
 |---|---|
-| `PhoneNumberClaimed` | The actual 740-xxx-xxxx number — update `.env` and site HTML with this |
+| `PhoneNumberClaimed` | The claimed phone number — confirm matches (404) 551-4145 / (404) 671-9774 |
 | `ConnectInstanceArn` | Connect instance ARN |
 | `ConnectInstanceId` | Connect instance ID |
 | `ConsoleUrl` | Direct URL to the Connect admin console |
@@ -339,7 +343,7 @@ CDK will provision the Connect instance, contact flow, Lambda, and phone number 
 ### Post-deploy steps
 
 1. Copy the `PhoneNumberClaimed` output value into `CONNECT_PHONE_NUMBER` in `.env`
-2. Replace `(740) 555-0192` in all Somnatek site HTML files with the real number
+2. Confirm (404) 551-4145 (main) and (404) 671-9774 (fax) appear in all Somnatek site HTML headers and footers
 3. Redeploy site files to S3 and the EC2 instance
 4. In the Connect console, confirm the phone number is associated with the `SomnatekMainLine` contact flow
 

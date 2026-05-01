@@ -168,6 +168,24 @@ By form 22: "Patient described vending machine accepting room keys. No prior exp
 
 The forms grow shorter after that. The last one reads: "Patient requested discontinuation. Reports dreaming about this office."
 
+### Act 2b: The Termination Reports (7A-SUPP-005)
+
+The supplemental index lists documents 7A-SUPP-001 through 7A-SUPP-010. Five of them are not accessible. The index itself is a redirect page — it loads, pauses, and disappears before the player can read it. Enough remains in page source to extract the document list.
+
+Among the accessible files: 7A-SUPP-005, the termination reports for the five Category 7 participants.
+
+Each report follows the same structure: participant ID, session count, final checklist score, termination classification, and a brief disposition note. The clinical language is identical across all five. What is not identical is the detail that bleeds through:
+
+- PTX-007: First unprompted corridor description (session 12). Note: "ongoing access confirmed in follow-up contact, June 2013."
+- PTX-011: First unprompted vending machine mention (session 11). This is fourteen months before PTX-018's session 22 entry documenting the same detail.
+- PTX-014: First participant to describe going through the blue door (session 22). The note reads: "reported light from everywhere. High ceiling. Hallway continuing."
+- PTX-018: Room 413 named explicitly (session 20). Highest EEC consistency rating in the study. Withdrawal request submitted session 22.
+- PTX-031: Active status. No termination rationale given.
+
+PTX-011 mentioned the vending machine fourteen months before PTX-018 did. PTX-031 has no termination date. The Category 7 designation means these files are maintained as active — indefinitely, with scheduled recall at intervals set by the Archive Committee.
+
+The player is reading their own intake intake paperwork before they know they are a participant.
+
 ### Act 3: The Protocol
 
 Metadata in the PDF files contains author fields, edit histories, and internal tags.
