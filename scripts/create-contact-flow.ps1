@@ -39,14 +39,18 @@ Write-Host "Instance ID: $InstanceId"
 # ── Build contact flow JSON ────────────────────────────────────────────────────
 # Action identifiers must be valid UUIDs.
 $ID = @{
-    voice      = "00000000-0000-0000-0000-000000000001"
-    greeting   = "00000000-0000-0000-0000-000000000002"
-    ext1       = "00000000-0000-0000-0000-000000000011"
-    ext2       = "00000000-0000-0000-0000-000000000012"
-    ext3       = "00000000-0000-0000-0000-000000000013"
-    ext4       = "00000000-0000-0000-0000-000000000014"
-    fallback   = "00000000-0000-0000-0000-000000000020"
-    disconnect = "00000000-0000-0000-0000-000000000099"
+    voice       = "00000000-0000-0000-0000-000000000001"
+    greeting    = "00000000-0000-0000-0000-000000000002"
+    ext1        = "00000000-0000-0000-0000-000000000011"
+    ext2        = "00000000-0000-0000-0000-000000000012"
+    ext3        = "00000000-0000-0000-0000-000000000013"
+    ext4        = "00000000-0000-0000-0000-000000000014"  # press 4 -> ext dial prompt
+    ext4digit1  = "00000000-0000-0000-0000-000000000031"  # collect second digit (1)
+    ext4digit2  = "00000000-0000-0000-0000-000000000032"  # collect third digit (3)
+    room413     = "00000000-0000-0000-0000-000000000041"  # hidden 413 message
+    extnotfound = "00000000-0000-0000-0000-000000000042"  # generic not-in-service
+    fallback    = "00000000-0000-0000-0000-000000000020"
+    disconnect  = "00000000-0000-0000-0000-000000000099"
 }
 
 $flowObj = [ordered]@{
@@ -127,8 +131,85 @@ $flowObj = [ordered]@{
             }
             Transitions = [ordered]@{ NextAction = $ID.disconnect }
         },
+        # ext4: collecting first digit — prompts "Extension." then waits
+        # Hidden path: 4 -> 1 -> 3 plays room 413 message. Any other sequence -> not-in-service.
         [ordered]@{
             Identifier  = $ID.ext4
+            Type        = "GetParticipantInput"
+            Parameters  = [ordered]@{
+                Text                  = "Extension."
+                InputTimeLimitSeconds = "8"
+                StoreInput            = "False"
+            }
+            Transitions = [ordered]@{
+                NextAction = $ID.extnotfound
+                Conditions = @(
+                    [ordered]@{ NextAction = $ID.ext4digit1; Condition = [ordered]@{ Operator = "Equals"; Operands = @("4") } }
+                )
+                Errors = @(
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "InputTimeLimitExceeded" },
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "NoMatchingCondition" },
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "NoMatchingError" }
+                )
+            }
+        },
+        [ordered]@{
+            Identifier  = $ID.ext4digit1
+            Type        = "GetParticipantInput"
+            Parameters  = [ordered]@{
+                Text                  = " "
+                InputTimeLimitSeconds = "6"
+                StoreInput            = "False"
+            }
+            Transitions = [ordered]@{
+                NextAction = $ID.extnotfound
+                Conditions = @(
+                    [ordered]@{ NextAction = $ID.ext4digit2; Condition = [ordered]@{ Operator = "Equals"; Operands = @("1") } }
+                )
+                Errors = @(
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "InputTimeLimitExceeded" },
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "NoMatchingCondition" },
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "NoMatchingError" }
+                )
+            }
+        },
+        [ordered]@{
+            Identifier  = $ID.ext4digit2
+            Type        = "GetParticipantInput"
+            Parameters  = [ordered]@{
+                Text                  = " "
+                InputTimeLimitSeconds = "6"
+                StoreInput            = "False"
+            }
+            Transitions = [ordered]@{
+                NextAction = $ID.extnotfound
+                Conditions = @(
+                    [ordered]@{ NextAction = $ID.room413; Condition = [ordered]@{ Operator = "Equals"; Operands = @("3") } }
+                )
+                Errors = @(
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "InputTimeLimitExceeded" },
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "NoMatchingCondition" },
+                    [ordered]@{ NextAction = $ID.extnotfound; ErrorType = "NoMatchingError" }
+                )
+            }
+        },
+        # Room 413 — hidden extension, discovered by pressing 4-1-3 at the ext prompt
+        [ordered]@{
+            Identifier  = $ID.room413
+            Type        = "MessageParticipant"
+            Parameters  = [ordered]@{
+                Text = ("Extension four one three. " +
+                        "This line is reserved for active protocol coordination. " +
+                        "All participant observation files for this extension have been retained and are current. " +
+                        "If you are hearing this recording, your file may be active. " +
+                        "Reference: Protocol Seven Alpha. " +
+                        "The door is on the left. " +
+                        "Please wait to be recalled.")
+            }
+            Transitions = [ordered]@{ NextAction = $ID.disconnect }
+        },
+        [ordered]@{
+            Identifier  = $ID.extnotfound
             Type        = "MessageParticipant"
             Parameters  = [ordered]@{
                 Text = ("The extension you have dialed is no longer in service. " +
