@@ -39,6 +39,17 @@ a:visited { color: #5a4a7a; }
     padding: 14px 18px 10px 18px;
 }
 
+#site-logo {
+    float: left;
+    margin-right: 12px;
+    margin-top: 2px;
+}
+
+#site-logo img {
+    display: block;
+    border: 0;
+}
+
 #site-title {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 20px;
