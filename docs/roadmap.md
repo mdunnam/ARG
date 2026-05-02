@@ -9,7 +9,7 @@ Last updated: April 30, 2026 (night)
 | Phase | Status | Verified | Blocker |
 |---|---|---|---|
 | 0 — Foundation | ✅ Complete | Apr 30, 2026 | None |
-| 1 — First Puzzle Chain | ⚠️ Core complete | Apr 30, 2026 | PDFs generated and deployed ✅; images placeholder; fax IVR untested |
+| 1 — First Puzzle Chain | ✅ Complete | May 1, 2026 | PDFs ✅; images ✅ (all 6 deployed, ratios corrected); fax confirmed live ✅ |
 | 2 — RestWell Forum | ⚠️ Site built, gated | — | Site complete (`sites/restwell/`); discoverable via Admin Tier 2 HTML source (`admin/index.html`). Not yet publicly deployed. |
 | 3 — Wexler Archive | ⬜ Not started | — | Requires Phase 2 community seeding |
 | 4 — Harrow County Records | ⬜ Not started | — | Phase 3 dependency |
