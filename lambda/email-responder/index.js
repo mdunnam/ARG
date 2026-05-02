@@ -78,8 +78,13 @@ const LEVEL_2_PATTERNS = [
  */
 function classifyEmail(body, previousLevel) {
   const text = (body || '').toLowerCase();
+  // Level 3 patterns are all highly specific (room numbers, lore phrases, patient IDs).
+  // A single match is intentional — these cannot be guessed casually.
   if (LEVEL_3_PATTERNS.some(p => p.test(text))) return 3;
-  if (LEVEL_2_PATTERNS.some(p => p.test(text))) return Math.max(2, previousLevel);
+  // Level 2 patterns include common words (study, recall, research).
+  // Require at least 2 matches to avoid false positives from ordinary emails.
+  const l2matches = LEVEL_2_PATTERNS.filter(p => p.test(text)).length;
+  if (l2matches >= 2) return Math.max(2, previousLevel);
   return Math.max(1, previousLevel);
 }
 
