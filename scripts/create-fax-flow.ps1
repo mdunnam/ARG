@@ -107,14 +107,14 @@ $flowObj = [ordered]@{
     Version     = "2019-10-30"
     StartAction = $ID.play
     Actions     = @(
+        # MessageParticipant with PromptId plays the audio and immediately proceeds.
+        # Do NOT use GetParticipantInput — it waits for keypress (charges ~30s per call).
+        # Do NOT use Media.Uri — Connect API requires PromptId directly.
         [ordered]@{
             Identifier  = $ID.play
             Type        = "MessageParticipant"
             Parameters  = [ordered]@{
-                Media = [ordered]@{
-                    Uri  = $promptArn
-                    Type = "Prompt"
-                }
+                PromptId = $promptId   # Use the prompt GUID, not the full ARN
             }
             Transitions = [ordered]@{ NextAction = $ID.disconnect }
         },
