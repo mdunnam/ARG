@@ -311,5 +311,5 @@ Conflicts where two or more docs say different things about the same fact:
 - **Ref-02** — Update twitter.com → x.com links (optional)
 - **D-03** — Decide whether to replace placeholder instance ID in deploy.md
 - **Fax IVR** — ✅ Confirmed live (May 1, 2026)
-- **Email L1/L2/L3** — Send test emails and confirm classification; update status table in live-ops.md
+- **Email L1/L2/L3** — SES domain verified May 1, 2026. Send test emails to confirm classification; update status table in live-ops.md
 - **Content ledger** — ✅ Seeded May 1, 2026 (25 drops, launch 2026-05-01)

@@ -229,6 +229,7 @@ The email responder Lambda (`lambda/email-responder/index.js`) is live and class
 |---|---|
 | Lambda built | ✅ |
 | Lambda deployed (`SomnatekEmailStack`) | ✅ |
+| SES domain verified (`somnatek.org`) | ✅ May 1, 2026 |
 | Level 1 live-tested | ⚠️ Unconfirmed |
 | Level 2 live-tested | ⚠️ Unconfirmed |
 | Level 3 live-tested | ⚠️ Unconfirmed |
