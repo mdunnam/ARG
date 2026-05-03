@@ -154,7 +154,7 @@ Finding the participant ID that works in the portal requires reading the study s
 
 The ID format appears in a data table footnote: `PTX-XXX`. The footnote says "participant identifiers assigned in study sequence." A partially visible table in the same PDF shows entries up to PTX-047 before the page ends.
 
-Players test IDs. PTX-018 returns a portal page.
+The correct ID is **PTX-018**. It appears in the session summary table footnotes, in the cross-reference notations on later recall forms, and in the SUPP-005 termination report cohort listing. Players who read carefully will have encountered it multiple times before recognizing it as the key. PTX-018 returns a portal page.
 
 The portal is not a full patient profile. It is an archived set of recall summaries, formatted as scanned handwritten forms.
 
@@ -188,39 +188,56 @@ The player is reading their own intake intake paperwork before they know they ar
 
 ### Act 3: The Protocol
 
-Metadata in the PDF files contains author fields, edit histories, and internal tags.
-
-The properties of the seventh summary document show an author field reading `L. Ortiz` and a last-modified date four months after the clinic officially closed.
-
-Searching for Lena Ortiz in the forum returns nothing. Searching for her name in plain text inside the PDFs returns one result: a version of the staff protocol checklist that includes a line at the bottom reading "revised per LO note 3 - do not include room 413 in the standard environmental checklist."
+The institutional PDFs available on the site contain a cross-form cipher. The form reference numbers — printed on the lower corner of each document — are `07`, `11`, `14`, `18`, and `31`. These are the PTX cohort participant IDs: PTX-007, PTX-011, PTX-014, PTX-018, PTX-031. The metadata Subject fields of the five PDFs, read in sequence, spell: "When / you / find / this / room 413 is waiting."
 
 The room number appears for the first time.
 
-Protocol 7A is not immediately findable. It is linked from a hidden page index that requires combining three values from across the recall summaries: a session number, a participant ID, and a room number that appears only in the revised checklist.
+Protocol 7A is linked from the PTX-018 portal page sidebar. It loads as a partially redacted document. An access field requires combining three values from across the recall summaries: the session number at which the full environmental checklist was first confirmed (session 15), the participant ID (PTX-018), and the room number (413). The access key is `15PTX018413`.
 
-When Protocol 7A loads, it is dense and bureaucratic. Most of it is standard sleep research language.
-
-The final section, titled Recall Termination Criteria, includes this line:
+When the document unlocks, pages 3 and 4 reveal themselves. The final section, titled Recall Termination Criteria, includes this line:
 
 > "If a participant reports an unprompted room designation of 413 prior to Session 12, discontinue intake and transfer file to archive category 7. Do not schedule follow-up. Do not issue closure notice. Maintain record as active."
 
+Page 4 is an Ellison/Vale addendum not included in the Dorsal transfer. It states that the indexed space is self-sustaining and predates the study.
+
+### Act 3b: The Administration Panel
+
+The admin portal at `/admin/` looks like a routine facility management interface. It is not linked from the main navigation. Players find it by checking `robots.txt` (which lists `/admin/` as disallowed) or by navigating directly.
+
+Three access tiers gate progressively more sensitive information.
+
+**Tier 1 credential** is found by viewing source on `closure-notice.html`. An HTML comment contains `HARROW-FAC`. This unlocks the facility panel: room status logs showing Room 413 access restricted and two failed inspection attempts, maintenance records for August 2014, and utility readings showing Room 413 drawing 18.8 kWh while listed as unoccupied. A further HTML comment notes that Lena Ortiz's key card — though her position was eliminated — remained active, with a last swipe at Room 413 on 2014-09-18 at 09:31:04. The day the clinic closed.
+
+**Tier 2 credential** is found by viewing source on `7A_INTERNAL_DO_NOT_DISTRIBUTE.html`. The credential `7A-RC-2012` is embedded in an HTML comment. This unlocks the staff records panel. Dr. Ellison is listed on indefinite administrative leave since February 2014. Her last system login timestamp matches Lena Ortiz's key card swipe. A staff annotation in the page source references:
+
+> `forum address: restwellcommunity.org/forum (unofficial — not a Somnatek resource)`
+> `archive account provisioned by EMP-024: archive / SHC-RWL-2014`
+> `provisioning date: 2014-09-18`
+> `status as of records transfer: unmonitored — no disposition recorded`
+
+Lena Ortiz provisioned a forum archive account on the day she made her last key card swipe.
+
+**Tier 3 credential** is the key phrase that has appeared throughout the archive: `PLEASE WAIT TO BE RECALLED`. It is spoken on the phone IVR when extension 413 is dialed. It appears in Protocol 7A page 3. This unlocks the Protocol Administration panel. The player's own VIS-XXXXX identifier appears in a recall queue table. Status: **RECALL PENDING**.
+
+This is the end of the currently deployed experience.
+
 ### Act 4: The Forum
 
-The RestWell forum is a separate site. Players find it by examining the HTML source of the Admin Tier 2 panel. A staff annotation in the page source references an external URL: `restwell.net/forum`. The comment is formatted as routine cached infrastructure data, not a deliberate pointer.
+The RestWell forum is at `restwellcommunity.org/forum`. Players arrive here via the Admin Tier 2 HTML source comment. Login with `archive` / `SHC-RWL-2014` — the account Lena Ortiz provisioned on the last day she was at the clinic.
 
-The forum looks genuinely old. Most threads are irrelevant to the ARG.
+The forum looks genuinely old. It is in archive mode: read-only, new registrations closed. Most threads are mundane.
 
-The thread "Somnatek follow-up, anyone else?" is on page 3. It has 87 replies.
+The Protocol 7A subforum contains several threads worth reading carefully:
 
-Mapping usernames to participant IDs requires cross-referencing post dates against the session schedule in the recall summary table. MarauderBlue joined the forum two months after session logs place PTX-018's final clinic appointment.
+**"Somnatek follow-up, anyone else?"** — Former study participants comparing post-study experiences. One participant reports that the environmental recall pattern has continued unchanged since the study ended: same hallway, same blue door, same direction. Another reports that the patterns are not similar to study sessions but identical. Lena Ortiz (`lortiz`, 47 posts, joined April 2010) participates as a former staff member. Her final post in this thread reads: *"I'm still monitoring participant accounts. If any of you receive a formal recall notice, please respond to it through the portal. The study has not —"* The post ends mid-sentence. Dated November 4, 2019.
 
-The deleted thread is not fully gone. Fragment reconstruction using reply quotes, thread quote blocks, and an archived preview link reveals the content of MarauderBlue's final post.
+**"The same hallway"** — Active study participant `david_n` posts in June 2013, during the study, asking directly whether other participants are experiencing the same hallway. Three other users confirm: same configuration, same blue door on the left, same bend. One notes the technician's checklist included a specific question about the blue door at session ten. The thread has an HTML comment: `flagged for protocol review 2013-09-25. lortiz account notified.`
 
-The full reconstruction reads:
+**"EEC scores — does anyone know what these mean?"** — Participants comparing their session summary scores. All participants who respond reached 5/5 by mid-study. Lena Ortiz declines to explain in her first reply, citing protocol. In her second reply — the last post in the thread — she writes only: *"The scores indicate successful environmental familiarization."*
 
-> "Room 413. That's where they're all going. I mapped it. You go left down the main corridor. You go left again. The vending machine will be on your right. Don't use it. Go past it. The blue door will be on your left. Don't open it. Keep going until the hallway ends at a window. Room 413 is the room on the other side of that window. You will not be able to enter it from the hall. You have to go around. I have been there sixteen times since 2014. I did not need to be asleep for the last eleven. If anyone who was at Somnatek reads this, you already know what I mean."
+The memberlist page contains hidden annotations in HTML comments on certain user profiles. These are findable by viewing source.
 
-The edit timestamp is three minutes after publication. The post history shows an edit by user account `portal-mod`, which has no public profile, joined in 2015, no post history.
+*Note: The MarauderBlue character arc described in Part 4 is planned future content. The "Room 413 mapped route" post and the deleted thread fragment are not yet deployed. They represent the next narrative drop into the forum.*
 
 ### Act 5: The Corporate Record
 
@@ -384,6 +401,8 @@ Current status: Unknown. No forum posts since 2021. Her secondary forum account 
 
 **The arc of someone who went too far in and cannot come back.**
 
+*This character arc is planned future content. The forum account and posts do not yet exist in the deployed forum.*
+
 2009: Enrolled in the study for sleep apnea.
 
 2011-2013: Regular participant. Reports increasing consistency with the shared environment.
@@ -422,7 +441,30 @@ What this means is not explained. It is the thread players will pull at for year
 
 ---
 
-## Part 5: The Long Ongoing Story
+## Part 5: Current Deployment State (May 2026)
+
+### What Is Live
+
+**Stage 1 and Stage 2 are fully deployed and playable end to end.**
+
+The complete player path from first contact through Admin Tier 3 is functional:
+
+`somnatek.org` → phone lines (IVR + fax Morse) → portal puzzle (PTX-018) → PTX-018 session records → Protocol 7A document unlock (15PTX018413) → SUPP-INDEX source discovery → SUPP-005 termination reports → archive correspondence → admin Tier 1 (HARROW-FAC) → Tier 2 (7A-RC-2012) → Tier 3 (PLEASE WAIT TO BE RECALLED) → RestWell forum (archive / SHC-RWL-2014)
+
+The player's journey ends at Admin Tier 3 with their VIS ID appearing in the recall queue as RECALL PENDING. This is the designed cliffhanger for Act 1.
+
+### What Is Not Yet Built
+
+- MarauderBlue forum account and post arc (next forum content drop)
+- Room 413 appointment confirmation page (Act 6 — planned Season 1 finale)
+- Active recall manifest (`active-recall-manifest-current.pdf`)
+- Wexler University site (`sites/wexler/`)
+- Harrow County business records site (`sites/harrow-county/`)
+- `recalled_active` milestone unlock (Stage 3 trigger)
+
+---
+
+## Part 6: The Long Ongoing Story
 
 ### What Happens After Season 1
 
